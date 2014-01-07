@@ -7,11 +7,19 @@
 //
 
 #import "GGPAppDelegate.h"
+#import <Parse/Parse.h>
 
 @implementation GGPAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    
+    [Parse setApplicationId:@"KgCQPAoFvl80eCkuT76jIz80MzcB5biM31kX38EG"
+                  clientKey:@"IMTjQhVsnezo69e1VuJ7huwpYmkdPjOpljIPeUXr"];
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+
     // Override point for customization after application launch.
     return YES;
 }

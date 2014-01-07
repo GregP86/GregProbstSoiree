@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GGPCreateUserViewController.h"
+#import <Parse/Parse.h>
 
 @interface GGPViewController : UIViewController
 
