@@ -44,14 +44,27 @@
     user.password = self.passwordField.text;
     user.email = self.emailField.text;
     
-    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-           //[ performSegueWithIdentifier:@"createUser" sender:self];
-        } else {
-
-        }
-    }];
+    if([self.passwordConfirmField.text isEqualToString:self.passwordField.text]){
+    
+        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error) {
+                [self performSegueWithIdentifier:@"backToFirst" sender:self];
+            } else {
+                NSString *errorString = [error userInfo][@"error"];
+                [self.errorLabel setText:errorString];
+            }
+        }];
+    } else{
+        [self.errorLabel setText:@"Passwords do not match."];
+    }
 }
 
+-(void)textFieldReturn:(id)sender{
+    [sender resignFirstResponder];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 
 @end

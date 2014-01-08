@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E0EAE24187C69A200B5F699 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E0EAE23187C69A200B5F699 /* Parse.framework */; };
 		1E9E8494187B5088002C19A6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8493187B5088002C19A6 /* Foundation.framework */; };
 		1E9E8496187B5088002C19A6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8495187B5088002C19A6 /* CoreGraphics.framework */; };
 		1E9E8498187B5088002C19A6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8497187B5088002C19A6 /* UIKit.framework */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E0EAE23187C69A200B5F699 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		1E9E8490187B5088002C19A6 /* Soiree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Soiree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9E8493187B5088002C19A6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1E9E8495187B5088002C19A6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -97,6 +99,7 @@
 				1E9E8496187B5088002C19A6 /* CoreGraphics.framework in Frameworks */,
 				37BDE15C187BBB9C000EC13C /* CFNetwork.framework in Frameworks */,
 				37BDE15A187BBB8E000EC13C /* AudioToolbox.framework in Frameworks */,
+				1E0EAE24187C69A200B5F699 /* Parse.framework in Frameworks */,
 				1E9E8498187B5088002C19A6 /* UIKit.framework in Frameworks */,
 				37BDE158187BBAB9000EC13C /* Parse.framework in Frameworks */,
 				1E9E8494187B5088002C19A6 /* Foundation.framework in Frameworks */,
@@ -119,15 +122,6 @@
 		1E9E8487187B5088002C19A6 = {
 			isa = PBXGroup;
 			children = (
-				37BDE169187BBC28000EC13C /* SystemConfiguration.framework */,
-				37BDE167187BBC0F000EC13C /* StoreKit.framework */,
-				37BDE165187BBBFB000EC13C /* Security.framework */,
-				37BDE163187BBBF1000EC13C /* QuartzCore.framework */,
-				37BDE161187BBBE1000EC13C /* MobileCoreServices.framework */,
-				37BDE15F187BBBD6000EC13C /* libz.1.1.3.dylib */,
-				37BDE15D187BBBBE000EC13C /* CoreLocation.framework */,
-				37BDE15B187BBB9C000EC13C /* CFNetwork.framework */,
-				37BDE159187BBB8E000EC13C /* AudioToolbox.framework */,
 				1E9E84CD187B51DD002C19A6 /* Documentation */,
 				1E9E84CC187B50E1002C19A6 /* Vendor */,
 				1E9E84CB187B509B002C19A6 /* Code */,
@@ -214,6 +208,16 @@
 		1E9E84CC187B50E1002C19A6 /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				1E0EAE23187C69A200B5F699 /* Parse.framework */,
+				37BDE169187BBC28000EC13C /* SystemConfiguration.framework */,
+				37BDE167187BBC0F000EC13C /* StoreKit.framework */,
+				37BDE165187BBBFB000EC13C /* Security.framework */,
+				37BDE163187BBBF1000EC13C /* QuartzCore.framework */,
+				37BDE161187BBBE1000EC13C /* MobileCoreServices.framework */,
+				37BDE15F187BBBD6000EC13C /* libz.1.1.3.dylib */,
+				37BDE15D187BBBBE000EC13C /* CoreLocation.framework */,
+				37BDE15B187BBB9C000EC13C /* CFNetwork.framework */,
+				37BDE159187BBB8E000EC13C /* AudioToolbox.framework */,
 				37BDE157187BBAB9000EC13C /* Parse.framework */,
 			);
 			name = Vendor;
@@ -276,6 +280,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Greg Probst";
 				TargetAttributes = {
+					1E9E848F187B5088002C19A6 = {
+						DevelopmentTeam = RJ884FX9M5;
+					};
 					1E9E84B3187B5088002C19A6 = {
 						TestTargetID = 1E9E848F187B5088002C19A6;
 					};
@@ -467,14 +474,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Greg/Downloads,
+					/Users/gregprobst/Desktop/Soiree/Soiree,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Soiree/Soiree-Prefix.pch";
 				INFOPLIST_FILE = "Soiree/Soiree-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -484,14 +495,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Greg/Downloads,
+					/Users/gregprobst/Desktop/Soiree/Soiree,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Soiree/Soiree-Prefix.pch";
 				INFOPLIST_FILE = "Soiree/Soiree-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

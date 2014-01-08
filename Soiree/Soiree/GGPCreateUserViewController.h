@@ -14,7 +14,10 @@
 @property (weak, nonatomic) IBOutlet UITextField *userNameField;
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordConfirmField;
+@property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 
 -(void)Register;
+-(IBAction)textFieldReturn:(id)sender;
 
 @end
