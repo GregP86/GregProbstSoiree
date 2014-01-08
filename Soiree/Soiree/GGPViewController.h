@@ -12,4 +12,6 @@
 
 @interface GGPViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *uesrMessageLabel;
+
 @end

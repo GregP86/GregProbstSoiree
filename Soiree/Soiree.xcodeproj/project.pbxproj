@@ -34,6 +34,7 @@
 		37BDE166187BBBFB000EC13C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BDE165187BBBFB000EC13C /* Security.framework */; };
 		37BDE168187BBC0F000EC13C /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BDE167187BBC0F000EC13C /* StoreKit.framework */; };
 		37BDE16A187BBC28000EC13C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BDE169187BBC28000EC13C /* SystemConfiguration.framework */; };
+		37BDE16E187CF611000EC13C /* GGPLogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BDE16D187CF611000EC13C /* GGPLogInViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,8 @@
 		37BDE165187BBBFB000EC13C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		37BDE167187BBC0F000EC13C /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		37BDE169187BBC28000EC13C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		37BDE16C187CF611000EC13C /* GGPLogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPLogInViewController.h; sourceTree = "<group>"; };
+		37BDE16D187CF611000EC13C /* GGPLogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPLogInViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,16 +154,13 @@
 		1E9E8499187B5088002C19A6 /* Soiree */ = {
 			isa = PBXGroup;
 			children = (
+				37BDE16B187CF514000EC13C /* ViewControllers */,
 				1E9E84A2187B5088002C19A6 /* GGPAppDelegate.h */,
 				1E9E84A3187B5088002C19A6 /* GGPAppDelegate.m */,
 				1E9E84A5187B5088002C19A6 /* Main_iPhone.storyboard */,
 				1E9E84A8187B5088002C19A6 /* Main_iPad.storyboard */,
-				1E9E84AB187B5088002C19A6 /* GGPViewController.h */,
-				1E9E84AC187B5088002C19A6 /* GGPViewController.m */,
 				1E9E84AE187B5088002C19A6 /* Images.xcassets */,
 				1E9E849A187B5088002C19A6 /* Supporting Files */,
-				37BDE154187BA336000EC13C /* GGPCreateUserViewController.h */,
-				37BDE155187BA336000EC13C /* GGPCreateUserViewController.m */,
 			);
 			path = Soiree;
 			sourceTree = "<group>";
@@ -230,6 +230,19 @@
 				1E9E84CE187B5212002C19A6 /* ProbstGerald-CapstoneProposal.docx */,
 			);
 			name = Documentation;
+			sourceTree = "<group>";
+		};
+		37BDE16B187CF514000EC13C /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				1E9E84AB187B5088002C19A6 /* GGPViewController.h */,
+				1E9E84AC187B5088002C19A6 /* GGPViewController.m */,
+				37BDE154187BA336000EC13C /* GGPCreateUserViewController.h */,
+				37BDE155187BA336000EC13C /* GGPCreateUserViewController.m */,
+				37BDE16C187CF611000EC13C /* GGPLogInViewController.h */,
+				37BDE16D187CF611000EC13C /* GGPLogInViewController.m */,
+			);
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,6 +348,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				37BDE156187BA336000EC13C /* GGPCreateUserViewController.m in Sources */,
+				37BDE16E187CF611000EC13C /* GGPLogInViewController.m in Sources */,
 				1E9E84A0187B5088002C19A6 /* main.m in Sources */,
 				1E9E84A4187B5088002C19A6 /* GGPAppDelegate.m in Sources */,
 				1E9E84AD187B5088002C19A6 /* GGPViewController.m in Sources */,

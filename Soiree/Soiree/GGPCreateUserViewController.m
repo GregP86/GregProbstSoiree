@@ -48,6 +48,7 @@
     
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
+                self.userMessage = @"You are now registered with Soirée";
                 [self performSegueWithIdentifier:@"backToFirst" sender:self];
             } else {
                 NSString *errorString = [error userInfo][@"error"];
@@ -65,6 +66,13 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([[segue identifier] isEqualToString:@"backToFirst"]) {
+        GGPViewController *destination = [segue destinationViewController];
+        destination.uesrMessageLabel.text = self.userMessage;
+    }
 }
 
 @end
