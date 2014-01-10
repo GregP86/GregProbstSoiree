@@ -10,4 +10,14 @@
 
 @interface GGPCreateEventViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *titleField;
+@property (weak, nonatomic) IBOutlet UITextField *descriptionField;
+@property (weak, nonatomic) IBOutlet UITextField *locationNamField;
+@property (weak, nonatomic) IBOutlet UILabel *gpsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *startTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *endTimeLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *isPrivate;
+
+- (IBAction)privateSwitch:(id)sender;
+
 @end
