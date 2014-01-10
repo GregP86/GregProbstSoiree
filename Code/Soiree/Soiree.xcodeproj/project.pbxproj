@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1E548C85187F1139009F8F5F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E548C84187F1139009F8F5F /* Parse.framework */; };
+		1E548C8B187F3C14009F8F5F /* GGPCreateEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C8A187F3C14009F8F5F /* GGPCreateEventViewController.m */; };
 		1E9E8494187B5088002C19A6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8493187B5088002C19A6 /* Foundation.framework */; };
 		1E9E8496187B5088002C19A6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8495187B5088002C19A6 /* CoreGraphics.framework */; };
 		1E9E8498187B5088002C19A6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8497187B5088002C19A6 /* UIKit.framework */; };
@@ -48,6 +49,8 @@
 
 /* Begin PBXFileReference section */
 		1E548C84187F1139009F8F5F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../../Vendor/Parse.framework; sourceTree = "<group>"; };
+		1E548C89187F3C14009F8F5F /* GGPCreateEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPCreateEventViewController.h; sourceTree = "<group>"; };
+		1E548C8A187F3C14009F8F5F /* GGPCreateEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPCreateEventViewController.m; sourceTree = "<group>"; };
 		1E9E8490187B5088002C19A6 /* Soiree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Soiree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9E8493187B5088002C19A6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1E9E8495187B5088002C19A6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -160,19 +163,13 @@
 		1E9E8499187B5088002C19A6 /* Soiree */ = {
 			isa = PBXGroup;
 			children = (
-				37BDE16B187CF514000EC13C /* ViewControllers */,
-				1E9E84AB187B5088002C19A6 /* GGPViewController.h */,
-				1E9E84AC187B5088002C19A6 /* GGPViewController.m */,
-				37BDE154187BA336000EC13C /* GGPCreateUserViewController.h */,
-				37BDE155187BA336000EC13C /* GGPCreateUserViewController.m */,
-				37BDE16C187CF611000EC13C /* GGPLogInViewController.h */,
-				37BDE16D187CF611000EC13C /* GGPLogInViewController.m */,
 				1E9E84A2187B5088002C19A6 /* GGPAppDelegate.h */,
 				1E9E84A3187B5088002C19A6 /* GGPAppDelegate.m */,
 				1E9E84A5187B5088002C19A6 /* Main_iPhone.storyboard */,
 				1E9E84A8187B5088002C19A6 /* Main_iPad.storyboard */,
 				1E9E84AE187B5088002C19A6 /* Images.xcassets */,
 				1E9E849A187B5088002C19A6 /* Supporting Files */,
+				37BDE16B187CF514000EC13C /* ViewControllers */,
 			);
 			path = Soiree;
 			sourceTree = "<group>";
@@ -209,6 +206,14 @@
 		37BDE16B187CF514000EC13C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				1E9E84AB187B5088002C19A6 /* GGPViewController.h */,
+				1E9E84AC187B5088002C19A6 /* GGPViewController.m */,
+				37BDE154187BA336000EC13C /* GGPCreateUserViewController.h */,
+				37BDE155187BA336000EC13C /* GGPCreateUserViewController.m */,
+				37BDE16C187CF611000EC13C /* GGPLogInViewController.h */,
+				37BDE16D187CF611000EC13C /* GGPLogInViewController.m */,
+				1E548C89187F3C14009F8F5F /* GGPCreateEventViewController.h */,
+				1E548C8A187F3C14009F8F5F /* GGPCreateEventViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -317,6 +322,7 @@
 			files = (
 				37BDE156187BA336000EC13C /* GGPCreateUserViewController.m in Sources */,
 				37BDE16E187CF611000EC13C /* GGPLogInViewController.m in Sources */,
+				1E548C8B187F3C14009F8F5F /* GGPCreateEventViewController.m in Sources */,
 				1E9E84A0187B5088002C19A6 /* main.m in Sources */,
 				1E9E84A4187B5088002C19A6 /* GGPAppDelegate.m in Sources */,
 				1E9E84AD187B5088002C19A6 /* GGPViewController.m in Sources */,
