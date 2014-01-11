@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1E548C85187F1139009F8F5F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E548C84187F1139009F8F5F /* Parse.framework */; };
 		1E548C8B187F3C14009F8F5F /* GGPCreateEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C8A187F3C14009F8F5F /* GGPCreateEventViewController.m */; };
+		1E548C8F1880CCCE009F8F5F /* GGPEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C8E1880CCCE009F8F5F /* GGPEvent.m */; };
 		1E9E8494187B5088002C19A6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8493187B5088002C19A6 /* Foundation.framework */; };
 		1E9E8496187B5088002C19A6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8495187B5088002C19A6 /* CoreGraphics.framework */; };
 		1E9E8498187B5088002C19A6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8497187B5088002C19A6 /* UIKit.framework */; };
@@ -51,6 +52,8 @@
 		1E548C84187F1139009F8F5F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../../Vendor/Parse.framework; sourceTree = "<group>"; };
 		1E548C89187F3C14009F8F5F /* GGPCreateEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPCreateEventViewController.h; sourceTree = "<group>"; };
 		1E548C8A187F3C14009F8F5F /* GGPCreateEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPCreateEventViewController.m; sourceTree = "<group>"; };
+		1E548C8D1880CCCE009F8F5F /* GGPEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPEvent.h; sourceTree = "<group>"; };
+		1E548C8E1880CCCE009F8F5F /* GGPEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPEvent.m; sourceTree = "<group>"; };
 		1E9E8490187B5088002C19A6 /* Soiree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Soiree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9E8493187B5088002C19A6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1E9E8495187B5088002C19A6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -120,6 +123,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1E548C8C1880CC64009F8F5F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1E548C8D1880CCCE009F8F5F /* GGPEvent.h */,
+				1E548C8E1880CCCE009F8F5F /* GGPEvent.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		1E9E8487187B5088002C19A6 = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +181,7 @@
 				1E9E84A8187B5088002C19A6 /* Main_iPad.storyboard */,
 				1E9E84AE187B5088002C19A6 /* Images.xcassets */,
 				1E9E849A187B5088002C19A6 /* Supporting Files */,
+				1E548C8C1880CC64009F8F5F /* Model */,
 				37BDE16B187CF514000EC13C /* ViewControllers */,
 			);
 			path = Soiree;
@@ -320,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1E548C8F1880CCCE009F8F5F /* GGPEvent.m in Sources */,
 				37BDE156187BA336000EC13C /* GGPCreateUserViewController.m in Sources */,
 				37BDE16E187CF611000EC13C /* GGPLogInViewController.m in Sources */,
 				1E548C8B187F3C14009F8F5F /* GGPCreateEventViewController.m in Sources */,

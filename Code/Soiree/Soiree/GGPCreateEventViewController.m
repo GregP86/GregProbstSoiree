@@ -9,7 +9,7 @@
 #import "GGPCreateEventViewController.h"
 
 @interface GGPCreateEventViewController (){
-    BOOL startTimeEdited, endTimeEdited, passwordEdit;
+    BOOL startTimeEdited, endTimeEdited, passwordEdit, locationEdit;
 }
 
 
@@ -39,6 +39,7 @@
     startTimeEdited = NO;
     endTimeEdited = NO;
     passwordEdit = NO;
+    locationEdit = NO;
 }
 
 //Overload of origional method called eachtime cells are created
@@ -55,33 +56,33 @@
         } else{
             return 0;
         }
-    }else if((indexPath.section == 3 && indexPath.row == 1) || (indexPath.section == 3 && indexPath.row == 2))
+    }else if((indexPath.section == 3 && indexPath.row == 1) || (indexPath.section == 3 && indexPath.row == 2)){
         if(passwordEdit){
             return 45;
         }else{
             return 0;
         }
-    else{
+    }else if((indexPath.section == 1 && indexPath.row == 1) || (indexPath.section == 1 && indexPath.row == 2)){
+        if(locationEdit){
+            return 45;
+        }else{
+            return 0;
+        }
+    }else{
         return self.tableView.rowHeight;
     }
 }
+
 
 //If selected row equals a date picker display date picker cell is resized accordingly
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 2 && indexPath.row == 0){
         startTimeEdited = !startTimeEdited;
-        [UIView animateWithDuration:.4 animations:^{
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:2]] withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView reloadData];
-        }];
+        [self reloadCellInSection:2 WithCell:1];
     } else if(indexPath.section == 2 && indexPath.row == 2){
         endTimeEdited = !endTimeEdited;
-        [UIView animateWithDuration:.4 animations:^{
-            [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:2]] withRowAnimation:UITableViewRowAnimationFade];
-            [self.tableView reloadData];
-        }];
+        [self reloadCellInSection:2 WithCell:3];
     }
-
 }
 
 - (void)didReceiveMemoryWarning
@@ -92,15 +93,27 @@
 
 
 - (IBAction)privateSwitch:(id)sender {
-    if(self.isPrivate.on){
-        passwordEdit = YES;
-            }else{
-        passwordEdit = NO;
-    }
-    [UIView animateWithDuration:.4 animations:^{
-        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:3],[NSIndexPath indexPathForRow:2 inSection:3]] withRowAnimation:UITableViewRowAnimationFade];
-        [self.tableView reloadData];
-    }];
+    passwordEdit = self.isPrivate.on?YES:NO;
+    [self reloadCellInSection:3 WithCell:1];
+    [self reloadCellInSection:3 WithCell:2];
     
 }
+
+- (IBAction)locationSwitch:(id)sender {
+    locationEdit = self.isLocationsOn.on?YES:NO;
+    [self reloadCellInSection:1 WithCell:1];
+    [self reloadCellInSection:1 WithCell:2];
+}
+
+- (IBAction)createEventButton:(id)sender {
+    
+}
+
+-(void)reloadCellInSection: (int)section WithCell: (int)row{
+    [UIView animateWithDuration:.4 animations:^{
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:row inSection:section]] withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView reloadData];
+    }];
+}
+
 @end

@@ -17,7 +17,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *startTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *endTimeLabel;
 @property (weak, nonatomic) IBOutlet UISwitch *isPrivate;
+@property (weak, nonatomic) IBOutlet UISwitch *isLocationsOn;
 
 - (IBAction)privateSwitch:(id)sender;
+- (IBAction)locationSwitch:(id)sender;
+- (IBAction)createEventButton:(id)sender;
 
 @end
