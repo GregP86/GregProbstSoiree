@@ -259,22 +259,22 @@
                             </tableViewSection>
                             <tableViewSection id="CAI-w7-xqQ">
                                 <cells>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="9tT-fO-N7E" detailTextLabel="upO-Y6-a7O" rowHeight="45" style="IBUITableViewCellStyleValue1" id="ejL-53-Ksa">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="9tT-fO-N7E" detailTextLabel="upO-Y6-a7O" rowHeight="45" style="IBUITableViewCellStyleValue1" id="ejL-53-Ksa">
                                         <rect key="frame" x="0.0" y="274" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ejL-53-Ksa" id="xWP-3x-hbb">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Start Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9tT-fO-N7E">
-                                                    <rect key="frame" x="15" y="12" width="80" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Starts" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="9tT-fO-N7E">
+                                                    <rect key="frame" x="15" y="12" width="46" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Select" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="upO-Y6-a7O">
-                                                    <rect key="frame" x="237" y="12" width="48" height="21"/>
+                                                    <rect key="frame" x="257" y="12" width="48" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
@@ -321,22 +321,22 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="C1n-aW-2c1" detailTextLabel="oSo-ne-j35" rowHeight="45" style="IBUITableViewCellStyleValue1" id="PEW-IM-tjy">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="C1n-aW-2c1" detailTextLabel="oSo-ne-j35" rowHeight="45" style="IBUITableViewCellStyleValue1" id="PEW-IM-tjy">
                                         <rect key="frame" x="0.0" y="319" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="PEW-IM-tjy" id="0wf-3B-DnL">
-                                            <rect key="frame" x="0.0" y="0.0" width="287" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="End Time" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="C1n-aW-2c1">
-                                                    <rect key="frame" x="15" y="12" width="73" height="21"/>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Ends" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="C1n-aW-2c1">
+                                                    <rect key="frame" x="15" y="12" width="39" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Select" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oSo-ne-j35">
-                                                    <rect key="frame" x="237" y="12" width="48" height="21"/>
+                                                    <rect key="frame" x="257" y="12" width="48" height="21"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -468,10 +468,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <connections>
                         <outlet property="descriptionField" destination="16E-y5-dhq" id="nNo-CK-b0G"/>
                         <outlet property="endTimeLabel" destination="oSo-ne-j35" id="Obj-Lh-hxo"/>
+                        <outlet property="endTimePicker" destination="hsi-26-gX5" id="nYv-2l-v7e"/>
                         <outlet property="isLocationsOn" destination="A1z-Zw-wG5" id="0yS-hZ-89s"/>
                         <outlet property="isPrivate" destination="j8N-wz-coi" id="VJv-YS-EI7"/>
                         <outlet property="locationNamField" destination="ove-kO-nSb" id="zXj-dn-3R3"/>
                         <outlet property="startTimeLabel" destination="upO-Y6-a7O" id="FUn-Vw-0NY"/>
+                        <outlet property="startTimePicker" destination="WhQ-oK-63S" id="rt8-g4-sH7"/>
                         <outlet property="titleField" destination="sKZ-Jg-NVb" id="hOQ-bV-fKR"/>
                     </connections>
                 </tableViewController>

@@ -40,6 +40,8 @@
     endTimeEdited = NO;
     passwordEdit = NO;
     locationEdit = NO;
+    [self.endTimePicker addTarget:self action:@selector(updateEndTime:) forControlEvents:UIControlEventValueChanged];
+    [self.startTimePicker addTarget:self action:@selector(updateStartTime:) forControlEvents:UIControlEventValueChanged];
 }
 
 //Overload of origional method called eachtime cells are created
@@ -78,11 +80,19 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.section == 2 && indexPath.row == 0){
         startTimeEdited = !startTimeEdited;
-        [self reloadCellInSection:2 WithCell:1];
+        endTimeEdited = NO;
+        
     } else if(indexPath.section == 2 && indexPath.row == 2){
         endTimeEdited = !endTimeEdited;
-        [self reloadCellInSection:2 WithCell:3];
+        startTimeEdited = NO;
+        
+    }else{
+        endTimeEdited = NO;
+        startTimeEdited = NO;
     }
+    [self reloadCellInSection:2 WithCell:1];
+    [self reloadCellInSection:2 WithCell:3];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -94,19 +104,46 @@
 
 - (IBAction)privateSwitch:(id)sender {
     passwordEdit = self.isPrivate.on?YES:NO;
+    endTimeEdited = NO;
+    startTimeEdited = NO;
     [self reloadCellInSection:3 WithCell:1];
     [self reloadCellInSection:3 WithCell:2];
+    [self reloadCellInSection:2 WithCell:1];
+    [self reloadCellInSection:2 WithCell:3];
     
 }
 
 - (IBAction)locationSwitch:(id)sender {
     locationEdit = self.isLocationsOn.on?YES:NO;
+    endTimeEdited = NO;
+    startTimeEdited = NO;
     [self reloadCellInSection:1 WithCell:1];
     [self reloadCellInSection:1 WithCell:2];
+    [self reloadCellInSection:2 WithCell:1];
+    [self reloadCellInSection:2 WithCell:3];
 }
+
 
 - (IBAction)createEventButton:(id)sender {
     
+}
+
+- (IBAction)updateStartTime:(id)sender {
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"dd-MM-yyyy 'at' HH:mm"];
+    NSDate *pickerDate = self.startTimePicker.date;
+    NSString *selectionString = [formatter stringFromDate:pickerDate];
+    self.startTimeLabel.text = selectionString;
+}
+
+- (IBAction)updateEndTime:(id)sender {
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"dd-MM-yyyy 'at' HH:mm"];
+    NSDate *pickerDate = self.endTimePicker.date;
+    NSString *selectionString = [formatter stringFromDate:pickerDate];
+    self.endTimeLabel.text = selectionString;
 }
 
 -(void)reloadCellInSection: (int)section WithCell: (int)row{
