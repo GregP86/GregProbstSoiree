@@ -254,6 +254,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="HbK-55-D3a" kind="push" id="2a5-Zh-3GG"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -481,6 +484,41 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <exit id="Lww-D6-8qu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2164" y="792"/>
+        </scene>
+        <!--Location Select View Controller - Select Location-->
+        <scene sceneID="9aW-9s-XZR">
+            <objects>
+                <viewController id="HbK-55-D3a" customClass="GGPLocationSelectViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Pa2-iV-bdr"/>
+                        <viewControllerLayoutGuide type="bottom" id="iB0-CD-6D8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="s6D-V8-J6V">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="t4H-wB-0zz">
+                                <rect key="frame" x="0.0" y="62" width="320" height="461"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Select Location" id="GKM-66-Pax">
+                        <barButtonItem key="rightBarButtonItem" title="My Location" id="YgY-ib-Z5u">
+                            <connections>
+                                <action selector="myLocation:" destination="HbK-55-D3a" id="PpP-ms-87u"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="map" destination="t4H-wB-0zz" id="9jS-Ah-hm1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SLQ-Ar-H92" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2610" y="798"/>
         </scene>
         <!--Create User View Controller-->
         <scene sceneID="fTb-FZ-Qjm">
