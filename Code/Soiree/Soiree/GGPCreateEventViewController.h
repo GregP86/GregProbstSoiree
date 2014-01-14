@@ -7,19 +7,34 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
+#import <MapKit/MapKit.h>
+#import <AddressBook/AddressBook.h>
+#import <Parse/Parse.h>
+#import "GGPLocation.h"
+#import "GGPEvent.h"
 
 @interface GGPCreateEventViewController : UITableViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *titleField;
 @property (weak, nonatomic) IBOutlet UITextField *descriptionField;
+
 @property (weak, nonatomic) IBOutlet UITextField *locationNamField;
-@property (weak, nonatomic) IBOutlet UILabel *gpsLabel;
+@property (weak, nonatomic) IBOutlet UITextField *streetAddressField;
+@property (weak, nonatomic) IBOutlet UITextField *cityField;
+@property (weak, nonatomic) IBOutlet UITextField *stateField;
+@property (weak, nonatomic) IBOutlet UITextField *zipField;
+@property CLLocationCoordinate2D coords;
+
 @property (weak, nonatomic) IBOutlet UILabel *startTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *endTimeLabel;
+
 @property (weak, nonatomic) IBOutlet UISwitch *isPrivate;
 @property (weak, nonatomic) IBOutlet UISwitch *isLocationsOn;
 @property (weak, nonatomic) IBOutlet UIDatePicker *startTimePicker;
 @property (weak, nonatomic) IBOutlet UIDatePicker *endTimePicker;
+
+
 
 - (IBAction)privateSwitch:(id)sender;
 - (IBAction)locationSwitch:(id)sender;

@@ -64,7 +64,7 @@
         }else{
             return 0;
         }
-    }else if((indexPath.section == 1 && indexPath.row == 1) || (indexPath.section == 1 && indexPath.row == 2)){
+    }else if(indexPath.section == 1 && !indexPath.row == 0){
         if(locationEdit){
             return 45;
         }else{
@@ -119,12 +119,71 @@
     startTimeEdited = NO;
     [self reloadCellInSection:1 WithCell:1];
     [self reloadCellInSection:1 WithCell:2];
+    [self reloadCellInSection:1 WithCell:3];
+    [self reloadCellInSection:1 WithCell:4];
+    [self reloadCellInSection:1 WithCell:5];
+
     [self reloadCellInSection:2 WithCell:1];
     [self reloadCellInSection:2 WithCell:3];
 }
 
 
-- (IBAction)createEventButton:(id)sender {
+- (IBAction)createEventButton:(id)sender{
+    
+    GGPLocation *location = locationEdit?[self generateLocation]:Nil;
+    GGPEvent *event = [self generateEvent];
+    
+    if(location){
+        PFObject *dbReadyLoc = location.getDBReadyObject;
+        event.location = dbReadyLoc;
+    }
+    
+    [event createOrUpdateOnDB];
+    
+}
+
+-(GGPEvent *)generateEvent{
+    GGPEvent *event = [[GGPEvent alloc]init];
+    event.eventTitle = self.titleField.text;
+    event.eventDescription = self.descriptionField.text;
+    event.startTime = self.startTimePicker.date;
+    event.endTime = self.endTimePicker.date;
+    PFUser *user = [PFUser currentUser];
+    event.creator = user.username;
+    
+    return event;
+}
+
+-(GGPLocation *)generateLocation{
+    GGPLocation *location = [[GGPLocation alloc]init];
+    location.locationName = self.locationNamField.text;
+    location.streetAddress = self.streetAddressField.text;
+    location.city = self.cityField.text;
+    location.state = self.stateField.text;
+    location.zip = self.zipField.text;
+    
+    [self GenerateCoords];
+    
+    location.latitude = self.coords.latitude;
+    location.longitude = self.coords.longitude;
+
+    return location;
+}
+
+-(void)GenerateCoords{
+    CLGeocoder *geocoder= [[CLGeocoder alloc]init];
+    NSString *addressString = [NSString stringWithFormat:@"%@ %@ %@ %@", self.streetAddressField.text, self.cityField.text, self.stateField.text, self.zipField.text];
+    
+    [geocoder geocodeAddressString:addressString completionHandler:^(NSArray *placemarks, NSError *error) {
+        if(error){
+            //TODO
+        }
+        if(placemarks && placemarks.count > 0){
+            CLPlacemark *placemark = placemarks[0];
+            CLLocation *location = placemark.location;
+            self.coords = location.coordinate;
+        }
+    }];
     
 }
 
