@@ -18,6 +18,8 @@
 @property (nonatomic, weak) NSDate *startTime;
 @property (nonatomic, weak) NSDate *endTime;
 @property (nonatomic, weak) PFObject *location;
+@property (nonatomic, weak) NSMutableArray *Attendees;
+@property (nonatomic, weak) NSString *password;
 
 -(void)createOrUpdateOnDB;
 

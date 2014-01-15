@@ -20,6 +20,7 @@
 @property (nonatomic, weak) NSString *state;
 @property (nonatomic, weak) NSString *zip;
 
+
 -(PFObject *)getDBReadyObject;
 
 @end

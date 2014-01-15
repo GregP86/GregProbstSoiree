@@ -63,6 +63,16 @@
                                     <segue destination="Ssb-25-031" kind="push" id="46v-wx-rsj"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H4K-zv-cO7">
+                                <rect key="frame" x="120" y="269" width="81" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Find Events">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="MnW-pa-Y7g" kind="push" id="RZh-Zv-ojb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -488,7 +498,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                                     <rect key="frame" x="20" y="7" width="280" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                 </textField>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -512,12 +522,14 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="cityField" destination="rJm-ZN-H7S" id="NIC-Zy-AVV"/>
+                        <outlet property="confirmPasswordField" destination="VUu-X9-b3j" id="JdH-6D-AMD"/>
                         <outlet property="descriptionField" destination="16E-y5-dhq" id="nNo-CK-b0G"/>
                         <outlet property="endTimeLabel" destination="oSo-ne-j35" id="Obj-Lh-hxo"/>
                         <outlet property="endTimePicker" destination="hsi-26-gX5" id="nYv-2l-v7e"/>
                         <outlet property="isLocationsOn" destination="A1z-Zw-wG5" id="0yS-hZ-89s"/>
                         <outlet property="isPrivate" destination="j8N-wz-coi" id="VJv-YS-EI7"/>
                         <outlet property="locationNamField" destination="ove-kO-nSb" id="zXj-dn-3R3"/>
+                        <outlet property="passwordField" destination="b1T-uk-5Og" id="4Sd-r1-Gil"/>
                         <outlet property="startTimeLabel" destination="upO-Y6-a7O" id="FUn-Vw-0NY"/>
                         <outlet property="startTimePicker" destination="WhQ-oK-63S" id="rt8-g4-sH7"/>
                         <outlet property="stateField" destination="YbW-Gf-B3A" id="UzS-Ph-pRK"/>
@@ -529,6 +541,47 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KNW-zt-C18" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1638" y="814"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="N21-mE-NF7">
+            <objects>
+                <tableViewController id="MnW-pa-Y7g" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="beK-DL-rsO">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="DfO-Kl-gjc">
+                            <rect key="frame" x="0.0" y="64" width="320" height="163"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="1n9-Vn-LwR">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="163"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </mapView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </view>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="jEB-CK-pC7">
+                                <rect key="frame" x="0.0" y="249" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jEB-CK-pC7" id="UQR-Tc-y6r">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MnW-pa-Y7g" id="Si9-MI-42C"/>
+                            <outlet property="delegate" destination="MnW-pa-Y7g" id="A3p-IW-EZV"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="NPN-hP-cM2"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="y8i-Xb-WZg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1082" y="-541"/>
         </scene>
         <!--Create User View Controller-->
         <scene sceneID="fTb-FZ-Qjm">
@@ -629,10 +682,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1631" y="-541"/>
         </scene>
-        <!--Table View Controller-->
+        <!--My Events View Controller-->
         <scene sceneID="jql-E9-gcc">
             <objects>
-                <tableViewController id="Ssb-25-031" sceneMemberID="viewController">
+                <tableViewController id="Ssb-25-031" customClass="GGPMyEventsViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="jL6-BE-nY1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -656,7 +709,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="01d-6u-K0F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1082" y="912"/>
+            <point key="canvasLocation" x="1082" y="814"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gzY-dc-75o">

@@ -24,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *cityField;
 @property (weak, nonatomic) IBOutlet UITextField *stateField;
 @property (weak, nonatomic) IBOutlet UITextField *zipField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UITextField *confirmPasswordField;
 @property CLLocationCoordinate2D coords;
 
 @property (weak, nonatomic) IBOutlet UILabel *startTimeLabel;

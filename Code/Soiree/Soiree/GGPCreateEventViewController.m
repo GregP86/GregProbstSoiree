@@ -130,8 +130,13 @@
 
 - (IBAction)createEventButton:(id)sender{
     
-    GGPLocation *location = locationEdit?[self generateLocation]:Nil;
+    GGPLocation *location = locationEdit?[self generateLocation]:nil;
     GGPEvent *event = [self generateEvent];
+    if(passwordEdit){
+       event.password = [self.passwordField.text isEqualToString:self.confirmPasswordField.text]?self.passwordField.text : nil;
+    }else{
+        event.password = nil;
+    }
     
     if(location){
         PFObject *dbReadyLoc = location.getDBReadyObject;
