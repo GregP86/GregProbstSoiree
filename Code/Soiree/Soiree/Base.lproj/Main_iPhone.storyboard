@@ -542,10 +542,10 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
             </objects>
             <point key="canvasLocation" x="1638" y="814"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Find Event View Controller-->
         <scene sceneID="N21-mE-NF7">
             <objects>
-                <tableViewController id="MnW-pa-Y7g" sceneMemberID="viewController">
+                <tableViewController id="MnW-pa-Y7g" customClass="GGPFindEventViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="beK-DL-rsO">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -578,6 +578,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     </tableView>
                     <navigationItem key="navigationItem" id="NPN-hP-cM2"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="map" destination="1n9-Vn-LwR" id="CH8-dY-qGZ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y8i-Xb-WZg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

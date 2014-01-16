@@ -177,7 +177,7 @@
 
 -(void)GenerateCoords{
     CLGeocoder *geocoder= [[CLGeocoder alloc]init];
-    NSString *addressString = [NSString stringWithFormat:@"%@ %@ %@ %@", self.streetAddressField.text, self.cityField.text, self.stateField.text, self.zipField.text];
+    NSString *addressString = [NSString stringWithFormat:@"%@ %@ %@", self.streetAddressField.text, self.cityField.text, self.stateField.text];
     
     [geocoder geocodeAddressString:addressString completionHandler:^(NSArray *placemarks, NSError *error) {
         if(error){

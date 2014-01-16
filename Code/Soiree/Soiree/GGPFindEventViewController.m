@@ -10,6 +10,7 @@
 
 @interface GGPFindEventViewController (){
     PFGeoPoint *currentLocation;
+    NSMutableArray *events;
 }
 
 @end
@@ -34,6 +35,7 @@
         [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
             if (!error) {
                 currentLocation = geoPoint;
+                [self loadObjects];
             }
         }];
     }
@@ -41,10 +43,14 @@
 }
 
 - (PFQuery *)queryForTable {
+    
+    if(!currentLocation){
+        return nil;
+    }
     PFQuery *innerQuery = [PFQuery queryWithClassName:self.parseClassName];
     [innerQuery whereKey:@"Coords" nearGeoPoint:currentLocation];
     PFQuery *query = [PFQuery queryWithClassName:@"Event"];
-    [query whereKey:@"Location" equalTo:innerQuery];
+    [query whereKey:@"Location" matchesQuery:innerQuery];
     [query setLimit:10];
     
     // If no objects are loaded in memory, we look to the cache first to fill the table
@@ -62,6 +68,7 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
                         object:(PFObject *)object
 {
+    
     static NSString *cellIdentifier = @"Cell";
     
     PFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -78,10 +85,68 @@
     return cell;
 }
 
-- (void)viewDidLoad
+- (void)createObjectsArray
 {
+    events = [NSMutableArray array];
+    for(PFObject *o in self.objects){
+        GGPEvent *event = [[GGPEvent alloc] init];
+        PFObject *pflocation = o[@"Location"];
+        
+        [pflocation fetch];
+        
+        GGPLocation *location = [[GGPLocation alloc]init];
+        PFGeoPoint *coords = [pflocation objectForKey: @"Coords"];
+        location.latitude = coords.latitude;
+        location.longitude = coords.longitude;
+        location.locationName = pflocation[@"Name"];
+        location.streetAddress = pflocation[@"Street"];
+        location.city = pflocation[@"City"];
+        location.state = pflocation[@"State"];
+        location.zip = pflocation[@"Zip"];
+        
+        event.eventTitle = o[@"Title"];
+        event.eventDescription = o[@"Description"];
+        event.startTime = o[@"StartTime"];
+        event.endTime = o[@"EndTime"];
+        event.password = o[@"Password"];
+        event.creator = o[@"Creator"];
+        event.realLocation = location;
+        [events addObject:event];
+    }
+}
+
+-(void)populateMap{
+    self.map.showsUserLocation = YES;
+    CLLocationCoordinate2D cllocation;
+    cllocation.latitude = currentLocation.latitude;
+    cllocation.longitude = currentLocation.longitude;
+    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance (cllocation, 20000, 20000);
+    [self.map setRegion:region animated:YES];
+}
+
+-(void)addPinPoints{
+    for(GGPEvent *e in events){
+       MKPointAnnotation *point = [[MKPointAnnotation alloc] init];
+        CLLocationCoordinate2D location;
+        location.latitude = e.realLocation.latitude;
+        location.longitude = e.realLocation.longitude;
+        [point setCoordinate:(location)];
+        [point setTitle:e.eventTitle];
+        
+        [self.map addAnnotation:point];
+        
+    }
+}
+
+-(void)objectsDidLoad:(NSError *)error{
+    [super objectsDidLoad:error];
+    [self createObjectsArray];
+    [self populateMap];
+    [self addPinPoints];
+}
+
+-(void)viewDidLoad{
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning

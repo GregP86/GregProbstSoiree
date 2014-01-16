@@ -7,7 +7,12 @@
 //
 
 #import <Parse/Parse.h>
+#import "GGPLocation.h"
+#import "GGPEvent.h"
+#import <MapKit/MapKit.h>
 
 @interface GGPFindEventViewController : PFQueryTableViewController
+
+@property (weak, nonatomic) IBOutlet MKMapView *map;
 
 @end
