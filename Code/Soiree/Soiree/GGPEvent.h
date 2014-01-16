@@ -12,15 +12,15 @@
 
 @interface GGPEvent : NSObject
 
-@property (nonatomic, weak) NSString *creator;
-@property (nonatomic, weak) NSString *eventTitle;
-@property (nonatomic, weak) NSString *eventDescription;
-@property (nonatomic, weak) NSDate *startTime;
-@property (nonatomic, weak) NSDate *endTime;
-@property (nonatomic, weak) PFObject *location;
+@property (nonatomic, strong) NSString *creator;
+@property (nonatomic, strong) NSString *eventTitle;
+@property (nonatomic, strong) NSString *eventDescription;
+@property (nonatomic, strong) NSDate *startTime;
+@property (nonatomic, strong) NSDate *endTime;
+@property (nonatomic, strong) PFObject *location;
 @property (nonatomic, strong) GGPLocation *realLocation;
-@property (nonatomic, weak) NSMutableArray *Attendees;
-@property (nonatomic, weak) NSString *password;
+@property (nonatomic, strong) NSMutableArray *Attendees;
+@property (nonatomic, strong) NSString *password;
 
 -(void)createOrUpdateOnDB;
 

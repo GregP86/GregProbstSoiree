@@ -14,11 +14,11 @@
 @property double latitude;
 @property double longitude;
 
-@property (nonatomic, weak) NSString *locationName;
-@property (nonatomic, weak) NSString *streetAddress;
-@property (nonatomic, weak) NSString *city;
-@property (nonatomic, weak) NSString *state;
-@property (nonatomic, weak) NSString *zip;
+@property (nonatomic, strong) NSString *locationName;
+@property (nonatomic, strong) NSString *streetAddress;
+@property (nonatomic, strong) NSString *city;
+@property (nonatomic, strong) NSString *state;
+@property (nonatomic, strong) NSString *zip;
 
 
 -(PFObject *)getDBReadyObject;

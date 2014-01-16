@@ -9,7 +9,7 @@
 #import "GGPCreateEventViewController.h"
 
 @interface GGPCreateEventViewController (){
-    BOOL startTimeEdited, endTimeEdited, passwordEdit, locationEdit;
+    BOOL startTimeEdited, endTimeEdited, passwordEdit, locationEdit, locationLoaded;
 }
 
 
@@ -40,6 +40,7 @@
     endTimeEdited = NO;
     passwordEdit = NO;
     locationEdit = NO;
+    locationLoaded = NO;
     [self.endTimePicker addTarget:self action:@selector(updateEndTime:) forControlEvents:UIControlEventValueChanged];
     [self.startTimePicker addTarget:self action:@selector(updateStartTime:) forControlEvents:UIControlEventValueChanged];
 }
@@ -129,21 +130,20 @@
 
 
 - (IBAction)createEventButton:(id)sender{
-    
-    GGPLocation *location = locationEdit?[self generateLocation]:nil;
-    GGPEvent *event = [self generateEvent];
-    if(passwordEdit){
-       event.password = [self.passwordField.text isEqualToString:self.confirmPasswordField.text]?self.passwordField.text : nil;
-    }else{
-        event.password = nil;
-    }
-    
-    if(location){
-        PFObject *dbReadyLoc = location.getDBReadyObject;
-        event.location = dbReadyLoc;
-    }
-    
-    [event createOrUpdateOnDB];
+    [self GenerateCoords];
+//    GGPEvent *event = [self generateEvent];
+//    if(passwordEdit){
+//       event.password = [self.passwordField.text isEqualToString:self.confirmPasswordField.text]?self.passwordField.text : nil;
+//    }else{
+//        event.password = nil;
+//    }
+//    GGPLocation *location = locationEdit?[self generateLocation]:nil;
+//    if(location){
+//        PFObject *dbReadyLoc = location.getDBReadyObject;
+//        event.location = dbReadyLoc;
+//    }
+//    
+//    [event createOrUpdateOnDB];
     
 }
 
@@ -167,8 +167,6 @@
     location.state = self.stateField.text;
     location.zip = self.zipField.text;
     
-    [self GenerateCoords];
-    
     location.latitude = self.coords.latitude;
     location.longitude = self.coords.longitude;
 
@@ -187,9 +185,22 @@
             CLPlacemark *placemark = placemarks[0];
             CLLocation *location = placemark.location;
             self.coords = location.coordinate;
+            
+            GGPEvent *event = [self generateEvent];
+            if(passwordEdit){
+                event.password = [self.passwordField.text isEqualToString:self.confirmPasswordField.text]?self.passwordField.text : nil;
+            }else{
+                event.password = nil;
+            }
+            GGPLocation *ggplocation = locationEdit?[self generateLocation]:nil;
+            if(location){
+                PFObject *dbReadyLoc = ggplocation.getDBReadyObject;
+                event.location = dbReadyLoc;
+            }
+            
+            [event createOrUpdateOnDB];
         }
     }];
-    
 }
 
 - (IBAction)updateStartTime:(id)sender {
