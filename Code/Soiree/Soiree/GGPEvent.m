@@ -23,7 +23,40 @@
     Event[@"Attendees"] = !self.Attendees ? null: self.Attendees;
     
     [Event saveInBackground];
-
 }
+
+-(void)addAttendee:(NSString *)username{
+    [self.Attendees addObject:username];
+    [self createOrUpdateOnDB];
+}
+
++(GGPEvent *)restoreFromDB:(PFObject *)dbObject{
+    GGPEvent *newevent = [[GGPEvent alloc] init];
+    PFObject *pflocation = dbObject[@"Location"];
+    
+    [pflocation fetch];
+    
+    GGPLocation *location = [[GGPLocation alloc]init];
+    PFGeoPoint *coords = [pflocation objectForKey: @"Coords"];
+    location.latitude = coords.latitude;
+    location.longitude = coords.longitude;
+    location.locationName = pflocation[@"Name"];
+    location.streetAddress = pflocation[@"Street"];
+    location.city = pflocation[@"City"];
+    location.state = pflocation[@"State"];
+    location.zip = pflocation[@"Zip"];
+    
+    newevent.eventTitle = dbObject[@"Title"];
+    newevent.eventDescription = dbObject[@"Description"];
+    newevent.startTime = dbObject[@"StartTime"];
+    newevent.endTime = dbObject[@"EndTime"];
+    newevent.password = dbObject[@"Password"];
+    newevent.creator = dbObject[@"Creator"];
+    newevent.realLocation = location;
+    
+    return newevent;
+}
+
+
 
 @end

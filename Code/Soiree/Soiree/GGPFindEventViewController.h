@@ -9,6 +9,7 @@
 #import <Parse/Parse.h>
 #import "GGPLocation.h"
 #import "GGPEvent.h"
+#import "GGPEventDetailViewController.h"
 #import <MapKit/MapKit.h>
 
 @interface GGPFindEventViewController : PFQueryTableViewController

@@ -23,5 +23,7 @@
 @property (nonatomic, strong) NSString *password;
 
 -(void)createOrUpdateOnDB;
+-(void)addAttendee: (NSString *) username;
++(GGPEvent *)restoreFromDB:(PFObject *)dbObject;
 
 @end

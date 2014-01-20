@@ -8,6 +8,7 @@
 
 #import <Parse/Parse.h>
 #import <UIKit/UIKit.h>
+#import "GGPEventDetailViewController.h"
 
 @interface GGPMyEventsViewController : PFQueryTableViewController
 
