@@ -21,6 +21,7 @@
 @property (nonatomic, strong) GGPLocation *realLocation;
 @property (nonatomic, strong) NSMutableArray *Attendees;
 @property (nonatomic, strong) NSString *password;
+@property (nonatomic, strong) NSString *id;
 
 -(void)createOrUpdateOnDB;
 -(void)addAttendee: (NSString *) username;

@@ -888,19 +888,22 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="tj0-IN-TCk">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Dvq-Jh-0OK">
+                        <barButtonItem key="rightBarButtonItem" id="Dvq-Jh-0OK">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="t8x-6c-sdJ">
                                 <rect key="frame" x="233" y="5" width="71" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="joinEventButton:" destination="u8u-z9-7Vr" eventType="touchUpInside" id="qpG-gY-BNu"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="AddressView" destination="l2i-VF-k1G" id="Xck-rZ-Kc6"/>
                         <outlet property="DetailsView" destination="qjb-eS-GUD" id="0hB-3B-9bS"/>
+                        <outlet property="barButton" destination="Dvq-Jh-0OK" id="iNf-zb-her"/>
                         <outlet property="endTimeLabel" destination="qxQ-do-kAa" id="OD3-h9-D1C"/>
                         <outlet property="joinButton" destination="t8x-6c-sdJ" id="gk1-kC-hvd"/>
-                        <outlet property="joinEventButton" destination="t8x-6c-sdJ" id="PdX-3M-4ff"/>
                         <outlet property="map" destination="f04-mh-X0T" id="bMt-Ao-sfm"/>
                         <outlet property="startTimeLabel" destination="3zx-Nb-TAA" id="xRw-Nh-Mz4"/>
                     </connections>
@@ -934,6 +937,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="fdf-i4-P26"/>
+        <segue reference="jSp-EQ-RIq"/>
     </inferredMetricsTieBreakers>
 </document>

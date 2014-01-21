@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "GGPEvent.h"
+#import "GGPViewController.h"
 
-@interface GGPEventDetailViewController : UITableViewController
+@interface GGPEventDetailViewController : UITableViewController<UIActionSheetDelegate>
+
 @property (weak, nonatomic) IBOutlet UITextView *DetailsView;
 @property (weak, nonatomic) IBOutlet UILabel *startTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *endTimeLabel;
@@ -18,8 +20,9 @@
 @property (weak, nonatomic) IBOutlet MKMapView *map;
 @property (strong, nonatomic) PFObject *event;
 @property (weak, nonatomic) IBOutlet UIButton *joinButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *barButton;
+@property (strong, nonatomic) GGPEvent *objectEvent;
 
-
-@property (weak, nonatomic) IBOutlet UIButton *joinEventButton;
+- (IBAction)joinEventButton:(id)sender;
 
 @end

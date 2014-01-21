@@ -20,7 +20,7 @@
     Event[@"Creator"] = self.creator;
     Event[@"Location"] = !self.location ? null: self.location;
     Event[@"Password"] = !self.password ? null: self.password;
-    Event[@"Attendees"] = !self.Attendees ? null: self.Attendees;
+    Event[@"Attendees"] = !self.Attendees ? [[NSMutableArray alloc]init]: self.Attendees;
     
     [Event saveInBackground];
 }
@@ -52,7 +52,9 @@
     newevent.endTime = dbObject[@"EndTime"];
     newevent.password = dbObject[@"Password"];
     newevent.creator = dbObject[@"Creator"];
+    newevent.id = [dbObject objectId];
     newevent.realLocation = location;
+    
     
     return newevent;
 }

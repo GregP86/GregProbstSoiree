@@ -145,6 +145,7 @@
 //    
 //    [event createOrUpdateOnDB];
     
+    
 }
 
 -(GGPEvent *)generateEvent{
@@ -199,6 +200,7 @@
             }
             
             [event createOrUpdateOnDB];
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }];
 }
