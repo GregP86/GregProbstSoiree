@@ -10,6 +10,7 @@
 #import <MapKit/MapKit.h>
 #import "GGPEvent.h"
 #import "GGPViewController.h"
+#import "GGPAttendeesViewController.h"
 
 @interface GGPEventDetailViewController : UITableViewController<UIActionSheetDelegate>
 

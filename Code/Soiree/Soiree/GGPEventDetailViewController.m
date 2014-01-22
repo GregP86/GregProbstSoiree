@@ -137,6 +137,13 @@
     [tooFarAlert show];
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"toAttendees"]) {
+        GGPAttendeesViewController *destination = segue.destinationViewController;
+        destination.eventId = self.objectEvent.idString;
+    }
+}
+
 @end
 
 

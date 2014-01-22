@@ -52,7 +52,8 @@
     newevent.endTime = dbObject[@"EndTime"];
     newevent.password = dbObject[@"Password"];
     newevent.creator = dbObject[@"Creator"];
-    newevent.id = [dbObject objectId];
+    newevent.Attendees = dbObject[@"Attendees"];
+    newevent.idString= [dbObject objectId];
     newevent.realLocation = location;
     
     
