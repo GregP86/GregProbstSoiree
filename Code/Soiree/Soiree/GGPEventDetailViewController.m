@@ -141,6 +141,9 @@
     if ([segue.identifier isEqualToString:@"toAttendees"]) {
         GGPAttendeesViewController *destination = segue.destinationViewController;
         destination.eventId = self.objectEvent.idString;
+    } else if ([segue.identifier isEqualToString:@"toEventLog"]) {
+        GGPEventLogViewController *destination = segue.destinationViewController;
+        destination.event = self.event;
     }
 }
 

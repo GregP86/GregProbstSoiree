@@ -11,6 +11,7 @@
 #import "GGPEvent.h"
 #import "GGPViewController.h"
 #import "GGPAttendeesViewController.h"
+#import "GGPEventLogViewController.h"
 
 @interface GGPEventDetailViewController : UITableViewController<UIActionSheetDelegate>
 

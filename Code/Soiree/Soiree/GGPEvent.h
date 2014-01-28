@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "GGPLocation.h"
+#import "GGPLogEntry.h"
 
 @interface GGPEvent : NSObject
 
@@ -20,6 +21,7 @@
 @property (nonatomic, strong) PFObject *location;
 @property (nonatomic, strong) GGPLocation *realLocation;
 @property (nonatomic, strong) NSMutableArray *Attendees;
+@property (nonatomic, strong) NSMutableArray *eventLog;
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) NSString *idString;
 

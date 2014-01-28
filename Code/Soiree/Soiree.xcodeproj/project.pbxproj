@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E208ADE1898000F00EDBDD6 /* GGPTextEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E208ADD1898000F00EDBDD6 /* GGPTextEntryViewController.m */; };
 		1E3DB44B188888B7002EA446 /* GGPEventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E3DB44A188888B7002EA446 /* GGPEventDetailViewController.m */; };
 		1E548C85187F1139009F8F5F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E548C84187F1139009F8F5F /* Parse.framework */; };
 		1E548C8B187F3C14009F8F5F /* GGPCreateEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C8A187F3C14009F8F5F /* GGPCreateEventViewController.m */; };
@@ -14,6 +15,7 @@
 		1E548C9218845AF7009F8F5F /* GGPLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C9118845AF7009F8F5F /* GGPLocation.m */; };
 		1E548C951885A7E7009F8F5F /* GGPMyEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C941885A7E7009F8F5F /* GGPMyEventsViewController.m */; };
 		1E548C9818865B0D009F8F5F /* GGPFindEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C9718865B0D009F8F5F /* GGPFindEventViewController.m */; };
+		1E7EE0271890DB5A006D0251 /* GGPLogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7EE0261890DB5A006D0251 /* GGPLogEntry.m */; };
 		1E9E8494187B5088002C19A6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8493187B5088002C19A6 /* Foundation.framework */; };
 		1E9E8496187B5088002C19A6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8495187B5088002C19A6 /* CoreGraphics.framework */; };
 		1E9E8498187B5088002C19A6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8497187B5088002C19A6 /* UIKit.framework */; };
@@ -30,6 +32,9 @@
 		1E9E84C0187B5088002C19A6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 1E9E84BE187B5088002C19A6 /* InfoPlist.strings */; };
 		1E9E84C2187B5088002C19A6 /* SoireeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9E84C1187B5088002C19A6 /* SoireeTests.m */; };
 		1EA45AF0188EEA2E00B13935 /* GGPAttendeesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA45AEF188EEA2E00B13935 /* GGPAttendeesViewController.m */; };
+		1EA45AF31890346600B13935 /* GGPEventLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA45AF21890346600B13935 /* GGPEventLogViewController.m */; };
+		1EA45AF618903B6400B13935 /* GGPComposeEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA45AF518903B6400B13935 /* GGPComposeEntryViewController.m */; };
+		1EA45AF918906C5000B13935 /* GGPVideoEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA45AF818906C5000B13935 /* GGPVideoEntryViewController.m */; };
 		37BDE156187BA336000EC13C /* GGPCreateUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BDE155187BA336000EC13C /* GGPCreateUserViewController.m */; };
 		37BDE15A187BBB8E000EC13C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BDE159187BBB8E000EC13C /* AudioToolbox.framework */; };
 		37BDE15C187BBB9C000EC13C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BDE15B187BBB9C000EC13C /* CFNetwork.framework */; };
@@ -55,6 +60,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1E208ADC1898000F00EDBDD6 /* GGPTextEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPTextEntryViewController.h; sourceTree = "<group>"; };
+		1E208ADD1898000F00EDBDD6 /* GGPTextEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPTextEntryViewController.m; sourceTree = "<group>"; };
 		1E3DB449188888B7002EA446 /* GGPEventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPEventDetailViewController.h; sourceTree = "<group>"; };
 		1E3DB44A188888B7002EA446 /* GGPEventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPEventDetailViewController.m; sourceTree = "<group>"; };
 		1E548C84187F1139009F8F5F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../../Vendor/Parse.framework; sourceTree = "<group>"; };
@@ -68,6 +75,8 @@
 		1E548C941885A7E7009F8F5F /* GGPMyEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPMyEventsViewController.m; sourceTree = "<group>"; };
 		1E548C9618865B0D009F8F5F /* GGPFindEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPFindEventViewController.h; sourceTree = "<group>"; };
 		1E548C9718865B0D009F8F5F /* GGPFindEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPFindEventViewController.m; sourceTree = "<group>"; };
+		1E7EE0251890DB5A006D0251 /* GGPLogEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPLogEntry.h; sourceTree = "<group>"; };
+		1E7EE0261890DB5A006D0251 /* GGPLogEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPLogEntry.m; sourceTree = "<group>"; };
 		1E9E8490187B5088002C19A6 /* Soiree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Soiree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9E8493187B5088002C19A6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1E9E8495187B5088002C19A6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -90,6 +99,12 @@
 		1E9E84C1187B5088002C19A6 /* SoireeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SoireeTests.m; sourceTree = "<group>"; };
 		1EA45AEE188EEA2E00B13935 /* GGPAttendeesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPAttendeesViewController.h; sourceTree = "<group>"; };
 		1EA45AEF188EEA2E00B13935 /* GGPAttendeesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPAttendeesViewController.m; sourceTree = "<group>"; };
+		1EA45AF11890346600B13935 /* GGPEventLogViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPEventLogViewController.h; sourceTree = "<group>"; };
+		1EA45AF21890346600B13935 /* GGPEventLogViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPEventLogViewController.m; sourceTree = "<group>"; };
+		1EA45AF418903B6400B13935 /* GGPComposeEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPComposeEntryViewController.h; sourceTree = "<group>"; };
+		1EA45AF518903B6400B13935 /* GGPComposeEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPComposeEntryViewController.m; sourceTree = "<group>"; };
+		1EA45AF718906C4F00B13935 /* GGPVideoEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPVideoEntryViewController.h; sourceTree = "<group>"; };
+		1EA45AF818906C5000B13935 /* GGPVideoEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPVideoEntryViewController.m; sourceTree = "<group>"; };
 		37BDE154187BA336000EC13C /* GGPCreateUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPCreateUserViewController.h; sourceTree = "<group>"; };
 		37BDE155187BA336000EC13C /* GGPCreateUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPCreateUserViewController.m; sourceTree = "<group>"; };
 		37BDE159187BBB8E000EC13C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -148,6 +163,8 @@
 				1E548C8E1880CCCE009F8F5F /* GGPEvent.m */,
 				1E548C9018845AF7009F8F5F /* GGPLocation.h */,
 				1E548C9118845AF7009F8F5F /* GGPLocation.m */,
+				1E7EE0251890DB5A006D0251 /* GGPLogEntry.h */,
+				1E7EE0261890DB5A006D0251 /* GGPLogEntry.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -272,6 +289,14 @@
 				1E9E84AC187B5088002C19A6 /* GGPViewController.m */,
 				1EA45AEC188EE63300B13935 /* UserManageViewControlls */,
 				1EA45AED188EE69B00B13935 /* EventManageViewControlls */,
+				1EA45AF11890346600B13935 /* GGPEventLogViewController.h */,
+				1EA45AF21890346600B13935 /* GGPEventLogViewController.m */,
+				1EA45AF418903B6400B13935 /* GGPComposeEntryViewController.h */,
+				1EA45AF518903B6400B13935 /* GGPComposeEntryViewController.m */,
+				1EA45AF718906C4F00B13935 /* GGPVideoEntryViewController.h */,
+				1EA45AF818906C5000B13935 /* GGPVideoEntryViewController.m */,
+				1E208ADC1898000F00EDBDD6 /* GGPTextEntryViewController.h */,
+				1E208ADD1898000F00EDBDD6 /* GGPTextEntryViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -378,6 +403,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EA45AF918906C5000B13935 /* GGPVideoEntryViewController.m in Sources */,
 				1E548C8F1880CCCE009F8F5F /* GGPEvent.m in Sources */,
 				1E548C951885A7E7009F8F5F /* GGPMyEventsViewController.m in Sources */,
 				1E3DB44B188888B7002EA446 /* GGPEventDetailViewController.m in Sources */,
@@ -387,6 +413,10 @@
 				1E548C8B187F3C14009F8F5F /* GGPCreateEventViewController.m in Sources */,
 				1E548C9818865B0D009F8F5F /* GGPFindEventViewController.m in Sources */,
 				1E9E84A0187B5088002C19A6 /* main.m in Sources */,
+				1E7EE0271890DB5A006D0251 /* GGPLogEntry.m in Sources */,
+				1EA45AF618903B6400B13935 /* GGPComposeEntryViewController.m in Sources */,
+				1E208ADE1898000F00EDBDD6 /* GGPTextEntryViewController.m in Sources */,
+				1EA45AF31890346600B13935 /* GGPEventLogViewController.m in Sources */,
 				1E9E84A4187B5088002C19A6 /* GGPAppDelegate.m in Sources */,
 				1E9E84AD187B5088002C19A6 /* GGPViewController.m in Sources */,
 				1E548C9218845AF7009F8F5F /* GGPLocation.m in Sources */,

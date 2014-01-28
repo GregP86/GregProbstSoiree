@@ -21,12 +21,18 @@
     Event[@"Location"] = !self.location ? null: self.location;
     Event[@"Password"] = !self.password ? null: self.password;
     Event[@"Attendees"] = !self.Attendees ? [[NSMutableArray alloc]init]: self.Attendees;
+    Event[@"Log"] = !self.eventLog ? [[NSMutableArray alloc]init]: self.eventLog;
     
     [Event saveInBackground];
 }
 
 -(void)addAttendee:(NSString *)username{
     [self.Attendees addObject:username];
+    [self createOrUpdateOnDB];
+}
+
+-(void)addLogEntry:(PFObject *)entry{
+    [self.eventLog addObject:entry];
     [self createOrUpdateOnDB];
 }
 
@@ -55,6 +61,7 @@
     newevent.Attendees = dbObject[@"Attendees"];
     newevent.idString= [dbObject objectId];
     newevent.realLocation = location;
+
     
     
     return newevent;
