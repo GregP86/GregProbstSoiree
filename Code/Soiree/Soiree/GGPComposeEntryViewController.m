@@ -1,0 +1,79 @@
+//
+//  GGPComposeEntryViewController.m
+//  Soiree
+//
+//  Created by Greg Probst on 1/22/14.
+//  Copyright (c) 2014 Greg Probst. All rights reserved.
+//
+
+#import "GGPComposeEntryViewController.h"
+
+@interface GGPComposeEntryViewController ()
+
+@end
+
+@implementation GGPComposeEntryViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+    [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)pickImage:(id)sender {
+    self.imagePicker = [[UIImagePickerController alloc]init];
+    self.imagePicker.delegate = self;
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }else{
+        self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+    [self presentViewController:self.imagePicker animated:YES completion:nil];
+}
+
+- (IBAction)submitButton:(id)sender {
+    NSData *data =  UIImageJPEGRepresentation(self.imageView.image, 0.7);
+    self.entry = [[GGPLogEntry alloc]init];
+    self.entry.file = data;
+    self.entry.text = self.captionField.text;
+    self.entry.fileType = @"JPEG";
+    self.entry.isIncluded = YES;
+    self.entry.submittedBy = [PFUser currentUser].username;
+    
+    PFObject *dbEntry = [self.entry getDBReadyObject];
+    [dbEntry saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if(!error){
+            [self.event addObject:[dbEntry objectId] forKey:@"Log"];
+            [self.event saveInBackground];
+            [self performSegueWithIdentifier:@"backToLog" sender:self];
+        }
+    }];
+    
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+@end
