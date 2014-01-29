@@ -28,6 +28,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    self.tabBarController.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
@@ -75,5 +76,23 @@
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+-(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+    self.vidController = [tabBarController.viewControllers objectAtIndex:1];
+    self.txtController = [tabBarController.viewControllers objectAtIndex:2];
+    
+    self.vidController.event = self.event;
+    self.txtController.event = self.event;
+}
+
+
+-(void)textFieldReturn:(id)sender{
+    [sender resignFirstResponder];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
 
 @end

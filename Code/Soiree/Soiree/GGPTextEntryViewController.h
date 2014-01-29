@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
+#import "GGPLogEntry.h"
 
 @interface GGPTextEntryViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITextView *textField;
+@property (strong, nonatomic) PFObject *event;
+@property (strong, nonatomic) GGPLogEntry *entry;
 
 - (IBAction)submitButton:(id)sender;
 

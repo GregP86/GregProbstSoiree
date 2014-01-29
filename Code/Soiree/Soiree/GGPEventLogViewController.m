@@ -38,13 +38,10 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"toEntryCompose"]){
         GGPComposeEntryViewController *vcImage = [[GGPComposeEntryViewController alloc] init];
-        GGPVideoEntryViewController *vcVideo = [[GGPVideoEntryViewController alloc]init];
         UITabBarController* tbc = [segue destinationViewController];
         vcImage = (GGPComposeEntryViewController*)[[tbc customizableViewControllers] objectAtIndex:0];
-        vcVideo = (GGPVideoEntryViewController*)[[tbc customizableViewControllers] objectAtIndex:1];
         
         vcImage.event = self.event;
-        vcVideo.event = self.event;
     }
 
 }

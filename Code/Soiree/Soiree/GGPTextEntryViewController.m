@@ -36,5 +36,28 @@
 }
 
 - (IBAction)submitButton:(id)sender {
+    
+    self.entry = [[GGPLogEntry alloc]init];
+    self.entry.fileType = @"TXT";
+    self.entry.isIncluded = YES;
+    self.entry.submittedBy = [PFUser currentUser].username;
+    self.entry.text = self.textField.text;
+    
+    PFObject *dbEntry = [self.entry getDBReadyObject];
+    [dbEntry saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if(!error){
+            [self.event addObject:[dbEntry objectId] forKey:@"Log"];
+            [self.event saveInBackground];
+            [self performSegueWithIdentifier:@"backToLog" sender:self];
+        }
+    }];
+}
+
+-(void)textFieldReturn:(id)sender{
+    [sender resignFirstResponder];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
 }
 @end

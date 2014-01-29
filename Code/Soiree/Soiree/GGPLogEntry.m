@@ -12,10 +12,10 @@
 
 
 -(PFObject *)getDBReadyObject{
-    PFObject *entry = [PFObject objectWithClassName:@"LogEntry"];
-    PFFile *file = [PFFile fileWithName:self.fileName data:self.file];
     NSNull *null = [[NSNull alloc]init];
-    entry[@"Data"] = file;
+    PFObject *entry = [PFObject objectWithClassName:@"LogEntry"];
+    PFFile *file = self.file ? [PFFile fileWithName:self.fileName data:self.file]: nil;
+    entry[@"Data"] = file? file : null;
     entry[@"Text"] = self.text? self.text: null;
     entry[@"isIncluded"] = self.isIncluded ? @1: @0;
     entry[@"FileType"] = self.fileType;

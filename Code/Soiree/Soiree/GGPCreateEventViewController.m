@@ -230,4 +230,12 @@
     }];
 }
 
+-(void)textFieldReturn:(id)sender{
+    [sender resignFirstResponder];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
+
 @end
