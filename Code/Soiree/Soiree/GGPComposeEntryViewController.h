@@ -12,7 +12,7 @@
 #import "GGPTextEntryViewController.h"
 #import <Parse/Parse.h>
 
-@interface GGPComposeEntryViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate>
+@interface GGPComposeEntryViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate, UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UIImagePickerController *imagePicker;

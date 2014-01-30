@@ -51,6 +51,7 @@
     [innerQuery whereKey:@"Coords" nearGeoPoint:currentLocation];
     PFQuery *query = [PFQuery queryWithClassName:@"Event"];
     [query whereKey:@"Location" matchesQuery:innerQuery];
+    [query whereKey:@"EndTime" greaterThanOrEqualTo:[NSDate date]];
     [query setLimit:10];
     
     // If no objects are loaded in memory, we look to the cache first to fill the table

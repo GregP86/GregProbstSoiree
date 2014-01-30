@@ -8,6 +8,8 @@
 
 #import "GGPAppDelegate.h"
 #import <Parse/Parse.h>
+#import <Social/Social.h>
+#import <Accounts/Accounts.h>
 
 @implementation GGPAppDelegate
 
@@ -19,11 +21,21 @@
                   clientKey:@"IMTjQhVsnezo69e1VuJ7huwpYmkdPjOpljIPeUXr"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
+    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
 
     // Override point for customization after application launch.
     return YES;
 }
-							
+
+
+
+
+
+-(void)fetchHashtag{
+    
+    
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

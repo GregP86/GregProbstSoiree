@@ -89,21 +89,31 @@
 
 - (IBAction)submitButton:(id)sender {
     NSData *data = [NSData dataWithContentsOfURL:self.moviePlayer.contentURL];
-    self.entry = [[GGPLogEntry alloc]init];
-    self.entry.file = data;
-    self.entry.fileType = @"MOV";
-    self.entry.isIncluded = YES;
-    self.entry.submittedBy = [PFUser currentUser].username;
-    
-    PFObject *dbEntry = [self.entry getDBReadyObject];
-    [dbEntry saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if(!error){
-            [self.event addObject:[dbEntry objectId] forKey:@"Log"];
-            [self.event saveInBackground];
-            [self performSegueWithIdentifier:@"backToLog" sender:self];
-        }
-    }];
+    if([data length] < 10485760){
+        self.entry = [[GGPLogEntry alloc]init];
+        self.entry.file = data;
+        self.entry.fileType = @"MOV";
+        self.entry.isIncluded = YES;
+        self.entry.submittedBy = [PFUser currentUser].username;
+        
+        PFObject *dbEntry = [self.entry getDBReadyObject];
+        [dbEntry saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if(!error){
+                [self.event addObject:[dbEntry objectId] forKey:@"Log"];
+                [self.event saveInBackground];
+                [self performSegueWithIdentifier:@"backToLog" sender:self];
+            }
+        }];
+    }else{
+        [self showAlertView];
+    }
 
 }
+
+-(void)showAlertView{
+    UIAlertView *tooBigAlert = [[UIAlertView alloc]initWithTitle:@"File too big." message:@"Your file must be less than 10 mb" delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil, nil];
+    [tooBigAlert show];
+}
+
 
 @end
