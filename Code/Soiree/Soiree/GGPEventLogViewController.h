@@ -11,8 +11,10 @@
 #import "GGPComposeEntryViewController.h"
 #import "GGPVideoEntryViewController.h"
 
-@interface GGPEventLogViewController : UICollectionViewController
+@interface GGPEventLogViewController : UICollectionViewController<UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property(strong, nonatomic) PFObject *event;
+@property(strong, nonatomic) NSMutableArray *dbobjects;
+@property(strong, nonatomic) NSMutableArray *LogEntries;
 
 @end
