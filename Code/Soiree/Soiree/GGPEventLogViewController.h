@@ -16,5 +16,6 @@
 @property(strong, nonatomic) PFObject *event;
 @property(strong, nonatomic) NSMutableArray *dbobjects;
 @property(strong, nonatomic) NSMutableArray *LogEntries;
+@property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
 
 @end
