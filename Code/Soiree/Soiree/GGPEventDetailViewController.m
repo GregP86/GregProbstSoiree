@@ -38,8 +38,7 @@
     if(isJoined){
         [self.joinButton setTitle:@"Leave" forState:UIControlStateNormal];
     }else if([self.objectEvent.creator isEqualToString:string]){
-        [self.joinButton setTitle:@"Delete" forState:UIControlStateNormal];
-        [self.joinButton setTintColor:[UIColor redColor]];
+        [self.joinButton setTitle:@"Options" forState:UIControlStateNormal];
     }else{
         [self.joinButton setTitle:@"Join" forState:UIControlStateNormal];
     }
@@ -104,8 +103,8 @@
         [self.event removeObject:[PFUser currentUser].username forKey:@"Attendees"];
         [self.event saveInBackground];
         [self.joinButton setTitle:@"Join" forState:UIControlStateNormal];
-    }else if([self.joinButton.titleLabel.text isEqualToString:@"Delete"]){
-        [self showActionSheet];
+    }else if([self.joinButton.titleLabel.text isEqualToString:@"Options"]){
+        [self performSegueWithIdentifier:@"toOptions" sender:self];
     }else{
         PFGeoPoint *loc = [PFGeoPoint geoPointWithLatitude:self.objectEvent.realLocation.latitude longitude: self.objectEvent.realLocation.longitude];
         double distanceFromEvent = [loc distanceInMilesTo:currentLocation];
@@ -121,17 +120,7 @@
     
 }
 
--(void)showActionSheet{
-    UIActionSheet *deleteSheet = [[UIActionSheet alloc]initWithTitle:@"Are you sure?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles: nil];
-    [deleteSheet showFromBarButtonItem:self.barButton animated:YES];
-}
 
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
-    if (buttonIndex == actionSheet.destructiveButtonIndex) {
-        [self.event deleteInBackground];
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
 -(void)showAlertView{
     UIAlertView *tooFarAlert = [[UIAlertView alloc]initWithTitle:@"Too far from event." message:@"You must be within 0.25 miles of the event to join it" delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil, nil];
     [tooFarAlert show];
@@ -143,6 +132,9 @@
         destination.eventId = self.objectEvent.idString;
     } else if ([segue.identifier isEqualToString:@"toEventLog"]) {
         GGPEventLogViewController *destination = segue.destinationViewController;
+        destination.event = self.event;
+    }else if ([segue.identifier isEqualToString:@"toOptions"]) {
+        GGPEventOptionsViewController *destination = segue.destinationViewController;
         destination.event = self.event;
     }
 }

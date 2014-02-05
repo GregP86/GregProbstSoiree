@@ -22,6 +22,7 @@
     Event[@"Password"] = !self.password ? null: self.password;
     Event[@"Attendees"] = !self.Attendees ? [[NSMutableArray alloc]init]: self.Attendees;
     Event[@"Log"] = !self.eventLog ? [[NSMutableArray alloc]init]: self.eventLog;
+    Event[@"isFiltered"] = self.isFiltered ? @1 : @0;
     
     [Event saveInBackground];
 }
@@ -61,9 +62,10 @@
     newevent.Attendees = dbObject[@"Attendees"];
     newevent.idString= [dbObject objectId];
     newevent.realLocation = location;
+    
+    NSNumber *filter = dbObject[@"isFiltered"];
+    newevent.isFiltered = ([filter  isEqual: @1]);
 
-    
-    
     return newevent;
 }
 

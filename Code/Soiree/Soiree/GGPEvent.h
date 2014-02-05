@@ -24,6 +24,8 @@
 @property (nonatomic, strong) NSMutableArray *eventLog;
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) NSString *idString;
+@property (nonatomic) BOOL isFiltered;
+
 
 -(void)createOrUpdateOnDB;
 -(void)addAttendee: (NSString *) username;

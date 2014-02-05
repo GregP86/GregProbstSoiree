@@ -10,6 +10,7 @@
 
 @interface GGPCreateEventViewController (){
     BOOL startTimeEdited, endTimeEdited, passwordEdit, locationEdit, locationLoaded;
+    int STANDARD_CELL_HEIGHT, EXPANDED_CELL_HEIGHT;
 }
 
 
@@ -41,39 +42,43 @@
     passwordEdit = NO;
     locationEdit = NO;
     locationLoaded = NO;
+    STANDARD_CELL_HEIGHT = 45;
+    EXPANDED_CELL_HEIGHT = 219;
     [self.endTimePicker addTarget:self action:@selector(updateEndTime:) forControlEvents:UIControlEventValueChanged];
     [self.startTimePicker addTarget:self action:@selector(updateStartTime:) forControlEvents:UIControlEventValueChanged];
 }
 
 //Overload of origional method called eachtime cells are created
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    float size=0;
     if(indexPath.section == 2 && indexPath.row == 1){
         if(startTimeEdited){
-            return 219;
+            size = STANDARD_CELL_HEIGHT;
         } else{
-            return 0;
+            size = 0;
         }
     }else if(indexPath.section == 2 && indexPath.row == 3){
         if(endTimeEdited){
-            return 219;
+            size = STANDARD_CELL_HEIGHT;
         } else{
-            return 0;
+            size = 0;
         }
     }else if((indexPath.section == 3 && indexPath.row == 1) || (indexPath.section == 3 && indexPath.row == 2)){
         if(passwordEdit){
-            return 45;
+            size = STANDARD_CELL_HEIGHT;
         }else{
-            return 0;
+            size = 0;
         }
     }else if(indexPath.section == 1 && !indexPath.row == 0){
         if(locationEdit){
-            return 45;
+            size = STANDARD_CELL_HEIGHT;
         }else{
-            return 0;
+            size = 0;
         }
     }else{
-        return self.tableView.rowHeight;
+        size = self.tableView.rowHeight;
     }
+    return size;
 }
 
 

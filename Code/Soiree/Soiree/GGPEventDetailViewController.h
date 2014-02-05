@@ -12,8 +12,9 @@
 #import "GGPViewController.h"
 #import "GGPAttendeesViewController.h"
 #import "GGPEventLogViewController.h"
+#import "GGPEventOptionsViewController.h"
 
-@interface GGPEventDetailViewController : UITableViewController<UIActionSheetDelegate>
+@interface GGPEventDetailViewController : UITableViewController
 
 @property (weak, nonatomic) IBOutlet UITextView *DetailsView;
 @property (weak, nonatomic) IBOutlet UILabel *startTimeLabel;
