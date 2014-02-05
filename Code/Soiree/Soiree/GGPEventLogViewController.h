@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "GGPComposeEntryViewController.h"
 #import "GGPVideoEntryViewController.h"
+#import "GGPTextFilter.h"
 
 @interface GGPEventLogViewController : UICollectionViewController<UICollectionViewDelegate, UICollectionViewDataSource>
 

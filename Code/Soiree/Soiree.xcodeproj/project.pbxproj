@@ -17,6 +17,7 @@
 		1E548C9818865B0D009F8F5F /* GGPFindEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C9718865B0D009F8F5F /* GGPFindEventViewController.m */; };
 		1E7EE0271890DB5A006D0251 /* GGPLogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7EE0261890DB5A006D0251 /* GGPLogEntry.m */; };
 		1E7F98AA18A15D6F00A0D5C2 /* GGPEventOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F98A918A15D6F00A0D5C2 /* GGPEventOptionsViewController.m */; };
+		1E7F98AD18A1EB1B00A0D5C2 /* GGPTextFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F98AC18A1EB1B00A0D5C2 /* GGPTextFilter.m */; };
 		1E9E8494187B5088002C19A6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8493187B5088002C19A6 /* Foundation.framework */; };
 		1E9E8496187B5088002C19A6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8495187B5088002C19A6 /* CoreGraphics.framework */; };
 		1E9E8498187B5088002C19A6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8497187B5088002C19A6 /* UIKit.framework */; };
@@ -79,6 +80,8 @@
 		1E7EE0261890DB5A006D0251 /* GGPLogEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPLogEntry.m; sourceTree = "<group>"; };
 		1E7F98A818A15D6E00A0D5C2 /* GGPEventOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPEventOptionsViewController.h; sourceTree = "<group>"; };
 		1E7F98A918A15D6F00A0D5C2 /* GGPEventOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPEventOptionsViewController.m; sourceTree = "<group>"; };
+		1E7F98AB18A1EB1B00A0D5C2 /* GGPTextFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPTextFilter.h; sourceTree = "<group>"; };
+		1E7F98AC18A1EB1B00A0D5C2 /* GGPTextFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPTextFilter.m; sourceTree = "<group>"; };
 		1E9E8490187B5088002C19A6 /* Soiree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Soiree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9E8493187B5088002C19A6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1E9E8495187B5088002C19A6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -235,6 +238,8 @@
 				1E9E849A187B5088002C19A6 /* Supporting Files */,
 				1E548C8C1880CC64009F8F5F /* Model */,
 				37BDE16B187CF514000EC13C /* ViewControllers */,
+				1E7F98AB18A1EB1B00A0D5C2 /* GGPTextFilter.h */,
+				1E7F98AC18A1EB1B00A0D5C2 /* GGPTextFilter.m */,
 			);
 			path = Soiree;
 			sourceTree = "<group>";
@@ -433,6 +438,7 @@
 				1E9E84A0187B5088002C19A6 /* main.m in Sources */,
 				1E7EE0271890DB5A006D0251 /* GGPLogEntry.m in Sources */,
 				1EA45AF618903B6400B13935 /* GGPComposeEntryViewController.m in Sources */,
+				1E7F98AD18A1EB1B00A0D5C2 /* GGPTextFilter.m in Sources */,
 				1E208ADE1898000F00EDBDD6 /* GGPTextEntryViewController.m in Sources */,
 				1EA45AF31890346600B13935 /* GGPEventLogViewController.m in Sources */,
 				1E9E84A4187B5088002C19A6 /* GGPAppDelegate.m in Sources */,

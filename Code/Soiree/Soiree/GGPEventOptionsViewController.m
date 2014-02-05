@@ -47,6 +47,7 @@
 - (IBAction)pressContentSwitch:(id)sender {
     
     self.event[@"isFiltered"] = [self.event[@"isFiltered"] isEqual:@1]? @0:@1;
+    [self.event saveInBackground];
 }
 
 - (IBAction)deleteButton:(id)sender {

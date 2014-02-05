@@ -93,13 +93,21 @@
     if ([entry.fileType isEqualToString:@"TXT"] ) {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"text" forIndexPath:indexPath];
         UILabel *label = (UILabel *)[cell viewWithTag:111];
-        label.text = [NSString stringWithFormat:@"%@ - %@", entry.text, entry.submittedBy];
+        NSString *text = entry.text;
+        if([self.event[@"isFiltered"] isEqual:@1]){
+            text = [GGPTextFilter filter:text];
+        }
+        label.text = [NSString stringWithFormat:@"%@ - %@", text, entry.submittedBy];
     }
     else if ([entry.fileType isEqualToString:@"JPEG"]){
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"image" forIndexPath:indexPath];
         UIImageView *view = (UIImageView *)[cell viewWithTag:112];
         UILabel *label = (UILabel *)[cell viewWithTag:113];
-        label.text = [NSString stringWithFormat:@"%@ - %@", entry.text, entry.submittedBy];
+        NSString *text = entry.text;
+        if([self.event[@"isFiltered"] isEqual:@1]){
+            text = [GGPTextFilter filter:text];
+        }
+        label.text = [NSString stringWithFormat:@"%@ - %@", text, entry.submittedBy];
         view.image = [UIImage imageWithData:entry.file];
     }else{
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"video" forIndexPath:indexPath];
