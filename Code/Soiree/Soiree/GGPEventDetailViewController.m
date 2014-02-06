@@ -100,9 +100,7 @@
 - (IBAction)joinEventButton:(id)sender {
     
     if([self.joinButton.titleLabel.text isEqualToString:@"Leave"]){
-        [self.event removeObject:[PFUser currentUser].username forKey:@"Attendees"];
-        [self.event saveInBackground];
-        [self.joinButton setTitle:@"Join" forState:UIControlStateNormal];
+        [self leaveEvent];
     }else if([self.joinButton.titleLabel.text isEqualToString:@"Options"]){
         [self performSegueWithIdentifier:@"toOptions" sender:self];
     }else{
@@ -119,6 +117,15 @@
     }
     
 }
+
+-(void)leaveEvent{
+    [self.event removeObject:[PFUser currentUser].username forKey:@"Attendees"];
+    [self.event saveInBackground];
+    [self.joinButton setTitle:@"Join" forState:UIControlStateNormal];
+
+}
+
+
 
 
 -(void)showAlertView{

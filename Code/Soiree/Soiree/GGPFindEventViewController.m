@@ -11,6 +11,9 @@
 @interface GGPFindEventViewController (){
     PFGeoPoint *currentLocation;
     NSMutableArray *events;
+    GGPEvent *selectedEvent;
+    int direction;
+    int shakes;
 }
 
 @end
@@ -148,12 +151,46 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
+    self.tableView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        if([[alertView textFieldAtIndex:0].text isEqualToString:selectedEvent.password]){
+            [self performSegueWithIdentifier:@"eventDetail" sender:self];
+        }else{
+            
+        }
+    }
+}
+
+
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    BOOL result = YES;
+    if([identifier isEqualToString:@"eventDetail"]){
+        selectedEvent = events[[self.tableView indexPathForSelectedRow].row];
+        if(![selectedEvent.password isEqual:[NSNull null]]){
+            [self showAlertView];
+            result = NO;
+        }
+    }
+    
+    return result;
+        
+}
+
+-(void)showAlertView{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Password" message:@"This event is private, enter the password:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+    alertView.delegate = self;
+    alertView.alertViewStyle = UIAlertViewStyleSecureTextInput;
+    [alertView show];
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

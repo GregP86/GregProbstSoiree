@@ -53,13 +53,13 @@
     float size=0;
     if(indexPath.section == 2 && indexPath.row == 1){
         if(startTimeEdited){
-            size = STANDARD_CELL_HEIGHT;
+            size = EXPANDED_CELL_HEIGHT;
         } else{
             size = 0;
         }
     }else if(indexPath.section == 2 && indexPath.row == 3){
         if(endTimeEdited){
-            size = STANDARD_CELL_HEIGHT;
+            size = EXPANDED_CELL_HEIGHT;
         } else{
             size = 0;
         }
@@ -181,11 +181,11 @@
 
 -(void)GenerateCoords{
     CLGeocoder *geocoder= [[CLGeocoder alloc]init];
-    NSString *addressString = [NSString stringWithFormat:@"%@ %@ %@ %@", self.streetAddressField.text, self.cityField.text, self.stateField.text, self.zipField];
+    NSString *addressString = [NSString stringWithFormat:@"%@ %@ %@", self.streetAddressField.text, self.cityField.text, self.stateField.text];
     
     [geocoder geocodeAddressString:addressString completionHandler:^(NSArray *placemarks, NSError *error) {
         if(error){
-            //TODO
+            NSLog(@"%@",error);
         }
         if(placemarks && placemarks.count > 0){
             CLPlacemark *placemark = placemarks[0];

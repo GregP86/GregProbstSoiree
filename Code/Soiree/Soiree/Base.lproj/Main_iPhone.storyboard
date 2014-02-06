@@ -570,7 +570,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="u8u-z9-7Vr" kind="push" identifier="eventDetail" id="fdf-i4-P26"/>
+                                    <segue destination="u8u-z9-7Vr" kind="push" identifier="eventDetail" id="rXR-Z4-ytF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -1370,6 +1370,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="jSp-EQ-RIq"/>
+        <segue reference="rXR-Z4-ytF"/>
     </inferredMetricsTieBreakers>
 </document>

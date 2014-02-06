@@ -45,19 +45,22 @@
     user.email = self.emailField.text;
     
     if([self.passwordConfirmField.text isEqualToString:self.passwordField.text]){
-    
-        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (!error) {
-                self.userMessage = @"You are now registered with Soirée";
-                [self performSegueWithIdentifier:@"backToFirst" sender:self];
-            } else {
-                NSString *errorString = [error userInfo][@"error"];
-                [self.errorLabel setText:errorString];
-            }
-        }];
+        [self signUpUser:user];
     } else{
         [self.errorLabel setText:@"Passwords do not match."];
     }
+}
+
+-(void)signUpUser:(PFUser *)user{
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (!error) {
+            self.userMessage = @"You are now registered with Soirée";
+            [self performSegueWithIdentifier:@"backToFirst" sender:self];
+        } else {
+            NSString *errorString = [error userInfo][@"error"];
+            [self.errorLabel setText:errorString];
+        }
+    }];
 }
 
 -(void)textFieldReturn:(id)sender{

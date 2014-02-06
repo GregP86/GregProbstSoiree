@@ -12,7 +12,7 @@
 #import "GGPEventDetailViewController.h"
 #import <MapKit/MapKit.h>
 
-@interface GGPFindEventViewController : PFQueryTableViewController
+@interface GGPFindEventViewController : PFQueryTableViewController<UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *map;
 
