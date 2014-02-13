@@ -21,7 +21,26 @@
                   clientKey:@"IMTjQhVsnezo69e1VuJ7huwpYmkdPjOpljIPeUXr"];
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    //[[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+    //[PFUser logOut];
+    PFUser *currentUser = [PFUser currentUser];
+    
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
+    
+    UIViewController *viewController; // determine the initial view controller here and instantiate it with [storyboard instantiateViewControllerWithIdentifier:<storyboard id>];
+    
+    
+    
+    if(currentUser){
+        viewController = [storyboard instantiateViewControllerWithIdentifier:@"MainStart"];
+    }else{
+        viewController = [storyboard instantiateViewControllerWithIdentifier:@"LogInStart"];
+    }
+    
+    self.window.rootViewController = viewController;
+    [self.window makeKeyAndVisible];
 
     // Override point for customization after application launch.
     return YES;

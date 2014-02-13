@@ -119,7 +119,7 @@
     self.results = jsonResults[@"statuses"];
     if ([self.results count] == 0)
     {
-        NSArray *errors = jsonResults[@"errors"];
+//        NSArray *errors = jsonResults[@"errors"];
 //        if ([errors count])
 //        {
 //            self.searchState = UYLTwitterSearchStateFailed;

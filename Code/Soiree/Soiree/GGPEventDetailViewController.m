@@ -29,6 +29,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.navigationController.toolbarHidden=YES;
     self.objectEvent = [GGPEvent restoreFromDB:self.event];
     isJoined = NO;
     isJoined = [self.objectEvent.Attendees containsObject:[PFUser currentUser].username];
@@ -96,7 +97,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 - (IBAction)joinEventButton:(id)sender {
     
     if([self.joinButton.titleLabel.text isEqualToString:@"Leave"]){
@@ -109,6 +109,8 @@
         if (distanceFromEvent < .5) {
             [self.event addUniqueObject:[PFUser currentUser].username forKey:@"Attendees"];
             [self.event saveInBackground];
+            [[PFUser currentUser] addUniqueObject:[self.event objectId] forKey:@"Events"];
+            [[PFUser currentUser] saveInBackground];
             [self.joinButton setTitle:@"Leave" forState:UIControlStateNormal];
         } else{
             [self showAlertView];
@@ -121,12 +123,11 @@
 -(void)leaveEvent{
     [self.event removeObject:[PFUser currentUser].username forKey:@"Attendees"];
     [self.event saveInBackground];
+    [[PFUser currentUser] removeObject:[self.event objectId] forKey:@"Events"];
+    [[PFUser currentUser] saveInBackground];
     [self.joinButton setTitle:@"Join" forState:UIControlStateNormal];
 
 }
-
-
-
 
 -(void)showAlertView{
     UIAlertView *tooFarAlert = [[UIAlertView alloc]initWithTitle:@"Too far from event." message:@"You must be within 0.25 miles of the event to join it" delegate:nil cancelButtonTitle:@"Done" otherButtonTitles:nil, nil];
@@ -145,6 +146,8 @@
         destination.event = self.event;
     }
 }
+
+
 
 @end
 

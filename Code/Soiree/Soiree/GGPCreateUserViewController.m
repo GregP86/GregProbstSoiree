@@ -43,6 +43,7 @@
     user.username = self.userNameField.text;
     user.password = self.passwordField.text;
     user.email = self.emailField.text;
+    user[@"Events"] = [[NSMutableArray alloc] init];
     
     if([self.passwordConfirmField.text isEqualToString:self.passwordField.text]){
         [self signUpUser:user];
@@ -55,7 +56,7 @@
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
             self.userMessage = @"You are now registered with Soirée";
-            [self performSegueWithIdentifier:@"backToFirst" sender:self];
+            [self performSegueWithIdentifier:@"ToFirst" sender:self];
         } else {
             NSString *errorString = [error userInfo][@"error"];
             [self.errorLabel setText:errorString];
@@ -72,7 +73,7 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([[segue identifier] isEqualToString:@"backToFirst"]) {
+    if ([[segue identifier] isEqualToString:@"ToFirst"]) {
         GGPViewController *destination = [segue destinationViewController];
         destination.uesrMessageLabel.text = self.userMessage;
     }

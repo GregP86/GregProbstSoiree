@@ -45,7 +45,7 @@
                                     block:^(PFUser *user, NSError *error) {
                                         if(user){
                                             self.userMessage = @"You are now logged into Soirée!";
-                                            [self performSegueWithIdentifier:@"backToFirst" sender:self];
+                                            [self performSegueWithIdentifier:@"ToFirst" sender:self];
                                         }else{
                                            NSString *errorString = [error userInfo][@"error"];
                                             [self.errorLabel setText:errorString];
@@ -62,9 +62,9 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([[segue identifier] isEqualToString:@"backToFirst"]) {
-        GGPViewController *destination = [segue destinationViewController];
-        destination.uesrMessageLabel.text = self.userMessage;
+    if ([[segue identifier] isEqualToString:@"ToFirst"]) {
+        //GGPViewController *destination = [segue destinationViewController];
+        //destination.uesrMessageLabel.text = self.userMessage;
     }
 }
 
