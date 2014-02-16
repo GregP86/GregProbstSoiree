@@ -23,6 +23,7 @@
 
 - (void)viewDidLoad
 {
+    [self.indicator startAnimating];
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
    //[PFUser logOut];
@@ -61,6 +62,7 @@
     [self createObjectsArray];
     [self populateMap];
     [self addPinPoints];
+    [self.indicator stopAnimating];
 }
 
 - (void)createObjectsArray

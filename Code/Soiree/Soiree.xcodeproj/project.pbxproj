@@ -41,6 +41,7 @@
 		1EA45AF918906C5000B13935 /* GGPVideoEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EA45AF818906C5000B13935 /* GGPVideoEntryViewController.m */; };
 		1EE3EDF718AC8353008AF9A7 /* GGPLabelConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3EDF618AC8353008AF9A7 /* GGPLabelConverter.m */; };
 		1EE3EDFA18AC9E8C008AF9A7 /* GGPSlideshowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3EDF918AC9E8B008AF9A7 /* GGPSlideshowViewController.m */; };
+		1EE3EDFD18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3EDFC18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.m */; };
 		37BDE156187BA336000EC13C /* GGPCreateUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BDE155187BA336000EC13C /* GGPCreateUserViewController.m */; };
 		37BDE15A187BBB8E000EC13C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BDE159187BBB8E000EC13C /* AudioToolbox.framework */; };
 		37BDE15C187BBB9C000EC13C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BDE15B187BBB9C000EC13C /* CFNetwork.framework */; };
@@ -122,6 +123,8 @@
 		1EE3EDF618AC8353008AF9A7 /* GGPLabelConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPLabelConverter.m; sourceTree = "<group>"; };
 		1EE3EDF818AC9E8B008AF9A7 /* GGPSlideshowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPSlideshowViewController.h; sourceTree = "<group>"; };
 		1EE3EDF918AC9E8B008AF9A7 /* GGPSlideshowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPSlideshowViewController.m; sourceTree = "<group>"; };
+		1EE3EDFB18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPSlideShowOptionsViewController.h; sourceTree = "<group>"; };
+		1EE3EDFC18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPSlideShowOptionsViewController.m; sourceTree = "<group>"; };
 		37BDE154187BA336000EC13C /* GGPCreateUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPCreateUserViewController.h; sourceTree = "<group>"; };
 		37BDE155187BA336000EC13C /* GGPCreateUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPCreateUserViewController.m; sourceTree = "<group>"; };
 		37BDE159187BBB8E000EC13C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -199,6 +202,9 @@
 				1E208ADD1898000F00EDBDD6 /* GGPTextEntryViewController.m */,
 				1E70D90D18A55708008DFC09 /* GGPCollectionLayout.h */,
 				1E70D90E18A55708008DFC09 /* GGPCollectionLayout.m */,
+				1EE3EDFB18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.h */,
+				1EE3EDFC18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.m */,
+				1E7F98AB18A1EB1B00A0D5C2 /* GGPTextFilter.h */,
 			);
 			name = Log;
 			sourceTree = "<group>";
@@ -254,7 +260,6 @@
 				1E9E849A187B5088002C19A6 /* Supporting Files */,
 				1E548C8C1880CC64009F8F5F /* Model */,
 				37BDE16B187CF514000EC13C /* ViewControllers */,
-				1E7F98AB18A1EB1B00A0D5C2 /* GGPTextFilter.h */,
 				1E7F98AC18A1EB1B00A0D5C2 /* GGPTextFilter.m */,
 				1EE3EDF518AC8353008AF9A7 /* GGPLabelConverter.h */,
 				1EE3EDF618AC8353008AF9A7 /* GGPLabelConverter.m */,
@@ -446,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1EA45AF918906C5000B13935 /* GGPVideoEntryViewController.m in Sources */,
+				1EE3EDFD18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.m in Sources */,
 				1E548C8F1880CCCE009F8F5F /* GGPEvent.m in Sources */,
 				1E70D90F18A55708008DFC09 /* GGPCollectionLayout.m in Sources */,
 				1E548C951885A7E7009F8F5F /* GGPMyEventsViewController.m in Sources */,

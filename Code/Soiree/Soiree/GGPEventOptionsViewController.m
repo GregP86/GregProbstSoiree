@@ -133,7 +133,7 @@
     
 }
 
--(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *selectedCell = [self.tableView cellForRowAtIndexPath:indexPath];
     if(selectedCell == self.twitterSearchCell){
         [self searchTwitter];
