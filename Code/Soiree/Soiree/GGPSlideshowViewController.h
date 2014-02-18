@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GGPLogEntry.h"
 #import "GGPLabelConverter.h"
+#import "GGPSlideshowOptions.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 
@@ -18,6 +19,7 @@
 @property (strong, nonatomic) NSMutableArray *logs;
 @property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
 @property (weak, nonatomic) IBOutlet UILabel *mainLabel;
-
+@property (strong, nonatomic) GGPSlideshowOptions *options;
+@property (strong, nonatomic) MPMusicPlayerController *player;
 
 @end

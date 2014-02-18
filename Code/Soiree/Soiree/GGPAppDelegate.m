@@ -16,6 +16,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
+    AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+    NSError *setCategoryError = nil;
+    [audioSession setCategory:AVAudioSessionCategoryAmbient error: &setCategoryError];
     
     [Parse setApplicationId:@"KgCQPAoFvl80eCkuT76jIz80MzcB5biM31kX38EG"
                   clientKey:@"IMTjQhVsnezo69e1VuJ7huwpYmkdPjOpljIPeUXr"];

@@ -15,6 +15,7 @@
 #import "GGPCollectionLayout.h"
 #import "GGPLabelConverter.h"
 #import "GGPSlideshowViewController.h"
+#import "GGPSlideshowOptions.h"
 
 @interface GGPEventLogViewController : UICollectionViewController<UICollectionViewDelegate, UICollectionViewDataSource>
 
@@ -22,6 +23,7 @@
 @property(strong, nonatomic) NSMutableArray *dbobjects;
 @property(strong, nonatomic) NSMutableArray *LogEntries;
 @property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
+@property (strong, nonatomic) GGPSlideshowOptions *options;
 
 
 

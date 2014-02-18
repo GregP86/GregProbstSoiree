@@ -11,7 +11,7 @@
 
 @interface GGPSlideshowOptions : NSObject
 
-@property(strong, nonatomic) MPMediaPickerController *picker;
+@property(strong, nonatomic) MPMediaItemCollection *song;
 @property(nonatomic) int frames;
 @property(nonatomic) BOOL useFade;
 @property(nonatomic) BOOL usePhotos;

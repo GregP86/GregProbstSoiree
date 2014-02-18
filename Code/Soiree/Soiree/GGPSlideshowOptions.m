@@ -14,7 +14,7 @@
 {
     self = [super init];
     if (self) {
-        self.picker = [[MPMediaPickerController alloc]initWithMediaTypes:MPMediaTypeMusic];
+        self.song = nil;
         self.frames = 5;
         self.useFade = YES;
         self.usePhotos = YES;

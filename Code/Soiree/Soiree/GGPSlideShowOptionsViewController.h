@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "GGPSlideshowOptions.h"
+#import "GGPEventLogViewController.h"
 #import <MediaPlayer/MediaPlayer.h>
 
 @interface GGPSlideShowOptionsViewController : UITableViewController<MPMediaPickerControllerDelegate>
@@ -16,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *secondsLabel;
 @property (weak, nonatomic) IBOutlet UISlider *frameSlider;
 @property (strong, nonatomic) GGPSlideshowOptions *options;
+@property (strong, nonatomic) MPMediaPickerController *picker;
 
 - (IBAction)slider:(id)sender;
 - (IBAction)fadeTrasitionSwitch:(id)sender;

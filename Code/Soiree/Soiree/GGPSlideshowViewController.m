@@ -28,9 +28,15 @@
 
 - (void)viewDidLoad
 {
+    self.player = [MPMusicPlayerController iPodMusicPlayer];
+    [self.player setQueueWithItemCollection:self.options.song];
+    [self.player play];
+    
+    self.options = self.options? self.options : [[GGPSlideshowOptions alloc]init];
+    
     count = 0;
  
-    timer = [NSTimer timerWithTimeInterval:4.0
+    timer = [NSTimer timerWithTimeInterval:self.options.frames
                                     target:self
                                   selector:@selector(onTimer)
                                   userInfo:nil
@@ -44,19 +50,21 @@
 
 
 -(void)onTimer{
-    [UIView animateWithDuration:3.0 animations:^{
-        self.imageView.alpha = 0.0;
-    }];
+    if(self.options.useFade){
+        [UIView animateWithDuration:3.0 animations:^{
+            self.imageView.alpha = 0.0;
+        }];
+    }
     
     GGPLogEntry *log = [self.logs objectAtIndex:count];
-    if ([log.fileType isEqualToString:@"TXT"]) {
+    if ([log.fileType isEqualToString:@"TXT"] && self.options.useText) {
         self.imageView.image = nil;
         self.mainLabel.text = log.text;
         
-    }else if ([log.fileType isEqualToString:@"JPEG"]){
+    }else if ([log.fileType isEqualToString:@"JPEG"] && self.options.usePhotos){
         self.mainLabel.text = @"";
         self.imageView.image = [UIImage imageWithData:log.file];
-    }else{
+    }else if(self.options.useVideo){
         self.mainLabel.text = @"";
         NSString *movieData = [NSTemporaryDirectory() stringByAppendingPathComponent:@"test.m4v"];
         NSURL *movie = [NSURL fileURLWithPath:movieData];
@@ -82,9 +90,12 @@
     if(count >= self.logs.count){
         count = 0;
     }
-    [UIView animateWithDuration:1.0 animations:^{
-        self.imageView.alpha = 1.0;
-    }];
+    
+    if(self.options.useFade){
+        [UIView animateWithDuration:1.0 animations:^{
+            self.imageView.alpha = 1.0;
+        }];
+    }
     
 }
 
@@ -109,5 +120,6 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     [timer invalidate];
+    [self.player stop];
 }
 @end

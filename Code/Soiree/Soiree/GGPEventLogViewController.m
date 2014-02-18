@@ -91,6 +91,7 @@
     }else if([segue.identifier isEqualToString:@"toSlideshow"]){
         GGPSlideshowViewController *destination = [segue destinationViewController];
         destination.logs = self.LogEntries;
+        destination.options = self.options;
     }
 
     self.navigationController.toolbarHidden=YES;
