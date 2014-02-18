@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GGPSlideshowOptions.h"
+#import <MediaPlayer/MediaPlayer.h>
 
-@interface GGPSlideShowOptionsViewController : UITableViewController
+@interface GGPSlideShowOptionsViewController : UITableViewController<MPMediaPickerControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UILabel *selectedSongLabel;
 @property (weak, nonatomic) IBOutlet UILabel *secondsLabel;
+@property (weak, nonatomic) IBOutlet UISlider *frameSlider;
+@property (strong, nonatomic) GGPSlideshowOptions *options;
 
 - (IBAction)slider:(id)sender;
 - (IBAction)fadeTrasitionSwitch:(id)sender;

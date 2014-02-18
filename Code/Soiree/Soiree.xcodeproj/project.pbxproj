@@ -42,6 +42,7 @@
 		1EE3EDF718AC8353008AF9A7 /* GGPLabelConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3EDF618AC8353008AF9A7 /* GGPLabelConverter.m */; };
 		1EE3EDFA18AC9E8C008AF9A7 /* GGPSlideshowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3EDF918AC9E8B008AF9A7 /* GGPSlideshowViewController.m */; };
 		1EE3EDFD18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3EDFC18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.m */; };
+		1EE3EE0018B28D01008AF9A7 /* GGPSlideshowOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3EDFF18B28D01008AF9A7 /* GGPSlideshowOptions.m */; };
 		37BDE156187BA336000EC13C /* GGPCreateUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BDE155187BA336000EC13C /* GGPCreateUserViewController.m */; };
 		37BDE15A187BBB8E000EC13C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BDE159187BBB8E000EC13C /* AudioToolbox.framework */; };
 		37BDE15C187BBB9C000EC13C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BDE15B187BBB9C000EC13C /* CFNetwork.framework */; };
@@ -125,6 +126,8 @@
 		1EE3EDF918AC9E8B008AF9A7 /* GGPSlideshowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPSlideshowViewController.m; sourceTree = "<group>"; };
 		1EE3EDFB18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPSlideShowOptionsViewController.h; sourceTree = "<group>"; };
 		1EE3EDFC18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPSlideShowOptionsViewController.m; sourceTree = "<group>"; };
+		1EE3EDFE18B28D01008AF9A7 /* GGPSlideshowOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPSlideshowOptions.h; sourceTree = "<group>"; };
+		1EE3EDFF18B28D01008AF9A7 /* GGPSlideshowOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPSlideshowOptions.m; sourceTree = "<group>"; };
 		37BDE154187BA336000EC13C /* GGPCreateUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPCreateUserViewController.h; sourceTree = "<group>"; };
 		37BDE155187BA336000EC13C /* GGPCreateUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPCreateUserViewController.m; sourceTree = "<group>"; };
 		37BDE159187BBB8E000EC13C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -183,6 +186,8 @@
 				1E548C9118845AF7009F8F5F /* GGPLocation.m */,
 				1E7EE0251890DB5A006D0251 /* GGPLogEntry.h */,
 				1E7EE0261890DB5A006D0251 /* GGPLogEntry.m */,
+				1EE3EDFE18B28D01008AF9A7 /* GGPSlideshowOptions.h */,
+				1EE3EDFF18B28D01008AF9A7 /* GGPSlideshowOptions.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -204,7 +209,6 @@
 				1E70D90E18A55708008DFC09 /* GGPCollectionLayout.m */,
 				1EE3EDFB18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.h */,
 				1EE3EDFC18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.m */,
-				1E7F98AB18A1EB1B00A0D5C2 /* GGPTextFilter.h */,
 			);
 			name = Log;
 			sourceTree = "<group>";
@@ -260,6 +264,7 @@
 				1E9E849A187B5088002C19A6 /* Supporting Files */,
 				1E548C8C1880CC64009F8F5F /* Model */,
 				37BDE16B187CF514000EC13C /* ViewControllers */,
+				1E7F98AB18A1EB1B00A0D5C2 /* GGPTextFilter.h */,
 				1E7F98AC18A1EB1B00A0D5C2 /* GGPTextFilter.m */,
 				1EE3EDF518AC8353008AF9A7 /* GGPLabelConverter.h */,
 				1EE3EDF618AC8353008AF9A7 /* GGPLabelConverter.m */,
@@ -456,6 +461,7 @@
 				1E70D90F18A55708008DFC09 /* GGPCollectionLayout.m in Sources */,
 				1E548C951885A7E7009F8F5F /* GGPMyEventsViewController.m in Sources */,
 				1E3DB44B188888B7002EA446 /* GGPEventDetailViewController.m in Sources */,
+				1EE3EE0018B28D01008AF9A7 /* GGPSlideshowOptions.m in Sources */,
 				37BDE156187BA336000EC13C /* GGPCreateUserViewController.m in Sources */,
 				1E7F98AA18A15D6F00A0D5C2 /* GGPEventOptionsViewController.m in Sources */,
 				1E7F98B018A35F1800A0D5C2 /* GGPTwitterResultsViewController.m in Sources */,
