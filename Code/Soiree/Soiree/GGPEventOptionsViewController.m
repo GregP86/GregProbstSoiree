@@ -8,7 +8,9 @@
 
 #import "GGPEventOptionsViewController.h"
 
-@interface GGPEventOptionsViewController ()
+@interface GGPEventOptionsViewController (){
+    BOOL isTwitterSearch;
+}
 
 @end
 
@@ -91,11 +93,12 @@
 }
 
 -(void)searchFacebook{
+    isTwitterSearch = NO;
     NSString *encodedQuery = [self.hashtagSearch.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     self.accountStore = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
     
-    NSDictionary *options = @{ACFacebookAppIdKey: @"674260562617581", ACFacebookPermissionsKey: @[@"publish_stream", @"publish_actions"], ACFacebookAudienceKey: ACFacebookAudienceEveryone};
+    NSDictionary *options = @{ACFacebookAppIdKey: @"674260562617581", ACFacebookPermissionsKey: @[@"read_stream", @"email"], ACFacebookAudienceKey: ACFacebookAudienceEveryone};
     
     [self.accountStore requestAccessToAccountsWithType:accountType
                                                options:options
@@ -123,7 +126,7 @@
                                                 }
                                                 else
                                                 {
-                                                    //display error
+                                                    NSLog(@"Everything broke %@", error);
                                                 }
                                             }];
 
@@ -131,6 +134,7 @@
 }
 
 -(void)searchTwitter{
+    isTwitterSearch = YES;
     NSString *encodedQuery = [self.hashtagSearch.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     self.accountStore = [[ACAccountStore alloc] init];
     ACAccountType *accountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierTwitter];
@@ -179,10 +183,10 @@
     
     NSError *jsonParsingError = nil;
     NSDictionary *jsonResults = [NSJSONSerialization JSONObjectWithData:self.buffer options:0 error:&jsonParsingError];
-    
-    self.results = jsonResults[@"statuses"];
-    if ([self.results count] == 0)
-    {
+   
+    if (isTwitterSearch) {
+        self.results = jsonResults[@"statuses"];
+        if ([self.results count] == 0){
 //        NSArray *errors = jsonResults[@"errors"];
 //        if ([errors count])
 //        {
@@ -192,8 +196,12 @@
 //        {
 //            self.searchState = UYLTwitterSearchStateNotFound;
 //        }
+        }
+        [self performSegueWithIdentifier:@"toTwitter" sender:self];
+    }else{
+        self.results = jsonResults[@"data"];
+        [self performSegueWithIdentifier:@"toFacebook" sender:self];
     }
-    [self performSegueWithIdentifier:@"toTwitter" sender:self];
     
 }
 
@@ -201,6 +209,8 @@
     UITableViewCell *selectedCell = [self.tableView cellForRowAtIndexPath:indexPath];
     if(selectedCell == self.twitterSearchCell){
         [self searchTwitter];
+    }else if (selectedCell == self.facebookSearchCell){
+        [self searchFacebook];
     }
     
 }
@@ -208,6 +218,9 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"toTwitter"]){
         GGPTwitterResultsViewController *destination = segue.destinationViewController;
+        destination.results = self.results;
+    }else if([segue.identifier isEqualToString:@"toFacebook"]){
+        GGPFacebookResultsViewController *destination = segue.destinationViewController;
         destination.results = self.results;
     }
 

@@ -11,6 +11,7 @@
 #import <Accounts/Accounts.h>
 #import <Twitter/Twitter.h>
 #import "GGPTwitterResultsViewController.h"
+#import "GGPFacebookResultsViewController.h"
 
 @interface GGPEventOptionsViewController : UITableViewController<UIActionSheetDelegate, NSURLConnectionDelegate, NSURLConnectionDataDelegate,NSURLConnectionDownloadDelegate>
 
@@ -23,6 +24,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *barButton;
 @property (weak, nonatomic) IBOutlet UITextField *hashtagSearch;
 @property (weak, nonatomic) IBOutlet UITableViewCell *twitterSearchCell;
+@property (weak, nonatomic) IBOutlet UITableViewCell *facebookSearchCell;
 @property (nonatomic,strong) ACAccountStore *accountStore;
 @property (nonatomic,strong) NSURLConnection *connection;
 @property (nonatomic,strong) NSMutableData *buffer;
