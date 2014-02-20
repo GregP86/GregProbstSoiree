@@ -23,7 +23,7 @@
 - (IBAction)createEventButton:(id)sender;
 - (IBAction)popOverMenu:(id)sender;
 - (IBAction)logOut:(id)sender;
-- (void)addToLog;
+- (void)addToLog:(id)sender;
 @property (weak, nonatomic) IBOutlet MKMapView *nearbtEventsMap;
 @property (weak, nonatomic) IBOutlet UITableView *myEventsTable;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;

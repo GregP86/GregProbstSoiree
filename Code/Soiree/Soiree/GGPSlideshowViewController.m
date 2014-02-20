@@ -50,21 +50,47 @@
 
 
 -(void)onTimer{
+    NSLog(@"fire");
+    //[_moviePlayer.view removeFromSuperview];
+    GGPLogEntry *log = [self.logs objectAtIndex:count];
+    BOOL isValidType = false;
+    while (!isValidType) {
+        if ([log.fileType isEqualToString:@"TXT"] ){
+            if (self.options.useText) {
+                isValidType = true;
+            }else{
+                [self countUp];
+            }
+        }else if([log.fileType isEqualToString:@"JPEG"]){
+            if (self.options.usePhotos){
+                isValidType = true;
+            }else{
+                [self countUp];
+            }
+        }else{
+            if (self.options.useVideo) {
+                isValidType = true;
+            }else{
+                [self countUp];
+            }
+        }
+        
+        log = [self.logs objectAtIndex:count];
+    }
+    
     if(self.options.useFade){
         [UIView animateWithDuration:3.0 animations:^{
             self.imageView.alpha = 0.0;
         }];
     }
-    
-    GGPLogEntry *log = [self.logs objectAtIndex:count];
-    if ([log.fileType isEqualToString:@"TXT"] && self.options.useText) {
-        self.imageView.image = nil;
-        self.mainLabel.text = log.text;
-        
+    if ([log.fileType isEqualToString:@"TXT"] && self.options.useText){
+            self.imageView.image = nil;
+            self.mainLabel.text = log.text;
     }else if ([log.fileType isEqualToString:@"JPEG"] && self.options.usePhotos){
         self.mainLabel.text = @"";
         self.imageView.image = [UIImage imageWithData:log.file];
     }else if(self.options.useVideo){
+       
         self.mainLabel.text = @"";
         NSString *movieData = [NSTemporaryDirectory() stringByAppendingPathComponent:@"test.m4v"];
         NSURL *movie = [NSURL fileURLWithPath:movieData];
@@ -79,6 +105,11 @@
                                                      name:MPMoviePlayerPlaybackDidFinishNotification
                                                    object:self.moviePlayer];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(moviePlayBackDidStart:)
+                                                     name:MPMoviePlayerDidEnterFullscreenNotification
+                                                   object:self.moviePlayer];
+        
         self.moviePlayer.movieSourceType = MPMovieMediaTypeMaskAudio;
         self.moviePlayer.contentURL = movie;
         self.moviePlayer.controlStyle = MPMovieControlStyleDefault;
@@ -86,18 +117,38 @@
         [self.view addSubview: [self.moviePlayer view]];
         [self.moviePlayer setFullscreen:YES animated:YES];
     }
-    count++;
-    if(count >= self.logs.count){
-        count = 0;
-    }
-    
+
+    [self countUp];
     if(self.options.useFade){
         [UIView animateWithDuration:1.0 animations:^{
             self.imageView.alpha = 1.0;
         }];
     }
+    if (!timer.isValid) {
+        [timer fire];
+        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+        timer = [NSTimer timerWithTimeInterval:self.options.frames
+                                        target:self
+                                      selector:@selector(onTimer)
+                                      userInfo:nil
+                                       repeats:YES];
+
+    }
     
 }
+
+-(void)countUp{
+    count++;
+    if (count >= self.logs.count) {
+        count = 0;
+    }
+}
+- (void) moviePlayBackDidStart:(NSNotification*)notification{
+    if (self.moviePlayer.duration > self.options.frames) {
+        [timer invalidate];
+    }
+}
+
 
 - (void) moviePlayBackDidFinish:(NSNotification*)notification {
     MPMoviePlayerController *player = [notification object];
@@ -109,7 +160,19 @@
     if ([player respondsToSelector:@selector(setFullscreen:animated:)])
     {
         [player.view removeFromSuperview];
+        
     }
+    
+    if (!timer.isValid) {
+        timer = [NSTimer timerWithTimeInterval:self.options.frames
+                                target:self
+                              selector:@selector(onTimer)
+                              userInfo:nil
+                               repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+        [timer fire];
+    }
+
 }
 
 - (void)didReceiveMemoryWarning

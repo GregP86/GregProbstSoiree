@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "GGPLogEntry.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface GGPTextEntryViewController : UIViewController
 

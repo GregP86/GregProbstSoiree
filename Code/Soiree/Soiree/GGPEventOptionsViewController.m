@@ -30,6 +30,15 @@
     if([self.event[@"isFiltered"] isEqual: @1]){
         [self.contentSwitch setOn:YES];
     }
+    if([self.event[@"isPublicLog"] isEqual: @1]){
+        [self.logSwitch setOn:YES];
+    }
+    if([self.event[@"usePhoto"] isEqual: @1]){
+        [self.photoSwitch setOn:YES];
+    }
+    if([self.event[@"useVideo"] isEqual: @1]){
+        [self.videoSwitch setOn:YES];
+    }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -54,6 +63,21 @@
     [self showActionSheet];
 }
 
+- (IBAction)pressLogSwitch:(id)sender {
+    self.event[@"isPublicLog"] = [self.event[@"isPublicLog"] isEqual:@1]? @0:@1;
+    [self.event saveInBackground];
+}
+
+- (IBAction)pressPhotoSwitch:(id)sender {
+    self.event[@"usePhoto"] = [self.event[@"usePhoto"] isEqual:@1]? @0:@1;
+    [self.event saveInBackground];
+}
+
+- (IBAction)pressVideoSwitch:(id)sender {
+    self.event[@"useVideo"] = [self.event[@"useVideo"] isEqual:@1]? @0:@1;
+    [self.event saveInBackground];
+}
+
 -(void)showActionSheet{
     UIActionSheet *deleteSheet = [[UIActionSheet alloc]initWithTitle:@"Are you sure?" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Delete" otherButtonTitles: nil];
     [deleteSheet showFromBarButtonItem:self.barButton animated:YES];
@@ -64,6 +88,46 @@
         [self.event deleteInBackground];
         [self.navigationController popViewControllerAnimated:YES];
     }
+}
+
+-(void)searchFacebook{
+    NSString *encodedQuery = [self.hashtagSearch.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    self.accountStore = [[ACAccountStore alloc] init];
+    ACAccountType *accountType = [self.accountStore accountTypeWithAccountTypeIdentifier:ACAccountTypeIdentifierFacebook];
+    
+    NSDictionary *options = @{ACFacebookAppIdKey: @"674260562617581", ACFacebookPermissionsKey: @[@"publish_stream", @"publish_actions"], ACFacebookAudienceKey: ACFacebookAudienceEveryone};
+    
+    [self.accountStore requestAccessToAccountsWithType:accountType
+                                               options:options
+                                            completion:^(BOOL granted, NSError *error){
+                                                if (granted)
+                                                {
+                                                    NSURL *url = [NSURL URLWithString:@"https://graph.facebook.com/search"];
+                                                    NSDictionary *parameters = @{@"type" : @"post",
+                                                                                 @"q" : encodedQuery};
+                                                    
+                                                    SLRequest *slRequest = [SLRequest requestForServiceType:SLServiceTypeFacebook
+                                                                                              requestMethod:SLRequestMethodGET
+                                                                                                        URL:url
+                                                                                                 parameters:parameters];
+                                                    
+                                                    NSArray *accounts = [self.accountStore accountsWithAccountType:accountType];
+                                                    slRequest.account = [accounts lastObject];
+                                                    
+                                                    NSURLRequest *request = [slRequest preparedURLRequest];
+                                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                                        self.connection = [[NSURLConnection alloc] initWithRequest:request
+                                                                                                          delegate:self];
+                                                        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+                                                    });
+                                                }
+                                                else
+                                                {
+                                                    //display error
+                                                }
+                                            }];
+
+ 
 }
 
 -(void)searchTwitter{

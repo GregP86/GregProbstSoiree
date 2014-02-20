@@ -23,6 +23,9 @@
     Event[@"Attendees"] = !self.Attendees ? [[NSMutableArray alloc]init]: self.Attendees;
     Event[@"Log"] = !self.eventLog ? [[NSMutableArray alloc]init]: self.eventLog;
     Event[@"isFiltered"] = self.isFiltered ? @1 : @0;
+    Event[@"isPublicLog"] = self.isPublicLog ? @1 : @0;
+    Event[@"usePhoto"] = self.usePhoto ? @1 : @0;
+    Event[@"useVideo"] = self.useVideo ? @1 : @0;
     
     [Event saveInBackground];
 }
@@ -64,7 +67,13 @@
     newevent.realLocation = location;
     
     NSNumber *filter = dbObject[@"isFiltered"];
-    newevent.isFiltered = ([filter  isEqual: @1]);
+    newevent.isFiltered = ([filter isEqual: @1]);
+    NSNumber *public = dbObject[@"isPublicLog"];
+    newevent.isPublicLog = ([public isEqual: @1]);
+    NSNumber *photo = dbObject[@"usePhoto"];
+    newevent.usePhoto = ([photo isEqual: @1]);
+    NSNumber *vid = dbObject[@"useVideo"];
+    newevent.useVideo = ([vid isEqual: @1]);
 
     return newevent;
 }

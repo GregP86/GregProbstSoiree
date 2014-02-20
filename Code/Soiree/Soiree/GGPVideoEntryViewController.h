@@ -12,6 +12,7 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AVFoundation/AVFoundation.h>
 #import "GGPLogEntry.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface GGPVideoEntryViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -22,6 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *videoThumbnailView;
 @property (strong, nonatomic) UIImagePickerController *videoSelector;
 @property (strong, nonatomic) GGPLogEntry *entry;
+@property (weak, nonatomic) IBOutlet UIButton *submit;
 
 
 - (IBAction)selectVideo:(id)sender;

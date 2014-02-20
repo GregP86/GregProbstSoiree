@@ -14,6 +14,10 @@
 
 @interface GGPEventOptionsViewController : UITableViewController<UIActionSheetDelegate, NSURLConnectionDelegate, NSURLConnectionDataDelegate,NSURLConnectionDownloadDelegate>
 
+@property (weak, nonatomic) IBOutlet UISwitch *videoSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *photoSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *logSwitch;
+
 @property (weak, nonatomic) IBOutlet UISwitch *contentSwitch;
 @property (weak, nonatomic) IBOutlet PFObject *event;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *barButton;
@@ -26,5 +30,8 @@
 
 - (IBAction)pressContentSwitch:(id)sender;
 - (IBAction)deleteButton:(id)sender;
+- (IBAction)pressLogSwitch:(id)sender;
+- (IBAction)pressPhotoSwitch:(id)sender;
+- (IBAction)pressVideoSwitch:(id)sender;
 
 @end

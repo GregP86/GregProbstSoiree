@@ -44,6 +44,10 @@
         [self.joinButton setTitle:@"Join" forState:UIControlStateNormal];
     }
     
+    if(!self.objectEvent.isPublicLog && ![string isEqualToString:self.objectEvent.creator]){
+        self.logLabel.text = @"Add to Log";
+    }
+    
     self.title = self.objectEvent.eventTitle;
     self.DetailsView.text = self.objectEvent.eventDescription;
     
@@ -144,9 +148,26 @@
     }else if ([segue.identifier isEqualToString:@"toOptions"]) {
         GGPEventOptionsViewController *destination = segue.destinationViewController;
         destination.event = self.event;
+    }else if ([segue.identifier isEqualToString:@"toSubmit"]){
+        GGPComposeEntryViewController *vcImage = [[GGPComposeEntryViewController alloc] init];
+        UITabBarController* tbc = [segue destinationViewController];
+        vcImage = (GGPComposeEntryViewController*)[[tbc customizableViewControllers] objectAtIndex:0];
+        vcImage.event = self.event;
+
     }
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if((indexPath.section == 2) && (indexPath.row == 1)){
+        NSString *string = [PFUser currentUser].username;
+        
+        if (self.objectEvent.isPublicLog || [string isEqualToString:self.objectEvent.creator]) {
+            [self performSegueWithIdentifier:@"toEventLog" sender:self];
+        }else{
+            [self performSegueWithIdentifier:@"toSubmit" sender:self];
+        }
+    }
+}
 
 
 @end

@@ -16,6 +16,7 @@
 #import "GGPLabelConverter.h"
 #import "GGPSlideshowViewController.h"
 #import "GGPSlideshowOptions.h"
+#import "GGPSlideShowOptionsViewController.h"
 
 @interface GGPEventLogViewController : UICollectionViewController<UICollectionViewDelegate, UICollectionViewDataSource>
 

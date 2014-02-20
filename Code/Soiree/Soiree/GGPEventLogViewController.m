@@ -84,15 +84,21 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if([segue.identifier isEqualToString:@"toEntryCompose"]){
         GGPComposeEntryViewController *vcImage = [[GGPComposeEntryViewController alloc] init];
+        GGPVideoEntryViewController *vidControl = [[GGPVideoEntryViewController alloc] init];
         UITabBarController* tbc = [segue destinationViewController];
         vcImage = (GGPComposeEntryViewController*)[[tbc customizableViewControllers] objectAtIndex:0];
-        
+        vidControl = (GGPVideoEntryViewController*)[[tbc customizableViewControllers] objectAtIndex:1];
         vcImage.event = self.event;
+        vidControl.event = self.event;
     }else if([segue.identifier isEqualToString:@"toSlideshow"]){
         GGPSlideshowViewController *destination = [segue destinationViewController];
         destination.logs = self.LogEntries;
         destination.options = self.options;
+    }else if([segue.identifier isEqualToString:@"toSlideOptions"]){
+        GGPSlideShowOptionsViewController *destination = [segue destinationViewController];
+        destination.options = self.options;
     }
+
 
     self.navigationController.toolbarHidden=YES;
 }

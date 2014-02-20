@@ -179,12 +179,12 @@
         GGPEventDetailViewController *destination = segue.destinationViewController;
         PFObject *passObject = [events objectAtIndex:cell.tag];
         destination.event = passObject;
-    }else if([segue.identifier isEqualToString:@"Compose"]){
+    }else if([segue.identifier isEqualToString:@"Compose"] && [sender isKindOfClass:[UIButton class]]){
         UIButton *button = sender;
         GGPComposeEntryViewController *vcImage = [[GGPComposeEntryViewController alloc] init];
         UITabBarController* tbc = [segue destinationViewController];
         vcImage = (GGPComposeEntryViewController*)[[tbc customizableViewControllers] objectAtIndex:0];
-        vcImage.event = myEvents[button.tag];
+        vcImage.event = events [button.tag];
     }
 }
 

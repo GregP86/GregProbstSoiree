@@ -27,6 +27,18 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.videoThumbnailView.layer.cornerRadius = 5;
+    if([self.event[@"useVideo"] isEqual: @0]){
+        [self.submit setTitle:@"Video Disabled" forState:UIControlStateNormal];
+        [self.submit setUserInteractionEnabled:NO];
+    }
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    if([self.event[@"useVideo"] isEqual: @0]){
+        [self.submit setTitle:@"Video Disabled" forState:UIControlStateNormal];
+        [self.submit setUserInteractionEnabled:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning

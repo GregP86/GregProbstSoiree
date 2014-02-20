@@ -11,6 +11,7 @@
 #import "GGPVideoEntryViewController.h"
 #import "GGPTextEntryViewController.h"
 #import <Parse/Parse.h>
+#import <QuartzCore/QuartzCore.h>
 
 @interface GGPComposeEntryViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate, UIAlertViewDelegate>
 
@@ -22,6 +23,7 @@
 
 @property (strong, nonatomic) GGPVideoEntryViewController *vidController;
 @property (strong, nonatomic) GGPTextEntryViewController *txtController;
+@property (weak, nonatomic) IBOutlet UIButton *submit;
 
 
 - (IBAction)pickImage:(id)sender;

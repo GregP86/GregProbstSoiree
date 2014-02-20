@@ -27,6 +27,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    self.imageView.layer.cornerRadius = 5;
+    self.captionField.layer.cornerRadius = 5;
+    if([self.event[@"usePhoto"] isEqual: @0]){
+       [self.submit setTitle:@"Photo Disabled" forState:UIControlStateNormal];
+        [self.submit setUserInteractionEnabled:NO];
+    }else{
+        [self.submit setTitle:@"Submit Photo" forState:UIControlStateNormal];
+        [self.submit setUserInteractionEnabled:YES];
+    }
+
     [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
     self.tabBarController.delegate = self;
 }

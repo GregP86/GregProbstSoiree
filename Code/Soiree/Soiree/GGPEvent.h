@@ -25,6 +25,9 @@
 @property (nonatomic, strong) NSString *password;
 @property (nonatomic, strong) NSString *idString;
 @property (nonatomic) BOOL isFiltered;
+@property (nonatomic) BOOL isPublicLog;
+@property (nonatomic) BOOL usePhoto;
+@property (nonatomic) BOOL useVideo;
 
 
 -(void)createOrUpdateOnDB;
