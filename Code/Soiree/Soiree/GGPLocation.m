@@ -9,7 +9,7 @@
 #import "GGPLocation.h"
 
 @implementation GGPLocation
-
+//
 -(PFObject *)getDBReadyObject{
     PFObject *location = [PFObject objectWithClassName:@"Location"];
     location[@"Name"] = self.locationName;
