@@ -44,6 +44,8 @@
 		1EE3EDFD18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3EDFC18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.m */; };
 		1EE3EE0018B28D01008AF9A7 /* GGPSlideshowOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3EDFF18B28D01008AF9A7 /* GGPSlideshowOptions.m */; };
 		1EE3EE0318B5F33E008AF9A7 /* GGPFacebookResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3EE0218B5F33E008AF9A7 /* GGPFacebookResultsViewController.m */; };
+		1EE3EE0718BBDC03008AF9A7 /* GGPStats.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3EE0618BBDC03008AF9A7 /* GGPStats.m */; };
+		1EE3EE0A18BC48C4008AF9A7 /* GGPStatsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1EE3EE0918BC48C4008AF9A7 /* GGPStatsViewController.m */; };
 		37BDE156187BA336000EC13C /* GGPCreateUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37BDE155187BA336000EC13C /* GGPCreateUserViewController.m */; };
 		37BDE15A187BBB8E000EC13C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BDE159187BBB8E000EC13C /* AudioToolbox.framework */; };
 		37BDE15C187BBB9C000EC13C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37BDE15B187BBB9C000EC13C /* CFNetwork.framework */; };
@@ -131,6 +133,10 @@
 		1EE3EDFF18B28D01008AF9A7 /* GGPSlideshowOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPSlideshowOptions.m; sourceTree = "<group>"; };
 		1EE3EE0118B5F33E008AF9A7 /* GGPFacebookResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPFacebookResultsViewController.h; sourceTree = "<group>"; };
 		1EE3EE0218B5F33E008AF9A7 /* GGPFacebookResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPFacebookResultsViewController.m; sourceTree = "<group>"; };
+		1EE3EE0518BBDC03008AF9A7 /* GGPStats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPStats.h; sourceTree = "<group>"; };
+		1EE3EE0618BBDC03008AF9A7 /* GGPStats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPStats.m; sourceTree = "<group>"; };
+		1EE3EE0818BC48C4008AF9A7 /* GGPStatsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPStatsViewController.h; sourceTree = "<group>"; };
+		1EE3EE0918BC48C4008AF9A7 /* GGPStatsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPStatsViewController.m; sourceTree = "<group>"; };
 		37BDE154187BA336000EC13C /* GGPCreateUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPCreateUserViewController.h; sourceTree = "<group>"; };
 		37BDE155187BA336000EC13C /* GGPCreateUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPCreateUserViewController.m; sourceTree = "<group>"; };
 		37BDE159187BBB8E000EC13C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -191,6 +197,8 @@
 				1E7EE0261890DB5A006D0251 /* GGPLogEntry.m */,
 				1EE3EDFE18B28D01008AF9A7 /* GGPSlideshowOptions.h */,
 				1EE3EDFF18B28D01008AF9A7 /* GGPSlideshowOptions.m */,
+				1EE3EE0518BBDC03008AF9A7 /* GGPStats.h */,
+				1EE3EE0618BBDC03008AF9A7 /* GGPStats.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -334,6 +342,8 @@
 				1E7F98AF18A35F1800A0D5C2 /* GGPTwitterResultsViewController.m */,
 				1EE3EE0118B5F33E008AF9A7 /* GGPFacebookResultsViewController.h */,
 				1EE3EE0218B5F33E008AF9A7 /* GGPFacebookResultsViewController.m */,
+				1EE3EE0818BC48C4008AF9A7 /* GGPStatsViewController.h */,
+				1EE3EE0918BC48C4008AF9A7 /* GGPStatsViewController.m */,
 			);
 			name = EventManageViewControlls;
 			sourceTree = "<group>";
@@ -473,6 +483,7 @@
 				37BDE16E187CF611000EC13C /* GGPLogInViewController.m in Sources */,
 				1EA45AF0188EEA2E00B13935 /* GGPAttendeesViewController.m in Sources */,
 				1E548C8B187F3C14009F8F5F /* GGPCreateEventViewController.m in Sources */,
+				1EE3EE0718BBDC03008AF9A7 /* GGPStats.m in Sources */,
 				1E548C9818865B0D009F8F5F /* GGPFindEventViewController.m in Sources */,
 				1E9E84A0187B5088002C19A6 /* main.m in Sources */,
 				1E7EE0271890DB5A006D0251 /* GGPLogEntry.m in Sources */,
@@ -486,6 +497,7 @@
 				1E9E84AD187B5088002C19A6 /* GGPViewController.m in Sources */,
 				1EE3EE0318B5F33E008AF9A7 /* GGPFacebookResultsViewController.m in Sources */,
 				1E548C9218845AF7009F8F5F /* GGPLocation.m in Sources */,
+				1EE3EE0A18BC48C4008AF9A7 /* GGPStatsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

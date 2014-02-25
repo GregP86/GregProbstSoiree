@@ -8,7 +8,9 @@
 
 #import "GGPCreateUserViewController.h"
 
-@interface GGPCreateUserViewController ()
+@interface GGPCreateUserViewController (){
+    BOOL Gen;
+}
 
 @end
 
@@ -26,6 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    Gen = YES;
 	// Do any additional setup after loading the view.
 }
 
@@ -44,6 +47,9 @@
     user.password = self.passwordField.text;
     user.email = self.emailField.text;
     user[@"Events"] = [[NSMutableArray alloc] init];
+    user[@"Gender"] = Gen? @1 : @0;
+    NSNumber *num = [NSNumber numberWithInt:[self.age.text intValue]];
+    user[@"Age"] = num;
     
     if([self.passwordConfirmField.text isEqualToString:self.passwordField.text]){
         [self signUpUser:user];
@@ -66,6 +72,10 @@
 
 -(void)textFieldReturn:(id)sender{
     [sender resignFirstResponder];
+}
+
+- (IBAction)genderSwitch:(id)sender {
+    Gen = !Gen;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{

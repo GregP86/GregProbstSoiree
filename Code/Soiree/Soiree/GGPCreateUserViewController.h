@@ -17,8 +17,11 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordConfirmField;
 @property (weak, nonatomic) IBOutlet UILabel *errorLabel;
 @property (weak, nonatomic) NSString *userMessage;
+@property (weak, nonatomic) IBOutlet UITextField *age;
+@property (weak, nonatomic) IBOutlet UISwitch *gender;
 
 -(void)Register;
 -(IBAction)textFieldReturn:(id)sender;
+- (IBAction)genderSwitch:(id)sender;
 
 @end

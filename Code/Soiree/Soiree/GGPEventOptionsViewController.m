@@ -211,6 +211,8 @@
         [self searchTwitter];
     }else if (selectedCell == self.facebookSearchCell){
         [self searchFacebook];
+    }else if(selectedCell == self.statsCell){
+        [self performSegueWithIdentifier:@"toStats" sender:self];
     }
     
 }
@@ -222,6 +224,9 @@
     }else if([segue.identifier isEqualToString:@"toFacebook"]){
         GGPFacebookResultsViewController *destination = segue.destinationViewController;
         destination.results = self.results;
+    }else if ([segue.identifier isEqualToString:@"toStats"]){
+        GGPStatsViewController *destination = segue.destinationViewController;
+        destination.event = self.event;
     }
 
 }

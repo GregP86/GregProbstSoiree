@@ -111,7 +111,7 @@
         PFGeoPoint *loc = [PFGeoPoint geoPointWithLatitude:self.objectEvent.realLocation.latitude longitude: self.objectEvent.realLocation.longitude];
         double distanceFromEvent = [loc distanceInMilesTo:currentLocation];
         if (distanceFromEvent < .5) {
-            [self.event addUniqueObject:[PFUser currentUser].username forKey:@"Attendees"];
+            [self.event addUniqueObject:[PFUser currentUser].objectId forKey:@"Attendees"];
             [self.event saveInBackground];
             [[PFUser currentUser] addUniqueObject:[self.event objectId] forKey:@"Events"];
             [[PFUser currentUser] saveInBackground];
