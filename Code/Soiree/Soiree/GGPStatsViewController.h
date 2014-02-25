@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "GGPStats.h"
+#import "GGPWordCloudRetriever.h"
 
 @interface GGPStatsViewController : UIViewController
 
@@ -25,5 +26,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *thirtysixToFourtyfive;
 @property (weak, nonatomic) IBOutlet UILabel *fourtysixToFiftyfive;
 @property (weak, nonatomic) IBOutlet UILabel *fiftyfivePlusLabel;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end

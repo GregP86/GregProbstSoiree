@@ -38,7 +38,7 @@
 }
 
 -(void)ageCount:(PFUser *)user{
-    NSNumber *ageObj = user[@"age"];
+    NSNumber *ageObj = user[@"Age"];
     int age = [ageObj intValue];
     if (age < 18) {
         self.underEighteen++;

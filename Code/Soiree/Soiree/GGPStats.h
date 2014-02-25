@@ -26,5 +26,11 @@
 -(int)GCD:(int) first and:(int) second;
 - (id)initWithEvent:(PFObject *)event;
 -(NSString *)ratioMaleToFemale;
+-(float)percentUnderEighteen;
+-(float)percentEighteenToTwentyfive;
+-(float)percentTwentyfiveToThirtyfive;
+-(float)percentThirtyfiveToFourtyFive;
+-(float)percentFourtyfiveToFiftyfive;
+-(float)percentGreaterThanFiftyFive;
 
 @end
