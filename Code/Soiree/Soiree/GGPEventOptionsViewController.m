@@ -245,6 +245,9 @@
     }else if ([segue.identifier isEqualToString:@"toStats"]){
         GGPStatsViewController *destination = segue.destinationViewController;
         destination.event = self.event;
+    }else if([segue.identifier isEqualToString:@"toInstagram"]){
+        GGPInstagramViewController *destination = segue.destinationViewController;
+        destination.instagramFeed = instagramFeed;
     }
 
 }

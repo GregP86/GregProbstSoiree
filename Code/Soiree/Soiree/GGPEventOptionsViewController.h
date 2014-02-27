@@ -12,6 +12,7 @@
 #import <Twitter/Twitter.h>
 #import "GGPTwitterResultsViewController.h"
 #import "GGPFacebookResultsViewController.h"
+#import "GGPInstagramViewController.h"
 #import "GGPStatsViewController.h"
 #import "InstagramKit.h"
 

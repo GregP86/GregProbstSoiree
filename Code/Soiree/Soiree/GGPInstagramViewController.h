@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InstagramKit.h"
 
 @interface GGPInstagramViewController : UITableViewController
-
+@property (strong, nonatomic) NSMutableArray *instagramFeed;
 @end

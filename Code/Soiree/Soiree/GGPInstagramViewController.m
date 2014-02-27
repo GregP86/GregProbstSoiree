@@ -44,16 +44,14 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    return self.instagramFeed.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -61,7 +59,15 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    // Configure the cell...
+    UILabel *label = (UILabel *)[cell viewWithTag:99];
+    UIWebView *imageView = (UIWebView *)[cell viewWithTag:100];
+    
+    
+    InstagramMedia *media = [self.instagramFeed objectAtIndex:indexPath.row];
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:media.thumbnailURL];
+    [imageView loadRequest:requestObj];
+    label.text = [NSString stringWithFormat:@"%@ - %@", media.caption.text, media.user.username];
+    
     
     return cell;
 }
