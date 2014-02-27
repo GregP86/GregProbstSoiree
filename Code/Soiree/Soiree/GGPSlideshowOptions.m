@@ -20,6 +20,8 @@
         self.usePhotos = YES;
         self.useText = YES;
         self.useVideo = YES;
+        self.useStats = YES;
+        self.useWordCloud = YES;
     }
     return self;
 }

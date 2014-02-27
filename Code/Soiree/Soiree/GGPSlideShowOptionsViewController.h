@@ -24,5 +24,7 @@
 - (IBAction)includePhotoSwitch:(id)sender;
 - (IBAction)includeText:(id)sender;
 - (IBAction)inludeVideoSwitch:(id)sender;
+- (IBAction)includeStatsSwitch:(id)sender;
+- (IBAction)includeWordCloudSwitch:(id)sender;
 
 @end

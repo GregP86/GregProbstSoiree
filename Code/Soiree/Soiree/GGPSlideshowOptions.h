@@ -17,6 +17,7 @@
 @property(nonatomic) BOOL usePhotos;
 @property(nonatomic) BOOL useText;
 @property(nonatomic) BOOL useVideo;
--(void)showPicker: (UIViewController *)sender;
+@property(nonatomic) BOOL useStats;
+@property(nonatomic) BOOL useWordCloud;
 
 @end

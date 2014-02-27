@@ -27,6 +27,7 @@
         PFObject *object = [query getObjectWithId:s];
         NSString *string = object[@"Text"];
         if (![string isEqual:[NSNull null]]) {
+            block = [block stringByAppendingString:@" "];
             block = [block stringByAppendingString:string];
         }
         

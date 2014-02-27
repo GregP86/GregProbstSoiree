@@ -10,7 +10,10 @@
 
 @interface GGPSlideshowViewController (){
     int count;
+    long top;
     NSTimer *timer;
+    GGPStats *stats;
+    BOOL shown;
 }
 
 @end
@@ -28,6 +31,35 @@
 
 - (void)viewDidLoad
 {
+    top = self.logs.count;
+    if (self.options.useWordCloud) {
+        top++;
+    }
+    if (self.options.useStats) {
+        top++;
+    }
+    shown = NO;
+    stats = [[GGPStats alloc]initWithEvent:self.event];
+    self.totalLabel.text =  [NSString stringWithFormat:@"%d",stats.totalCount];
+    self.totalWomen.text = [NSString stringWithFormat:@"%d",stats.femaleCount];
+    self.totalMen.text = [NSString stringWithFormat:@"%d",stats.maleCount];
+    self.ratioLabel.text = [NSString stringWithFormat:@"%@",[stats ratioMaleToFemale]];
+    self.underEighteen.text = [NSString stringWithFormat:@"%.02f%%",[stats percentUnderEighteen]];
+    self.toTwentyfive.text = [NSString stringWithFormat:@"%.02f%%",[stats percentEighteenToTwentyfive]];
+    self.toThirtyFive.text = [NSString stringWithFormat:@"%.02f%%",[stats percentTwentyfiveToThirtyfive]];
+    self.toFourtyfive.text = [NSString stringWithFormat:@"%.02f%%",[stats percentThirtyfiveToFourtyFive]];
+    self.toFiftyfive.text = [NSString stringWithFormat:@"%.02f%%",[stats percentFourtyfiveToFiftyfive]];
+    self.aboveFiftyFive.text = [NSString stringWithFormat:@"%.02f%%", [stats percentGreaterThanFiftyFive]];
+    self.webView.layer.cornerRadius = 5;
+    [self.webView setClipsToBounds:YES];
+    self.webView.layer.borderColor = [[UIColor blackColor]CGColor];
+    self.webView.layer.borderWidth = 2;
+    
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:[GGPWordCloudRetriever getWordCloudUrl:self.event]];
+    [self.webView loadRequest:requestObj];
+    
+    self.webView.alpha = 0;
+    self.statsView.alpha = 0;
     self.player = [MPMusicPlayerController iPodMusicPlayer];
     [self.player setQueueWithItemCollection:self.options.song];
     [self.player play];
@@ -52,17 +84,25 @@
 -(void)onTimer{
     NSLog(@"fire");
     //[_moviePlayer.view removeFromSuperview];
-    GGPLogEntry *log = [self.logs objectAtIndex:count];
+    self.webView.alpha = 0;
+    self.statsView.alpha = 0;
+    GGPLogEntry *log = count < self.logs.count?[self.logs objectAtIndex:count]:[NSNull null];
     BOOL isValidType = false;
     while (!isValidType) {
-        if ([log.fileType isEqualToString:@"TXT"] ){
-            if (self.options.useText) {
+        if([log isEqual:[NSNull null]]){
+            if(self.options.useStats || self.options.useWordCloud){
                 isValidType = true;
             }else{
                 [self countUp];
             }
         }else if([log.fileType isEqualToString:@"JPEG"]){
             if (self.options.usePhotos){
+                isValidType = true;
+            }else{
+                [self countUp];
+            }
+        }else if ([log.fileType isEqualToString:@"TXT"] ){
+            if (self.options.useText) {
                 isValidType = true;
             }else{
                 [self countUp];
@@ -75,22 +115,31 @@
             }
         }
         
-        log = [self.logs objectAtIndex:count];
+        log = count < self.logs.count?[self.logs objectAtIndex:count]:[NSNull null];
     }
     
     if(self.options.useFade){
         [UIView animateWithDuration:3.0 animations:^{
             self.imageView.alpha = 0.0;
+            self.statsView.alpha = 0;
         }];
     }
-    if ([log.fileType isEqualToString:@"TXT"] && self.options.useText){
+    
+    if ([log isEqual: [NSNull null]] && self.options.useStats && !shown) {
+        self.imageView.image = nil;
+        self.mainLabel.text = @"";
+        self.statsView.alpha = 1;
+        shown = YES;
+    }else if([log isEqual: [NSNull null]] && self.options.useWordCloud){
+        self.webView.alpha = 1;
+        [self.view bringSubviewToFront:self.webView];
+    }else if([log.fileType isEqualToString:@"TXT"] && self.options.useText){
             self.imageView.image = nil;
             self.mainLabel.text = log.text;
     }else if ([log.fileType isEqualToString:@"JPEG"] && self.options.usePhotos){
         self.mainLabel.text = @"";
         self.imageView.image = [UIImage imageWithData:log.file];
     }else if(self.options.useVideo){
-       
         self.mainLabel.text = @"";
         NSString *movieData = [NSTemporaryDirectory() stringByAppendingPathComponent:@"test.m4v"];
         NSURL *movie = [NSURL fileURLWithPath:movieData];
@@ -139,8 +188,12 @@
 
 -(void)countUp{
     count++;
-    if (count >= self.logs.count) {
+    if (count >= top) {
+//        if(self.options.useStats){
+//            self.statsView.alpha = 1;
+//        }
         count = 0;
+        shown = NO;
     }
 }
 - (void) moviePlayBackDidStart:(NSNotification*)notification{

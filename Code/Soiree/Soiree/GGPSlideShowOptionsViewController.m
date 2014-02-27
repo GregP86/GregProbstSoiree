@@ -64,6 +64,14 @@
     self.options.useVideo = !self.options.useVideo;
 }
 
+- (IBAction)includeStatsSwitch:(id)sender {
+    self.options.useStats = !self.options.useStats;
+}
+
+- (IBAction)includeWordCloudSwitch:(id)sender {
+    self.options.useWordCloud = !self.options.useWordCloud;
+}
+
 -(void)showPicker{
     self.picker.allowsPickingMultipleItems = NO;
     self.picker.prompt = @"Select any song.";

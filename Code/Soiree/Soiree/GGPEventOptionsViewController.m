@@ -10,6 +10,7 @@
 
 @interface GGPEventOptionsViewController (){
     BOOL isTwitterSearch;
+    NSMutableArray *instagramFeed;
 }
 
 @end
@@ -91,6 +92,21 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
+- (IBAction)searchInstagram
+{
+    [self.hashtagSearch resignFirstResponder];
+    if ([self.hashtagSearch.text length]) {
+        [[InstagramEngine sharedEngine] getMediaWithTagName:self.hashtagSearch.text withSuccess:^(NSArray *feed) {
+            instagramFeed = [[NSMutableArray alloc] init];
+            [instagramFeed addObjectsFromArray:feed];
+            [self performSegueWithIdentifier:@"toInstagram" sender:self];
+            
+        } failure:^(NSError *error) {
+            NSLog(@"Search Media Failed");
+        }];
+    }}
+
 
 -(void)searchFacebook{
     isTwitterSearch = NO;
@@ -213,6 +229,8 @@
         [self searchFacebook];
     }else if(selectedCell == self.statsCell){
         [self performSegueWithIdentifier:@"toStats" sender:self];
+    }else if(selectedCell == self.instagramCell){
+        [self searchInstagram];
     }
     
 }

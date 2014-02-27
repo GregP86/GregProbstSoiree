@@ -40,7 +40,12 @@
     self.thirtysixToFourtyfive.text = [NSString stringWithFormat:@"%.02f%%",[stats percentThirtyfiveToFourtyFive]];
     self.fourtysixToFiftyfive.text = [NSString stringWithFormat:@"%.02f%%",[stats percentFourtyfiveToFiftyfive]];
     self.fiftyfivePlusLabel.text = [NSString stringWithFormat:@"%.02f%%", [stats percentGreaterThanFiftyFive]];
+    self.webView.layer.cornerRadius = 5;
+    [self.webView setClipsToBounds:YES];
+    self.webView.layer.borderColor = [[UIColor blackColor]CGColor];
+    self.webView.layer.borderWidth = 2;
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:[GGPWordCloudRetriever getWordCloudUrl:self.event]];
+    
     [self.webView loadRequest:requestObj];
 }
 

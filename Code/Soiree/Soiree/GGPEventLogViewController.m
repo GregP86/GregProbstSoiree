@@ -94,6 +94,7 @@
         GGPSlideshowViewController *destination = [segue destinationViewController];
         destination.logs = self.LogEntries;
         destination.options = self.options;
+        destination.event = self.event;
     }else if([segue.identifier isEqualToString:@"toSlideOptions"]){
         GGPSlideShowOptionsViewController *destination = [segue destinationViewController];
         destination.options = self.options;

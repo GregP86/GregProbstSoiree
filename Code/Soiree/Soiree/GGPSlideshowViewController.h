@@ -12,6 +12,8 @@
 #import "GGPSlideshowOptions.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import "GGPStats.h"
+#import "GGPWordCloudRetriever.h"
 
 @interface GGPSlideshowViewController : UIViewController
 
@@ -21,5 +23,19 @@
 @property (weak, nonatomic) IBOutlet UILabel *mainLabel;
 @property (strong, nonatomic) GGPSlideshowOptions *options;
 @property (strong, nonatomic) MPMusicPlayerController *player;
+@property (weak, nonatomic) IBOutlet UILabel *totalLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalWomen;
+@property (weak, nonatomic) IBOutlet UILabel *totalMen;
+@property (weak, nonatomic) IBOutlet UILabel *ratioLabel;
+@property (weak, nonatomic) IBOutlet UILabel *underEighteen;
+@property (weak, nonatomic) IBOutlet UILabel *toTwentyfive;
+@property (weak, nonatomic) IBOutlet UILabel *toThirtyFive;
+@property (weak, nonatomic) IBOutlet UILabel *toFourtyfive;
+@property (weak, nonatomic) IBOutlet UILabel *toFiftyfive;
+@property (weak, nonatomic) IBOutlet UILabel *aboveFiftyFive;
+@property (weak, nonatomic) IBOutlet UIView *statsView;
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (strong, nonatomic) PFObject *event;
+
 
 @end

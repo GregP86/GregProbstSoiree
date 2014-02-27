@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "GGPStats.h"
 #import "GGPWordCloudRetriever.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface GGPStatsViewController : UIViewController
 
