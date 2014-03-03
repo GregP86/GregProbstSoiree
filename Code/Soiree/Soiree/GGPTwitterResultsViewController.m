@@ -8,7 +8,10 @@
 
 #import "GGPTwitterResultsViewController.h"
 
-@interface GGPTwitterResultsViewController ()
+@interface GGPTwitterResultsViewController (){
+    NSMutableArray *checkArray;
+    
+}
 
 @end
 
@@ -26,7 +29,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    NSNumber *noObj = [NSNumber numberWithBool:NO];
+    
+    checkArray = [[NSMutableArray alloc] init];
+    for (int count = 0; count < self.results.count; count++) {
+        [checkArray addObject:noObj];
+    }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -57,6 +66,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSNumber *yesObj = [NSNumber numberWithBool:YES];
+    
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSDictionary *tweet = (self.results)[indexPath.row];
@@ -66,6 +77,11 @@
     NSString *text = [NSString stringWithFormat:@"%@ - %@", tweet[@"text"], [tweet[@"user"] objectForKey:@"name"]];
     cell.textLabel.text = text;
     cell.textLabel.numberOfLines = 5;
+//    if (checkArray[indexPath.row] == yesObj) {
+//        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+//    }else{
+//        [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+//    }
     // Configure the cell...
     
     return cell;
@@ -74,6 +90,28 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 130;
 }
+
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    
+//    NSNumber *yesObj = [NSNumber numberWithBool:YES];
+//    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryCheckmark;
+//    checkArray[indexPath.row] = yesObj;
+//    
+//    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//    
+//}
+//
+//-(void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+//    NSNumber *noObj = [NSNumber numberWithBool:NO];
+//    [tableView cellForRowAtIndexPath:indexPath].accessoryType = UITableViewCellAccessoryNone;
+//     checkArray[indexPath.row] = noObj;
+//    
+//    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+//}
+
+
+
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
