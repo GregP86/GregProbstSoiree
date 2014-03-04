@@ -7,9 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface GGPTwitterResultsViewController : UITableViewController
 
 @property (nonatomic,strong) NSMutableArray *results;
+@property (nonatomic, strong) PFObject *event;
+
+- (IBAction)addToLog:(id)sender;
 
 @end

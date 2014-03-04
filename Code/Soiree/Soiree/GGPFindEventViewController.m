@@ -14,6 +14,8 @@
     GGPEvent *selectedEvent;
     int direction;
     int shakes;
+    NSDate *start;
+    
 }
 
 @end
@@ -23,7 +25,7 @@
 - (id)initWithCoder:(NSCoder *)aCoder {
     self = [super initWithCoder:aCoder];
     if (self) {
-        
+        [self.indicator startAnimating];
         self.parseClassName = @"Location";
         
         // The key of the PFObject to display in the label of the default cell style
@@ -33,7 +35,11 @@
         // self.imageKey = @"image";
         self.pullToRefreshEnabled = YES;
         self.paginationEnabled = YES;
-        self.objectsPerPage = 25;
+        self.objectsPerPage = 7;
+        
+        start = [NSDate date];
+        int daysToAdd = 1;
+        start = [start dateByAddingTimeInterval:60*60*24 * daysToAdd];
         
         [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
             if (!error) {
@@ -53,8 +59,10 @@
     PFQuery *innerQuery = [PFQuery queryWithClassName:self.parseClassName];
     [innerQuery whereKey:@"Coords" nearGeoPoint:currentLocation];
     PFQuery *query = [PFQuery queryWithClassName:@"Event"];
+    //query.cachePolicy = kPFCachePolicyIgnoreCache;
     [query whereKey:@"Location" matchesQuery:innerQuery];
     [query whereKey:@"EndTime" greaterThanOrEqualTo:[NSDate date]];
+    [query whereKey:@"StartTime" lessThanOrEqualTo:start];
     [query setLimit:10];
     
     // If no objects are loaded in memory, we look to the cache first to fill the table
@@ -147,6 +155,7 @@
     [self createObjectsArray];
     [self populateMap];
     [self addPinPoints];
+    [self.indicator stopAnimating];
 }
 
 -(void)viewDidLoad{
@@ -201,4 +210,35 @@
     }
 }
 
+- (IBAction)search:(id)sender {
+    
+}
+
+- (IBAction)setToday:(id)sender {
+    [self.indicator startAnimating];
+    start = [NSDate date];
+    int addDays = 1;
+    start = [start dateByAddingTimeInterval:60*60*24*addDays];
+    [self.map removeAnnotations:self.map.annotations];
+    [self loadObjects];
+    
+}
+
+- (IBAction)setWeek:(id)sender {
+    [self.indicator startAnimating];
+    start = [NSDate date];
+    int addDays = 7;
+    start = [start dateByAddingTimeInterval:60*60*24*addDays];
+    [self.map removeAnnotations:self.map.annotations];
+    [self loadObjects];
+}
+
+- (IBAction)setMonth:(id)sender {
+    [self.indicator startAnimating];
+    start = [NSDate date];
+    int addDays = 30;
+    start = [start dateByAddingTimeInterval:60*60*24*addDays];
+    [self.map removeAnnotations:self.map.annotations];
+    [self loadObjects];
+}
 @end

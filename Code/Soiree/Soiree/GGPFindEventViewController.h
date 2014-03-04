@@ -15,5 +15,12 @@
 @interface GGPFindEventViewController : PFQueryTableViewController<UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *map;
+@property (weak, nonatomic) IBOutlet UITextField *searchBar;
+- (IBAction)search:(id)sender;
+- (IBAction)setToday:(id)sender;
+- (IBAction)setWeek:(id)sender;
+- (IBAction)setMonth:(id)sender;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+
 
 @end

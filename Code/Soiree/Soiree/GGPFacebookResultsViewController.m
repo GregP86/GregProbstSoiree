@@ -127,4 +127,26 @@
 
  */
 
+- (IBAction)addToLog:(id)sender {
+    NSArray * selectedCells = [self.tableView indexPathsForSelectedRows];
+    for (NSIndexPath *indexPath in selectedCells) {
+        NSDictionary *fb = (self.results)[indexPath.row];
+        PFObject *post = [PFObject objectWithClassName:@"LogEntry"];
+        post[@"Data"] = [NSNull null];
+        post[@"FileType"] = @"TXT";
+        post[@"Text"] = fb[@"message"];
+        post[@"isIncluded"] = @1;
+        post[@"SubmittedBy"] = [fb[@"from"] objectForKey:@"name"];
+        
+        [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if(!error){
+                [self.event addObject:[post objectId] forKey:@"Log"];
+                [self.event saveInBackground];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }];
+        
+    }
+
+}
 @end

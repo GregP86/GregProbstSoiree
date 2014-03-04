@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 #import "InstagramKit.h"
 
 @interface GGPInstagramViewController : UITableViewController
+- (IBAction)addToLog:(id)sender;
 @property (strong, nonatomic) NSMutableArray *instagramFeed;
+@property (strong, nonatomic) PFObject *event;
 @end

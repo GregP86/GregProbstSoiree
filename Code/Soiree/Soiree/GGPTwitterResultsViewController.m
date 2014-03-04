@@ -66,8 +66,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSNumber *yesObj = [NSNumber numberWithBool:YES];
-    
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     NSDictionary *tweet = (self.results)[indexPath.row];
@@ -163,4 +161,26 @@
 
  */
 
+- (IBAction)addToLog:(id)sender {
+    NSArray * selectedCells = [self.tableView indexPathsForSelectedRows];
+
+    for (NSIndexPath *indexPath in selectedCells) {
+        NSDictionary *tweet = (self.results)[indexPath.row];
+        PFObject *post = [PFObject objectWithClassName:@"LogEntry"];
+        post[@"Data"] = [NSNull null];
+        post[@"FileType"] = @"TXT";
+        post[@"Text"] = tweet[@"text"];
+        post[@"isIncluded"] = @1;
+        post[@"SubmittedBy"] = [tweet[@"user"] objectForKey:@"name"];
+        
+        [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if(!error){
+                [self.event addObject:[post objectId] forKey:@"Log"];
+                [self.event saveInBackground];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }];
+
+    }
+}
 @end

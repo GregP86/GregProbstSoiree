@@ -123,4 +123,30 @@
 
  */
 
+- (IBAction)addToLog:(id)sender {
+    
+    NSArray * selectedCells = [self.tableView indexPathsForSelectedRows];
+    for (NSIndexPath *indexPath in selectedCells) {
+        InstagramMedia *media = [self.instagramFeed objectAtIndex:indexPath.row];
+        NSData * imageData = [[NSData alloc] initWithContentsOfURL: media.standardResolutionImageURL];
+        PFFile *file =  [PFFile fileWithName:@"file" data:imageData];
+
+        
+        PFObject *post = [PFObject objectWithClassName:@"LogEntry"];
+        post[@"Data"] = file;
+        post[@"FileType"] = @"JPEG";
+        post[@"Text"] = media.caption.text;
+        post[@"isIncluded"] = @1;
+        post[@"SubmittedBy"] = media.user.username;
+        
+        [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if(!error){
+                [self.event addObject:[post objectId] forKey:@"Log"];
+                [self.event saveInBackground];
+                [self.navigationController popViewControllerAnimated:YES];
+            }
+        }];
+        
+    }
+}
 @end

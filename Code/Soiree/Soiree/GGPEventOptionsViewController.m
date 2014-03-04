@@ -239,15 +239,18 @@
     if([segue.identifier isEqualToString:@"toTwitter"]){
         GGPTwitterResultsViewController *destination = segue.destinationViewController;
         destination.results = self.results;
+        destination.event = self.event;
     }else if([segue.identifier isEqualToString:@"toFacebook"]){
         GGPFacebookResultsViewController *destination = segue.destinationViewController;
         destination.results = self.results;
+        destination.event = self.event;
     }else if ([segue.identifier isEqualToString:@"toStats"]){
         GGPStatsViewController *destination = segue.destinationViewController;
         destination.event = self.event;
     }else if([segue.identifier isEqualToString:@"toInstagram"]){
         GGPInstagramViewController *destination = segue.destinationViewController;
         destination.instagramFeed = instagramFeed;
+        destination.event = self.event;
     }
 
 }
