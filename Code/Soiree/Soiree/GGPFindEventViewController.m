@@ -26,7 +26,7 @@
     self = [super initWithCoder:aCoder];
     if (self) {
         [self.indicator startAnimating];
-        self.parseClassName = @"Location";
+                self.parseClassName = @"Location";
         
         // The key of the PFObject to display in the label of the default cell style
         self.textKey = @"text";
@@ -151,6 +151,7 @@
 }
 
 -(void)objectsDidLoad:(NSError *)error{
+    
     [super objectsDidLoad:error];
     [self createObjectsArray];
     [self populateMap];
@@ -161,6 +162,8 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     self.tableView.delegate = self;
+    [self.todayButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [self.todayButton setUserInteractionEnabled:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -207,15 +210,24 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         GGPEventDetailViewController *destination = segue.destinationViewController;
         destination.event = [self.objects objectAtIndex:indexPath.row];
+    }if([segue.identifier isEqualToString:@"toSearch"]){
+        GGPSearchViewController *destination = segue.destinationViewController;
+        destination.search = self.searchBar.text;
     }
 }
 
 - (IBAction)search:(id)sender {
-    
+    [self performSegueWithIdentifier:@"toSearch" sender:self];
 }
 
 - (IBAction)setToday:(id)sender {
     [self.indicator startAnimating];
+    [self.todayButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [self.todayButton setUserInteractionEnabled:NO];
+    [self.weekButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [self.weekButton setUserInteractionEnabled:YES];
+    [self.monthButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [self.monthButton setUserInteractionEnabled:YES];
     start = [NSDate date];
     int addDays = 1;
     start = [start dateByAddingTimeInterval:60*60*24*addDays];
@@ -226,6 +238,12 @@
 
 - (IBAction)setWeek:(id)sender {
     [self.indicator startAnimating];
+    [self.weekButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [self.weekButton setUserInteractionEnabled:NO];
+    [self.todayButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [self.todayButton setUserInteractionEnabled:YES];
+    [self.monthButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [self.monthButton setUserInteractionEnabled:YES];
     start = [NSDate date];
     int addDays = 7;
     start = [start dateByAddingTimeInterval:60*60*24*addDays];
@@ -235,6 +253,12 @@
 
 - (IBAction)setMonth:(id)sender {
     [self.indicator startAnimating];
+    [self.monthButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+    [self.monthButton setUserInteractionEnabled:NO];
+    [self.todayButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [self.todayButton setUserInteractionEnabled:YES];
+    [self.weekButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [self.weekButton setUserInteractionEnabled:YES];
     start = [NSDate date];
     int addDays = 30;
     start = [start dateByAddingTimeInterval:60*60*24*addDays];

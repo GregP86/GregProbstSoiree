@@ -39,7 +39,12 @@
     NSMutableArray *items = [[NSMutableArray alloc] init];
     [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(playVideo)]];
     [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil]];
-    [items addObject:[[UIBarButtonItem alloc] initWithTitle:@"Slide Show Options" style:UIBarButtonItemStylePlain target:self action:@selector(slideOptions)]];
+    if ([[PFUser currentUser].username isEqualToString:self.event[@"Creator"]]) {
+        [items addObject:[[UIBarButtonItem alloc] initWithTitle:@"Edit Log" style:UIBarButtonItemStylePlain target:self action:@selector(logEdit)]];
+        [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil]];
+    }
+    
+    [items addObject:[[UIBarButtonItem alloc] initWithTitle:@"Options" style:UIBarButtonItemStylePlain target:self action:@selector(slideOptions)]];
     self.toolbarItems = items;
     
     numberOfItemsPerPage = 4 * 3;
@@ -61,6 +66,7 @@
         entry.text = temp[@"Text"]? temp[@"Text"] : nil;
         entry.isIncluded = temp[@"isIncluded"];
         entry.submittedBy = temp[@"SubmittedBy"];
+        entry.id = temp.objectId;
         [self.LogEntries addObject:entry];
     }
 	
@@ -69,6 +75,10 @@
 //    UICollectionViewFlowLayout *myLayout = [[UICollectionViewFlowLayout alloc]init];
 //    myLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 //    [self.collectionView setCollectionViewLayout:myLayout animated:YES];
+}
+
+-(void)logEdit{
+    [self performSegueWithIdentifier:@"toLogEdit" sender:self];  
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,6 +108,10 @@
     }else if([segue.identifier isEqualToString:@"toSlideOptions"]){
         GGPSlideShowOptionsViewController *destination = [segue destinationViewController];
         destination.options = self.options;
+    }else if([segue.identifier isEqualToString:@"toLogEdit"]){
+        GGPLogEditViewController *destination = [segue destinationViewController];
+        destination.LogEntries = self.LogEntries;
+        destination.event = self.event;
     }
 
 

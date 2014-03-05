@@ -15,6 +15,8 @@
 		1E548C9218845AF7009F8F5F /* GGPLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C9118845AF7009F8F5F /* GGPLocation.m */; };
 		1E548C951885A7E7009F8F5F /* GGPMyEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C941885A7E7009F8F5F /* GGPMyEventsViewController.m */; };
 		1E548C9818865B0D009F8F5F /* GGPFindEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C9718865B0D009F8F5F /* GGPFindEventViewController.m */; };
+		1E5C83CD18C64EB2006CFE6A /* GGPSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C83CC18C64EB2006CFE6A /* GGPSearchViewController.m */; };
+		1E5C83D418C6A36B006CFE6A /* GGPLogEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C83D318C6A36B006CFE6A /* GGPLogEditViewController.m */; };
 		1E70D90F18A55708008DFC09 /* GGPCollectionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E70D90E18A55708008DFC09 /* GGPCollectionLayout.m */; };
 		1E7EE0271890DB5A006D0251 /* GGPLogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7EE0261890DB5A006D0251 /* GGPLogEntry.m */; };
 		1E7F98AA18A15D6F00A0D5C2 /* GGPEventOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F98A918A15D6F00A0D5C2 /* GGPEventOptionsViewController.m */; };
@@ -151,6 +153,10 @@
 		1E548C941885A7E7009F8F5F /* GGPMyEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPMyEventsViewController.m; sourceTree = "<group>"; };
 		1E548C9618865B0D009F8F5F /* GGPFindEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPFindEventViewController.h; sourceTree = "<group>"; };
 		1E548C9718865B0D009F8F5F /* GGPFindEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPFindEventViewController.m; sourceTree = "<group>"; };
+		1E5C83CB18C64EB2006CFE6A /* GGPSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPSearchViewController.h; sourceTree = "<group>"; };
+		1E5C83CC18C64EB2006CFE6A /* GGPSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPSearchViewController.m; sourceTree = "<group>"; };
+		1E5C83D218C6A36B006CFE6A /* GGPLogEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPLogEditViewController.h; sourceTree = "<group>"; };
+		1E5C83D318C6A36B006CFE6A /* GGPLogEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPLogEditViewController.m; sourceTree = "<group>"; };
 		1E70D90D18A55708008DFC09 /* GGPCollectionLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPCollectionLayout.h; sourceTree = "<group>"; };
 		1E70D90E18A55708008DFC09 /* GGPCollectionLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPCollectionLayout.m; sourceTree = "<group>"; };
 		1E7EE0251890DB5A006D0251 /* GGPLogEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPLogEntry.h; sourceTree = "<group>"; };
@@ -429,6 +435,8 @@
 				1E70D90E18A55708008DFC09 /* GGPCollectionLayout.m */,
 				1EE3EDFB18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.h */,
 				1EE3EDFC18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.m */,
+				1E5C83D218C6A36B006CFE6A /* GGPLogEditViewController.h */,
+				1E5C83D318C6A36B006CFE6A /* GGPLogEditViewController.m */,
 			);
 			name = Log;
 			sourceTree = "<group>";
@@ -562,6 +570,8 @@
 				1EE3EE0918BC48C4008AF9A7 /* GGPStatsViewController.m */,
 				1EEAE83118BF0616006580C2 /* GGPInstagramViewController.h */,
 				1EEAE83218BF0616006580C2 /* GGPInstagramViewController.m */,
+				1E5C83CB18C64EB2006CFE6A /* GGPSearchViewController.h */,
+				1E5C83CC18C64EB2006CFE6A /* GGPSearchViewController.m */,
 			);
 			name = EventManageViewControlls;
 			sourceTree = "<group>";
@@ -1029,6 +1039,7 @@
 				1E70D90F18A55708008DFC09 /* GGPCollectionLayout.m in Sources */,
 				1EEAE7E718BD2A9C006580C2 /* UNIHTTPBinaryResponse.m in Sources */,
 				1EEAE7ED18BD2A9C006580C2 /* UNIHTTPRequest.m in Sources */,
+				1E5C83D418C6A36B006CFE6A /* GGPLogEditViewController.m in Sources */,
 				1E548C951885A7E7009F8F5F /* GGPMyEventsViewController.m in Sources */,
 				1E3DB44B188888B7002EA446 /* GGPEventDetailViewController.m in Sources */,
 				1EE3EE0018B28D01008AF9A7 /* GGPSlideshowOptions.m in Sources */,
@@ -1067,6 +1078,7 @@
 				1E208ADE1898000F00EDBDD6 /* GGPTextEntryViewController.m in Sources */,
 				1EE3EDFA18AC9E8C008AF9A7 /* GGPSlideshowViewController.m in Sources */,
 				1EA45AF31890346600B13935 /* GGPEventLogViewController.m in Sources */,
+				1E5C83CD18C64EB2006CFE6A /* GGPSearchViewController.m in Sources */,
 				1EEAE7E418BD2A9C006580C2 /* UNIBaseRequest.m in Sources */,
 				1EEAE7EE18BD2A9C006580C2 /* UNIHTTPRequestWithBody.m in Sources */,
 				1EEAE7E818BD2A9C006580C2 /* UNIHTTPJsonResponse.m in Sources */,

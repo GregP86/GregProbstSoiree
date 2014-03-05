@@ -11,6 +11,7 @@
 #import "GGPEvent.h"
 #import "GGPEventDetailViewController.h"
 #import <MapKit/MapKit.h>
+#import "GGPSearchViewController.h"
 
 @interface GGPFindEventViewController : PFQueryTableViewController<UIAlertViewDelegate>
 
@@ -21,6 +22,9 @@
 - (IBAction)setWeek:(id)sender;
 - (IBAction)setMonth:(id)sender;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+@property (weak, nonatomic) IBOutlet UIButton *todayButton;
+@property (weak, nonatomic) IBOutlet UIButton *weekButton;
+@property (weak, nonatomic) IBOutlet UIButton *monthButton;
 
 
 @end

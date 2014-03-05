@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSString *fileName;
 @property (strong, nonatomic) NSString *fileType;
 @property (strong, nonatomic) NSString *submittedBy;
+@property (strong, nonatomic) NSString *id;
 @property (nonatomic) BOOL isIncluded;
 
 -(PFObject *)getDBReadyObject;
