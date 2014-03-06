@@ -28,14 +28,26 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     self.navigationController.toolbarHidden=NO;
+    [self LoadItems];
+    [self.collectionView reloadData];
+    
 }
 
 - (void)viewDidLoad
 {
     
     [super viewDidLoad];
-    transform = CGAffineTransformMake(10, 10, 10, 10, 10, 10);
     self.navigationController.toolbarHidden=NO;
+    [self LoadItems];
+    
+    
+    
+//    UICollectionViewFlowLayout *myLayout = [[UICollectionViewFlowLayout alloc]init];
+//    myLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+//    [self.collectionView setCollectionViewLayout:myLayout animated:YES];
+}
+
+-(void)LoadItems{
     NSMutableArray *items = [[NSMutableArray alloc] init];
     [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(playVideo)]];
     [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil]];
@@ -71,10 +83,6 @@
     }
 	
     NSLog(@"done");
-    
-//    UICollectionViewFlowLayout *myLayout = [[UICollectionViewFlowLayout alloc]init];
-//    myLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-//    [self.collectionView setCollectionViewLayout:myLayout animated:YES];
 }
 
 -(void)logEdit{

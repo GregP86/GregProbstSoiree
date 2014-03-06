@@ -15,6 +15,7 @@
 		1E548C9218845AF7009F8F5F /* GGPLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C9118845AF7009F8F5F /* GGPLocation.m */; };
 		1E548C951885A7E7009F8F5F /* GGPMyEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C941885A7E7009F8F5F /* GGPMyEventsViewController.m */; };
 		1E548C9818865B0D009F8F5F /* GGPFindEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C9718865B0D009F8F5F /* GGPFindEventViewController.m */; };
+		1E5ACB1618C83E86007698B4 /* GGPLogModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5ACB1518C83E86007698B4 /* GGPLogModeViewController.m */; };
 		1E5C83CD18C64EB2006CFE6A /* GGPSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C83CC18C64EB2006CFE6A /* GGPSearchViewController.m */; };
 		1E5C83D418C6A36B006CFE6A /* GGPLogEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C83D318C6A36B006CFE6A /* GGPLogEditViewController.m */; };
 		1E70D90F18A55708008DFC09 /* GGPCollectionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E70D90E18A55708008DFC09 /* GGPCollectionLayout.m */; };
@@ -153,6 +154,8 @@
 		1E548C941885A7E7009F8F5F /* GGPMyEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPMyEventsViewController.m; sourceTree = "<group>"; };
 		1E548C9618865B0D009F8F5F /* GGPFindEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPFindEventViewController.h; sourceTree = "<group>"; };
 		1E548C9718865B0D009F8F5F /* GGPFindEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPFindEventViewController.m; sourceTree = "<group>"; };
+		1E5ACB1418C83E86007698B4 /* GGPLogModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPLogModeViewController.h; sourceTree = "<group>"; };
+		1E5ACB1518C83E86007698B4 /* GGPLogModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPLogModeViewController.m; sourceTree = "<group>"; };
 		1E5C83CB18C64EB2006CFE6A /* GGPSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPSearchViewController.h; sourceTree = "<group>"; };
 		1E5C83CC18C64EB2006CFE6A /* GGPSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPSearchViewController.m; sourceTree = "<group>"; };
 		1E5C83D218C6A36B006CFE6A /* GGPLogEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPLogEditViewController.h; sourceTree = "<group>"; };
@@ -867,6 +870,8 @@
 				1EA45AEC188EE63300B13935 /* UserManageViewControlls */,
 				1EA45AED188EE69B00B13935 /* EventManageViewControlls */,
 				1E7F98A718A156E200A0D5C2 /* Log */,
+				1E5ACB1418C83E86007698B4 /* GGPLogModeViewController.h */,
+				1E5ACB1518C83E86007698B4 /* GGPLogModeViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1063,6 +1068,7 @@
 				1EEAE7E518BD2A9C006580C2 /* UNIBodyRequest.m in Sources */,
 				1EEAE82E18BEF899006580C2 /* InstagramModel.m in Sources */,
 				1EE3EE0718BBDC03008AF9A7 /* GGPStats.m in Sources */,
+				1E5ACB1618C83E86007698B4 /* GGPLogModeViewController.m in Sources */,
 				1E548C9818865B0D009F8F5F /* GGPFindEventViewController.m in Sources */,
 				1EEAE7E318BD2A9C006580C2 /* Base64.m in Sources */,
 				1EEAE82D18BEF899006580C2 /* InstagramMedia.m in Sources */,

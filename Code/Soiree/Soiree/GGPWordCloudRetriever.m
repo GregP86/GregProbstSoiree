@@ -25,7 +25,8 @@
     for(NSString *s in dbobjects){
         PFQuery *query = [PFQuery queryWithClassName:@"LogEntry"];
         PFObject *object = [query getObjectWithId:s];
-        NSString *string = object[@"Text"];
+        NSString *string = object[@"Text"] == nil? [NSNull null]: object[@"Text"];
+        
         if (![string isEqual:[NSNull null]]) {
             block = [block stringByAppendingString:@" "];
             block = [block stringByAppendingString:string];

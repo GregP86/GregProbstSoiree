@@ -48,9 +48,16 @@
     
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [self.indicator startAnimating];
+    [self performSelector:@selector(loadObjects) withObject:nil afterDelay:0.1];
+    
+}
+
 -(void)loadObjects{
     
-   
+    [self.nearbtEventsMap removeAnnotations:self.nearbtEventsMap.annotations];
+    
     PFQuery *innerQuery = [PFQuery queryWithClassName:parseClassName];
     [innerQuery whereKey:@"Coords" nearGeoPoint:currentLocation];
     PFQuery *query = [PFQuery queryWithClassName:@"Event"];
@@ -63,6 +70,7 @@
     [self createObjectsArray];
     [self populateMap];
     [self addPinPoints];
+    [self.myEventsTable reloadData];
     [self.indicator stopAnimating];
 }
 

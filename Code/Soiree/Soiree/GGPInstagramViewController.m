@@ -143,10 +143,9 @@
             if(!error){
                 [self.event addObject:[post objectId] forKey:@"Log"];
                 [self.event saveInBackground];
-                [self.navigationController popViewControllerAnimated:YES];
             }
         }];
-        
     }
+    [self.navigationController popViewControllerAnimated:YES];
 }
 @end
