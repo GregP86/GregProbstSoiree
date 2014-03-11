@@ -172,6 +172,7 @@
         post[@"Text"] = tweet[@"text"];
         post[@"isIncluded"] = @1;
         post[@"SubmittedBy"] = [tweet[@"user"] objectForKey:@"name"];
+        post[@"eventID"] = [self.event objectId];
         
         [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if(!error){

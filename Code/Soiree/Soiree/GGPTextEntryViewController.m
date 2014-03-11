@@ -43,6 +43,7 @@
     self.entry.isIncluded = YES;
     self.entry.submittedBy = [PFUser currentUser].username;
     self.entry.text = self.textField.text;
+    self.entry.eventID = [self.event objectId];
     
     PFObject *dbEntry = [self.entry getDBReadyObject];
     [dbEntry saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -60,5 +61,13 @@
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    UIButton *button = sender;
+    if ([segue.identifier isEqualToString:@"backToLog"] && [button isEqual:self.submit]) {
+        GGPEventLogViewController *destination = [segue destinationViewController];
+        destination.load = YES;
+    }
 }
 @end

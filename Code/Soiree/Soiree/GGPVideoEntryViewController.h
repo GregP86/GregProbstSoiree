@@ -13,6 +13,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "GGPLogEntry.h"
 #import <QuartzCore/QuartzCore.h>
+#import "GGPEventLogViewController.h"
 
 @interface GGPVideoEntryViewController : UIViewController<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 

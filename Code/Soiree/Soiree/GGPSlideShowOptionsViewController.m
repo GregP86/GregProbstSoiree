@@ -29,6 +29,15 @@
     self.picker = [[MPMediaPickerController alloc]initWithMediaTypes:MPMediaTypeMusic];
     self.options = self.options? self.options : [[GGPSlideshowOptions alloc]init];
     self.picker.delegate = self;
+    self.frameSlider.value = self.options.frames;
+    self.secondsLabel.text = [NSString stringWithFormat:@"%d", self.options.frames];
+    self.selectedSongLabel.text = [self.options.song valueForProperty:MPMediaItemPropertyTitle];
+    [self.transitionSwitch setOn:self.options.useFade];
+    [self.photosSwitch setOn:self.options.usePhotos];
+    [self.videoSwitch setOn:self.options.useVideo];
+    [self.textSwitch setOn:self.options.useText];
+    [self.statsSwitch setOn:self.options.useStats];
+    [self.cloudSwitch setOn:self.options.useWordCloud];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -92,7 +101,7 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row == 0){
+    if(indexPath.row == 0 && indexPath.section == 0){
         [self showPicker];
     }
 }

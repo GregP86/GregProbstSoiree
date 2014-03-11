@@ -69,7 +69,8 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    cell.textLabel.text = self.attendees[indexPath.item];
+    PFUser *user = [PFQuery getUserObjectWithId:self.attendees[indexPath.item]];
+    cell.textLabel.text = user.username;
     
     return cell;
 }

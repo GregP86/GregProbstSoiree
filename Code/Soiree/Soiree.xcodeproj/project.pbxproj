@@ -16,6 +16,7 @@
 		1E548C951885A7E7009F8F5F /* GGPMyEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C941885A7E7009F8F5F /* GGPMyEventsViewController.m */; };
 		1E548C9818865B0D009F8F5F /* GGPFindEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C9718865B0D009F8F5F /* GGPFindEventViewController.m */; };
 		1E5ACB1618C83E86007698B4 /* GGPLogModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5ACB1518C83E86007698B4 /* GGPLogModeViewController.m */; };
+		1E5ACB1718CB9A80007698B4 /* GGPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9E84AC187B5088002C19A6 /* GGPViewController.m */; };
 		1E5C83CD18C64EB2006CFE6A /* GGPSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C83CC18C64EB2006CFE6A /* GGPSearchViewController.m */; };
 		1E5C83D418C6A36B006CFE6A /* GGPLogEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C83D318C6A36B006CFE6A /* GGPLogEditViewController.m */; };
 		1E70D90F18A55708008DFC09 /* GGPCollectionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E70D90E18A55708008DFC09 /* GGPCollectionLayout.m */; };
@@ -1103,6 +1104,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E9E84C2187B5088002C19A6 /* SoireeTests.m in Sources */,
+				1E5ACB1718CB9A80007698B4 /* GGPViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

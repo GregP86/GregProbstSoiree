@@ -35,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UISwitch *isLocationsOn;
 @property (weak, nonatomic) IBOutlet UIDatePicker *startTimePicker;
 @property (weak, nonatomic) IBOutlet UIDatePicker *endTimePicker;
+@property (weak, nonatomic) IBOutlet UISwitch *locSwitch;
 
 
 

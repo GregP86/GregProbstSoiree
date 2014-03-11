@@ -20,8 +20,20 @@
     entry[@"isIncluded"] = self.isIncluded ? @1: @0;
     entry[@"FileType"] = self.fileType;
     entry[@"SubmittedBy"] = self.submittedBy;
+    entry[@"eventID"] = self.eventID;
     
     return entry;
 }
 
++(GGPLogEntry *)objectFromDb:(PFObject *)dbObject{
+    GGPLogEntry *entry = [[GGPLogEntry alloc]init];
+    PFFile *file = dbObject[@"Data"];
+    entry.file = [file isEqual:[NSNull null]]? nil : [file getData];
+    entry.text = dbObject[@"Text"];
+    entry.fileType = dbObject[@"FileType"];
+    entry.submittedBy = dbObject[@"SubmittedBy"];
+    entry.eventID = dbObject[@"eventID"];
+    
+    return entry;
+}
 @end

@@ -10,9 +10,23 @@
 
 @interface GGPEventLogViewController (){
     UICollectionViewCell *largeCell;
+    UICollectionViewCell *cell;
     CGRect frame;
     int shrinkOffset, numberOfItemsPerPage, numberOfPages;
-    CGAffineTransform transform;
+    UILabel *label;
+    UIImageView *view;
+    NSString *text;
+    PFObject *object;
+    GGPLogEntry *entry;
+    PFFile *image;
+    NSData *data;
+    AVURLAsset *asset;
+    AVAssetImageGenerator *generateImg;
+    NSString *movieData;
+    NSURL *movie;
+    CGImageRef refImg;
+    
+
 }
 
 @end
@@ -23,18 +37,39 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        self.load = NO;
     }
     return self;
 }
 -(void)viewDidAppear:(BOOL)animated{
     self.navigationController.toolbarHidden=NO;
+    if (self.load) {
+        [self.collectionView bringSubviewToFront:self.indicator];
+        [self.indicator startAnimating];
+        [self performSelector:@selector(Refresh) withObject:nil afterDelay:0.1];
+    }
+    self.load = NO;
+}
+
+-(void)Refresh{
+    self.navigationController.toolbarHidden=NO;
     [self LoadItems];
     [self.collectionView reloadData];
-    
+    [self.indicator stopAnimating];
 }
 
 - (void)viewDidLoad
 {
+    NSMutableArray *items = [[NSMutableArray alloc] init];
+    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(playVideo)]];
+    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil]];
+    if ([[PFUser currentUser].username isEqualToString:self.event[@"Creator"]]) {
+        [items addObject:[[UIBarButtonItem alloc] initWithTitle:@"Edit Log" style:UIBarButtonItemStylePlain target:self action:@selector(logEdit)]];
+        [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil]];
+    }
+    
+    [items addObject:[[UIBarButtonItem alloc] initWithTitle:@"Options" style:UIBarButtonItemStylePlain target:self action:@selector(slideOptions)]];
+    self.toolbarItems = items;
     
     [super viewDidLoad];
     self.navigationController.toolbarHidden=NO;
@@ -48,40 +83,20 @@
 }
 
 -(void)LoadItems{
-    NSMutableArray *items = [[NSMutableArray alloc] init];
-    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(playVideo)]];
-    [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil]];
-    if ([[PFUser currentUser].username isEqualToString:self.event[@"Creator"]]) {
-        [items addObject:[[UIBarButtonItem alloc] initWithTitle:@"Edit Log" style:UIBarButtonItemStylePlain target:self action:@selector(logEdit)]];
-        [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil]];
-    }
-    
-    [items addObject:[[UIBarButtonItem alloc] initWithTitle:@"Options" style:UIBarButtonItemStylePlain target:self action:@selector(slideOptions)]];
-    self.toolbarItems = items;
-    
-    numberOfItemsPerPage = 4 * 3;
-    numberOfPages = 2;//ceilf((CGFloat)self.LogEntries.count / (CGFloat)numberOfItemsPerPage);
     
     shrinkOffset = 64;
-    NSNull *null = [[NSNull alloc]init];
     self.dbobjects = self.event[@"Log"];
     self.LogEntries = [[NSMutableArray alloc]init];
     for(NSString *s in self.dbobjects){
         PFQuery *query = [PFQuery queryWithClassName:@"LogEntry"];
-        PFObject *temp =[query getObjectWithId:s];
-        GGPLogEntry *entry = [[GGPLogEntry alloc]init];
-        PFFile *tempFile = temp[@"Data"]? temp[@"Data"]: null;
-        if(![null isEqual:tempFile]){
-            entry.file = [tempFile getData];
-        }
-        entry.fileType = temp[@"FileType"];
-        entry.text = temp[@"Text"]? temp[@"Text"] : nil;
-        entry.isIncluded = temp[@"isIncluded"];
-        entry.submittedBy = temp[@"SubmittedBy"];
-        entry.id = temp.objectId;
+        object =[query getObjectWithId:s];
+        entry = [GGPLogEntry objectFromDb:object];
         [self.LogEntries addObject:entry];
     }
 	
+    numberOfItemsPerPage = 12;
+    numberOfPages = ceilf((CGFloat)self.LogEntries.count / (CGFloat)numberOfItemsPerPage);
+    
     NSLog(@"done");
 }
 
@@ -103,11 +118,14 @@
     if([segue.identifier isEqualToString:@"toEntryCompose"]){
         GGPComposeEntryViewController *vcImage = [[GGPComposeEntryViewController alloc] init];
         GGPVideoEntryViewController *vidControl = [[GGPVideoEntryViewController alloc] init];
+        GGPTextEntryViewController *textControl = [[GGPTextEntryViewController alloc] init];
         UITabBarController* tbc = [segue destinationViewController];
         vcImage = (GGPComposeEntryViewController*)[[tbc customizableViewControllers] objectAtIndex:0];
         vidControl = (GGPVideoEntryViewController*)[[tbc customizableViewControllers] objectAtIndex:1];
+        textControl = (GGPTextEntryViewController*)[[tbc customizableViewControllers] objectAtIndex:2];
         vcImage.event = self.event;
         vidControl.event = self.event;
+        textControl.event = self.event;
     }else if([segue.identifier isEqualToString:@"toSlideshow"]){
         GGPSlideshowViewController *destination = [segue destinationViewController];
         destination.logs = self.LogEntries;
@@ -135,7 +153,11 @@
 }
 
 -(void)playVideo{
-    
+    [self.indicator startAnimating];
+    [self performSelector:@selector(videoSegue) withObject:nil afterDelay:0.1];
+}
+
+-(void)videoSegue{
     [self performSegueWithIdentifier:@"toSlideshow" sender:self];
 }
 
@@ -152,24 +174,22 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
     if (indexPath.row > [self.LogEntries count] -1 || [self.LogEntries count]==0) {
-        //We have no more items, so return nil. This is to trick it to display actual full pages.
-        UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"text" forIndexPath:indexPath];
-        UILabel *label = (UILabel *)[cell viewWithTag:111];
-        NSString *text = @" ";
+        cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"text" forIndexPath:indexPath];
+        label = (UILabel *)[cell viewWithTag:111];
+        text = @" ";
         label.text = text;
         return cell;
     }
     
     long row = [indexPath row];
-    GGPLogEntry *entry = [self.LogEntries objectAtIndex:row];
-    UICollectionViewCell *cell;
+    entry = [self.LogEntries objectAtIndex:row];
     
     
     
     if ([entry.fileType isEqualToString:@"TXT"] ) {
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"text" forIndexPath:indexPath];
-        UILabel *label = (UILabel *)[cell viewWithTag:111];
-        NSString *text = entry.text;
+        label = (UILabel *)[cell viewWithTag:111];
+        text = entry.text;
         if([self.event[@"isFiltered"] isEqual:@1]){
             text = [GGPTextFilter filter:text];
         }
@@ -177,32 +197,33 @@
     }
     else if ([entry.fileType isEqualToString:@"JPEG"]){
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"image" forIndexPath:indexPath];
-        UIImageView *view = (UIImageView *)[cell viewWithTag:112];
-        UILabel *label = (UILabel *)[cell viewWithTag:113];
-        NSString *text = entry.text;
+        view = (UIImageView *)[cell viewWithTag:112];
+        label = (UILabel *)[cell viewWithTag:113];
+        text = entry.text;
         if([self.event[@"isFiltered"] isEqual:@1]){
             text = [GGPTextFilter filter:text];
         }
-        label.text = [NSString stringWithFormat:@"%@ - %@", text, entry.submittedBy];
-        view.image = [UIImage imageWithData:entry.file];
+        label.text = text;
+        data = entry.file;
+        view.image = [UIImage imageWithData:data];
     } else{
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"video" forIndexPath:indexPath];
-       
+        data = entry.file;
         
-        NSString *movieData = [NSTemporaryDirectory() stringByAppendingPathComponent:@"test.m4v"];
-        NSURL *movie = [NSURL fileURLWithPath:movieData];
-        [entry.file writeToURL:movie atomically:NO];
+        movieData = [NSTemporaryDirectory() stringByAppendingPathComponent:@"test.m4v"];
+        movie = [NSURL fileURLWithPath:movieData];
+        [data writeToURL:movie atomically:NO];
         
-        AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:movie options:nil];
-        AVAssetImageGenerator *generateImg = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+        asset = [[AVURLAsset alloc] initWithURL:movie options:nil];
+        generateImg = [[AVAssetImageGenerator alloc] initWithAsset:asset];
         NSError *error = NULL;
         CMTime time = CMTimeMake(1, 65);
-        CGImageRef refImg = [generateImg copyCGImageAtTime:time actualTime:NULL error:&error];
+        refImg = [generateImg copyCGImageAtTime:time actualTime:NULL error:&error];
         
-        UIImageView *view = (UIImageView *)[cell viewWithTag:114];
+        view = (UIImageView *)[cell viewWithTag:114];
         view.image = [[UIImage alloc] initWithCGImage:refImg];
         
-        UILabel *label = (UILabel *)[cell viewWithTag:115];
+        label = (UILabel *)[cell viewWithTag:115];
         label.text = [NSString stringWithFormat:@"video - %@", entry.submittedBy];
         
     }
@@ -228,16 +249,17 @@
    
     
     //[self.collectionView.collectionViewLayout invalidateLayout];
-    UICollectionViewCell  *cell = [collectionView cellForItemAtIndexPath:indexPath];
+    cell = [collectionView cellForItemAtIndexPath:indexPath];
     
     //[self.view convertPoint:CGPointZero fromView:[UIApplication sharedApplication].keyWindow];
     
     if ([cell.reuseIdentifier isEqualToString:@"video"]) {
         
-        NSString *movieData = [NSTemporaryDirectory() stringByAppendingPathComponent:@"test.m4v"];
-        NSURL *movie = [NSURL fileURLWithPath:movieData];
-        GGPLogEntry *entry = self.LogEntries[indexPath.row];
-        [entry.file writeToURL:movie atomically:NO];
+        movieData = [NSTemporaryDirectory() stringByAppendingPathComponent:@"test.m4v"];
+        movie = [NSURL fileURLWithPath:movieData];
+        entry = self.LogEntries[indexPath.row];
+        data = entry.file;
+        [data writeToURL:movie atomically:NO];
         
         self.moviePlayer =[[MPMoviePlayerController alloc] init];
         
@@ -273,25 +295,25 @@
     
 }
 
--(void)enlargeCell:(UICollectionViewCell *)cell inCollectionView:(UICollectionView *)collectionView{
+-(void)enlargeCell:(UICollectionViewCell *)cellY inCollectionView:(UICollectionView *)collectionView{
     [UIView animateWithDuration:.5
                           delay:0
                         options:(UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
-                         [cell.layer setCornerRadius:10];
-                         frame = [collectionView convertRect:cell.frame toView:self.view];
+                         [cellY.layer setCornerRadius:10];
+                         frame = [collectionView convertRect:cellY.frame toView:self.view];
                          NSLog(@"animation start");
-                         [cell setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.7] ];
-                         cell.frame =  CGRectMake(cell.frame.origin.x - self.collectionView.contentOffset.x + cell.frame.origin.x, 75, 300, 350);
-                         [self.collectionView bringSubviewToFront:cell];
+                         [cellY setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.7] ];
+                         cellY.frame =  CGRectMake(cellY.frame.origin.x - self.collectionView.contentOffset.x + cellY.frame.origin.x, 75, 300, 350);
+                         [self.collectionView bringSubviewToFront:cellY];
                      }
                      completion:^(BOOL finished){
                          NSLog(@"animation end");
                          
-                         if([cell.reuseIdentifier isEqualToString:@"text"]){
-                             [self enlargeTextCellContents:cell];
+                         if([cellY.reuseIdentifier isEqualToString:@"text"]){
+                             [self enlargeTextCellContents:cellY];
                          }else if ([cell.reuseIdentifier isEqualToString:@"image"]){
-                             [self enlargeImageCellContents:cell];
+                             [self enlargeImageCellContents:cellY];
                          }
                          
                      }
@@ -299,12 +321,12 @@
 
 }
 
--(void)enlargeTextCellContents:(UICollectionViewCell *)cell{
+-(void)enlargeTextCellContents:(UICollectionViewCell *)cellY{
     [UIView animateWithDuration:.5
                           delay:0
                         options:(UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
-                         UILabel *label = (UILabel *)[cell viewWithTag:111];
+                         label = (UILabel *)[cellY viewWithTag:111];
                          label.frame = CGRectMake(5, 5, 280, 330);
                          label.font = [UIFont systemFontOfSize:50];
                          label.textColor = [UIColor blackColor];
@@ -314,14 +336,14 @@
 
 }
 
--(void)enlargeImageCellContents:(UICollectionViewCell *)cell{
+-(void)enlargeImageCellContents:(UICollectionViewCell *)cellY{
     [UIView animateWithDuration:.5
                           delay:0
                         options:(UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
-                         UIImageView *view = (UIImageView *)[cell viewWithTag:112];
+                         view = (UIImageView *)[cellY viewWithTag:112];
                          view.frame = CGRectMake(7, 5, 285, 340);
-                         UILabel *label = (UILabel *)[cell viewWithTag:113];
+                         label = (UILabel *)[cellY viewWithTag:113];
                          label.frame = CGRectMake(5, 280, 285, 100);
                          label.font = [UIFont systemFontOfSize:25];
                          label.textColor = [UIColor blackColor];
@@ -332,24 +354,24 @@
 
 }
 
--(void)shrinkCell:(UICollectionViewCell *)cell inCollectionView:(UICollectionView *)collectionView{
+-(void)shrinkCell:(UICollectionViewCell *)cellY inCollectionView:(UICollectionView *)collectionView{
     CGRect tempFrame = frame;
-    if([cell.reuseIdentifier isEqualToString:@"text"]){
-        [self shrinkTextCellContents:cell toSize: tempFrame];
-    }else if ([cell.reuseIdentifier isEqualToString:@"image"]){
-        [self shrinkImageCellContents:cell toSize:tempFrame];
+    if([cellY.reuseIdentifier isEqualToString:@"text"]){
+        [self shrinkTextCellContents:cellY toSize: tempFrame];
+    }else if ([cellY.reuseIdentifier isEqualToString:@"image"]){
+        [self shrinkImageCellContents:cellY toSize:tempFrame];
     }
     
     
 }
 
 
--(void)shrinkTextCellContents:(UICollectionViewCell *)cell toSize:(CGRect)tempFrame{
+-(void)shrinkTextCellContents:(UICollectionViewCell *)cellY toSize:(CGRect)tempFrame{
     [UIView animateWithDuration:.5
                           delay:0
                         options:(UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
-                         UILabel *label = (UILabel *)[cell viewWithTag:111];
+                         label = (UILabel *)[cellY viewWithTag:111];
                          label.frame = CGRectMake(0, 0, 100, 100);
                          label.font = [UIFont systemFontOfSize:12];
                          label.textColor = [UIColor whiteColor];
@@ -359,26 +381,26 @@
                                              options:(UIViewAnimationOptionAllowUserInteraction)
                                           animations:^{
                                               NSLog(@"animation start");
-                                              [cell setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.7]];
-                                              cell.frame = CGRectMake(tempFrame.origin.x, (tempFrame.origin.y - shrinkOffset), 100, 100);
+                                              [cellY setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.7]];
+                                              cellY.frame = CGRectMake(tempFrame.origin.x, (tempFrame.origin.y - shrinkOffset), 100, 100);
                                               
                                           }
                                           completion:^(BOOL finished){
                                               NSLog(@"animation end");
-                                              [cell setBackgroundColor:[UIColor blackColor]];
-                                              [cell.layer setCornerRadius:0];
+                                              [cellY setBackgroundColor:[UIColor blackColor]];
+                                              [cellY.layer setCornerRadius:0];
                                           }
                           ];
                      }];
     
 }
 
--(void)shrinkImageCellContents:(UICollectionViewCell *)cell toSize:(CGRect)tempFrame{
+-(void)shrinkImageCellContents:(UICollectionViewCell *)cellY toSize:(CGRect)tempFrame{
     [UIView animateWithDuration:.5
                           delay:0
                         options:(UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
-                         UIImageView *view = (UIImageView *)[cell viewWithTag:112];
+                         view = (UIImageView *)[cellY viewWithTag:112];
                          view.frame = CGRectMake(0, 0 , 100, 100);
                          view.contentMode = UIViewContentModeScaleAspectFit;
                      } completion:^(BOOL finished) {
@@ -387,14 +409,14 @@
                                              options:(UIViewAnimationOptionAllowUserInteraction)
                                           animations:^{
                                               NSLog(@"animation start");
-                                              [cell setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.7] ];
-                                              cell.frame = CGRectMake(tempFrame.origin.x, (tempFrame.origin.y - shrinkOffset), 100, 100);
+                                              [cellY setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.7] ];
+                                              cellY.frame = CGRectMake(tempFrame.origin.x, (tempFrame.origin.y - shrinkOffset), 100, 100);
                                               
                                           }
                                           completion:^(BOOL finished){
                                               NSLog(@"animation end");
-                                              [cell setBackgroundColor:[UIColor blackColor]];
-                                              [cell.layer setCornerRadius:0];
+                                              [cellY setBackgroundColor:[UIColor blackColor]];
+                                              [cellY.layer setCornerRadius:0];
                                           }
                           ];
 
@@ -403,7 +425,9 @@
 }
 
 
-
+-(void)viewDidDisappear:(BOOL)animated{
+    [self.indicator stopAnimating];
+}
 
 
 @end

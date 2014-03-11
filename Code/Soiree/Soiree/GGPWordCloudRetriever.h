@@ -20,7 +20,9 @@
 #import "UNISimpleRequest.h"
 #import "UNIUrlConnection.h"
 #import "Unirest-Prefix.pch"
+#import "GGPLogEntry.h"
 
 @interface GGPWordCloudRetriever : NSObject
 + (NSURL *) getWordCloudUrl: (PFObject *)event;
++ (NSURL *) getWordCloudUrlWithLogs: (NSMutableArray *)logs;
 @end

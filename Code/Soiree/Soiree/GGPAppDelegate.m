@@ -33,7 +33,7 @@
     // determine the initial view controller here and instantiate it with [storyboard instantiateViewControllerWithIdentifier:<storyboard id>];
     
     
-    if([[UIDevice currentDevice]userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
+    //if([[UIDevice currentDevice]userInterfaceIdiom] == UIUserInterfaceIdiomPhone) {
         
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPhone" bundle:nil];
         
@@ -44,12 +44,12 @@
             viewController = [storyboard instantiateViewControllerWithIdentifier:@"LogInStart"];
         }
         self.window.rootViewController = viewController;
-    }else{
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPad" bundle:nil];
+    //}else{
+    //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main_iPad" bundle:nil];
         
-        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"ipadStart"];
-        self.window.rootViewController = viewController;
-    }
+     //   UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"ipadStart"];
+      //  self.window.rootViewController = viewController;
+   // }
     
     
     [self.window makeKeyAndVisible];

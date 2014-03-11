@@ -28,5 +28,17 @@
 @property (weak, nonatomic) IBOutlet UITableView *myEventsTable;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 @property (weak, nonatomic) IBOutlet UIView *front;
+@property (weak, nonatomic) IBOutlet UIView *frontView;
+@property (weak, nonatomic) IBOutlet UIView *midView;
+- (IBAction)pullUpEvents:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *bigImage;
+@property (weak, nonatomic) IBOutlet UIButton *leftButton;
+@property (weak, nonatomic) IBOutlet UIButton *rightButton;
+@property (weak, nonatomic) IBOutlet UILabel *bigLabel;
+@property (weak, nonatomic) IBOutlet UILabel *leftLabel;
+@property (weak, nonatomic) IBOutlet UILabel *rightLabel;
+@property (weak, nonatomic) IBOutlet UILabel *userLabel;
+
+
 
 @end

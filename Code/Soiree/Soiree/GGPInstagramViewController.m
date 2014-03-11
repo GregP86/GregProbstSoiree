@@ -138,6 +138,7 @@
         post[@"Text"] = media.caption.text;
         post[@"isIncluded"] = @1;
         post[@"SubmittedBy"] = media.user.username;
+        post[@"eventID"] = [self.event objectId];
         
         [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if(!error){

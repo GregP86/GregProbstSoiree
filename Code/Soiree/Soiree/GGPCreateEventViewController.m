@@ -135,7 +135,49 @@
 
 
 - (IBAction)createEventButton:(id)sender{
-    [self GenerateCoords];
+    
+    NSMutableString *error = [NSMutableString stringWithString:@""];
+    
+    if ([self.titleField.text length] == 0) {
+        [error appendString:@"Title is required. "];
+    }
+    NSDate *today = [NSDate date];
+    if ([self.startTimePicker.date compare:today] == NSOrderedAscending) {
+        [error appendString:@"Start time must not be in the past. "];
+    }
+    if ([self.endTimePicker.date compare:self.startTimePicker.date] == NSOrderedAscending) {
+        [error appendString:@"Start time must be before end time. "];
+    }
+    if (self.locSwitch.on) {
+        if ([self.streetAddressField.text length]==0) {
+            [error appendString:@"Street address is required. "];
+        }
+        if ([self.cityField.text length] == 0) {
+            [error appendString:@"City is required. "];
+        }
+        if ([self.stateField.text length] == 0) {
+            [error appendString:@"State is required. "];
+        }
+    }
+    
+    
+    if (![error isEqualToString:@""]) {
+        UIAlertView *view = [[UIAlertView alloc] initWithTitle: @"Error" message: error delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [view show];
+    }else if (!self.locSwitch.on) {
+        GGPEvent *event = [self generateEvent];
+        if(passwordEdit){
+            event.password = [self.passwordField.text isEqualToString:self.confirmPasswordField.text]?self.passwordField.text : nil;
+        }else{
+            event.password = nil;
+        }
+        event.location = nil;
+        [event createOrUpdateOnDB];
+        [self.navigationController popViewControllerAnimated:YES];
+
+    }else{
+        [self GenerateCoords];
+    }
 //    GGPEvent *event = [self generateEvent];
 //    if(passwordEdit){
 //       event.password = [self.passwordField.text isEqualToString:self.confirmPasswordField.text]?self.passwordField.text : nil;

@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *barButton;
 @property (strong, nonatomic) GGPEvent *objectEvent;
 @property (weak, nonatomic) IBOutlet UILabel *logLabel;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 
 - (IBAction)joinEventButton:(id)sender;
 

@@ -11,7 +11,7 @@
 @interface GGPFindEventViewController (){
     PFGeoPoint *currentLocation;
     NSMutableArray *events;
-    GGPEvent *selectedEvent;
+    PFObject *selectedEvent;
     int direction;
     int shakes;
     NSDate *start;
@@ -40,6 +40,7 @@
         start = [NSDate date];
         int daysToAdd = 1;
         start = [start dateByAddingTimeInterval:60*60*24 * daysToAdd];
+        
         
         [PFGeoPoint geoPointForCurrentLocationInBackground:^(PFGeoPoint *geoPoint, NSError *error) {
             if (!error) {
@@ -87,6 +88,11 @@
     if (!cell) {
         cell = [[PFTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:cellIdentifier];
+    }
+    
+    if(object[@"Password"] != [NSNull null]){
+        UIImageView * view = (UIImageView *)[cell viewWithTag:1234];
+        view.image = [UIImage imageNamed:@"lock.png"];
     }
     
     // Configure the cell to show todo item with a priority at the bottom
@@ -162,6 +168,7 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     self.tableView.delegate = self;
+    self.map.delegate = self;
     [self.todayButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.todayButton setUserInteractionEnabled:NO];
 }
@@ -175,7 +182,7 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex != alertView.cancelButtonIndex) {
-        if([[alertView textFieldAtIndex:0].text isEqualToString:selectedEvent.password]){
+        if([[alertView textFieldAtIndex:0].text isEqualToString:selectedEvent[@"Password"]]){
             [self performSegueWithIdentifier:@"eventDetail" sender:self];
         }else{
             
@@ -187,8 +194,8 @@
 -(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
     BOOL result = YES;
     if([identifier isEqualToString:@"eventDetail"]){
-        selectedEvent = events[[self.tableView indexPathForSelectedRow].row];
-        if(![selectedEvent.password isEqual:[NSNull null]]){
+        selectedEvent = self.objects[[self.tableView indexPathForSelectedRow].row];
+        if(![selectedEvent[@"Password"] isEqual:[NSNull null]]){
             [self showAlertView];
             result = NO;
         }
@@ -206,11 +213,22 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"eventDetail"]) {
+    
+    if ([segue.identifier isEqualToString:@"eventDetail"] && [sender isKindOfClass: [MKAnnotationView class]]) {
+        MKAnnotationView *annotationView = sender;
+        GGPEventDetailViewController *destination = segue.destinationViewController;
+        PFObject *passObject;
+        for (PFObject *obj in self.objects) {
+            if([obj[@"Title"] isEqualToString:annotationView.annotation.title]){
+                passObject = obj;
+            }
+        }
+        destination.event = passObject;
+    }else if ([segue.identifier isEqualToString:@"eventDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         GGPEventDetailViewController *destination = segue.destinationViewController;
         destination.event = [self.objects objectAtIndex:indexPath.row];
-    }if([segue.identifier isEqualToString:@"toSearch"]){
+    }else if([segue.identifier isEqualToString:@"toSearch"]){
         GGPSearchViewController *destination = segue.destinationViewController;
         destination.search = self.searchBar.text;
     }
@@ -224,9 +242,9 @@
     [self.indicator startAnimating];
     [self.todayButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.todayButton setUserInteractionEnabled:NO];
-    [self.weekButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [self.weekButton setTitleColor:[UIColor colorWithRed:76.0f/255.0f green:202.0f/255.0f blue:205.0f/255.0f alpha:1.0] forState:UIControlStateNormal];
     [self.weekButton setUserInteractionEnabled:YES];
-    [self.monthButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [self.monthButton setTitleColor:[UIColor colorWithRed:76.0f/255.0f green:202.0f/255.0f blue:205.0f/255.0f alpha:1.0] forState:UIControlStateNormal];
     [self.monthButton setUserInteractionEnabled:YES];
     start = [NSDate date];
     int addDays = 1;
@@ -240,9 +258,9 @@
     [self.indicator startAnimating];
     [self.weekButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.weekButton setUserInteractionEnabled:NO];
-    [self.todayButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [self.todayButton setTitleColor:[UIColor colorWithRed:76.0f/255.0f green:202.0f/255.0f blue:205.0f/255.0f alpha:1.0]forState:UIControlStateNormal];
     [self.todayButton setUserInteractionEnabled:YES];
-    [self.monthButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [self.monthButton setTitleColor:[UIColor colorWithRed:76.0f/255.0f green:202.0f/255.0f blue:205.0f/255.0f alpha:1.0] forState:UIControlStateNormal];
     [self.monthButton setUserInteractionEnabled:YES];
     start = [NSDate date];
     int addDays = 7;
@@ -255,14 +273,42 @@
     [self.indicator startAnimating];
     [self.monthButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.monthButton setUserInteractionEnabled:NO];
-    [self.todayButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [self.todayButton setTitleColor:[UIColor colorWithRed:76.0f/255.0f green:202.0f/255.0f blue:205.0f/255.0f alpha:1.0] forState:UIControlStateNormal];
     [self.todayButton setUserInteractionEnabled:YES];
-    [self.weekButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0] forState:UIControlStateNormal];
+    [self.weekButton setTitleColor:[UIColor colorWithRed:76.0f/255.0f green:202.0f/255.0f blue:205.0f/255.0f alpha:1.0] forState:UIControlStateNormal];
     [self.weekButton setUserInteractionEnabled:YES];
     start = [NSDate date];
     int addDays = 30;
     start = [start dateByAddingTimeInterval:60*60*24*addDays];
     [self.map removeAnnotations:self.map.annotations];
     [self loadObjects];
+}
+
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    
+    if (annotation == mapView.userLocation)
+    {
+        return nil;
+    }
+    MKAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"loc"];
+    annotationView.canShowCallout = YES;
+    annotationView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    
+    return annotationView;
+}
+
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    for (PFObject *obj in self.objects) {
+        if([obj[@"Title"] isEqualToString: view.annotation.title]){
+            if (obj[@"Password"] != [NSNull null]) {
+                selectedEvent = obj;
+                [self showAlertView];
+            }else{
+                [self performSegueWithIdentifier:@"eventDetail" sender:view];
+            }
+        }
+    }
 }
 @end

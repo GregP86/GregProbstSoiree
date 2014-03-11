@@ -54,8 +54,10 @@
     [self.webView setClipsToBounds:YES];
     self.webView.layer.borderColor = [[UIColor blackColor]CGColor];
     self.webView.layer.borderWidth = 2;
+    [self.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
-    NSURLRequest *requestObj = [NSURLRequest requestWithURL:[GGPWordCloudRetriever getWordCloudUrl:self.event]];
+    
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:[GGPWordCloudRetriever getWordCloudUrlWithLogs:self.logs]];
     [self.webView loadRequest:requestObj];
     
     self.webView.alpha = 0;
@@ -73,6 +75,8 @@
                                   selector:@selector(onTimer)
                                   userInfo:nil
                                    repeats:YES];
+    
+    
     
     [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
     [timer fire];

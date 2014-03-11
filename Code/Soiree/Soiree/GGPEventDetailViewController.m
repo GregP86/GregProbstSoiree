@@ -11,6 +11,7 @@
 @interface GGPEventDetailViewController (){
     BOOL isJoined;
     PFGeoPoint *currentLocation;
+    NSString *string;
 }
 
 @end
@@ -32,9 +33,9 @@
     self.navigationController.toolbarHidden=YES;
     self.objectEvent = [GGPEvent restoreFromDB:self.event];
     isJoined = NO;
-    isJoined = [self.objectEvent.Attendees containsObject:[PFUser currentUser].username];
+    isJoined = [self.objectEvent.Attendees containsObject:[PFUser currentUser].objectId];
     
-    NSString *string = [PFUser currentUser].username;
+    string = [PFUser currentUser].username;
     
     if(isJoined){
         [self.joinButton setTitle:@"Leave" forState:UIControlStateNormal];
@@ -42,6 +43,10 @@
         [self.joinButton setTitle:@"Options" forState:UIControlStateNormal];
     }else{
         [self.joinButton setTitle:@"Join" forState:UIControlStateNormal];
+        NSIndexPath *path =[NSIndexPath indexPathForRow:1 inSection:2];
+        self.logLabel.textColor = [UIColor lightGrayColor];
+        self.logLabel.text = @"Join this event to contribute.";
+        [self.tableView cellForRowAtIndexPath:path].userInteractionEnabled = NO;
     }
     
     if(!self.objectEvent.isPublicLog && ![string isEqualToString:self.objectEvent.creator]){
@@ -105,6 +110,11 @@
     
     if([self.joinButton.titleLabel.text isEqualToString:@"Leave"]){
         [self leaveEvent];
+         NSIndexPath *path =[NSIndexPath indexPathForRow:1 inSection:2];
+        self.logLabel.textColor = [UIColor lightGrayColor];
+        self.logLabel.text = @"Join this event to contribute.";
+         [self.tableView cellForRowAtIndexPath:path].userInteractionEnabled = NO;
+        isJoined = NO;
     }else if([self.joinButton.titleLabel.text isEqualToString:@"Options"]){
         [self performSegueWithIdentifier:@"toOptions" sender:self];
     }else{
@@ -116,6 +126,11 @@
             [[PFUser currentUser] addUniqueObject:[self.event objectId] forKey:@"Events"];
             [[PFUser currentUser] saveInBackground];
             [self.joinButton setTitle:@"Leave" forState:UIControlStateNormal];
+            NSIndexPath *path =[NSIndexPath indexPathForRow:1 inSection:2];
+            self.logLabel.textColor = [UIColor blackColor];
+            self.logLabel.text = @"Event Log";
+            [self.tableView cellForRowAtIndexPath:path].userInteractionEnabled = YES;
+            isJoined = YES;
         } else{
             [self showAlertView];
         }
@@ -159,17 +174,27 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if((indexPath.section == 2) && (indexPath.row == 1)){
-        NSString *string = [PFUser currentUser].username;
         
+        string = [PFUser currentUser].username;
+        [self.indicator startAnimating];
+        [self performSelector:@selector(segueStuff) withObject:nil afterDelay:0.1];
+    }
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [self.indicator stopAnimating];
+}
+
+-(void)segueStuff{
+    if (isJoined) {
         if (self.objectEvent.isPublicLog || [string isEqualToString:self.objectEvent.creator]) {
             [self performSegueWithIdentifier:@"toEventLog" sender:self];
         }else{
             [self performSegueWithIdentifier:@"toSubmit" sender:self];
         }
     }
+
 }
-
-
 @end
 
 

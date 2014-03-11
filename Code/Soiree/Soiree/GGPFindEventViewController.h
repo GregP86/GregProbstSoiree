@@ -13,7 +13,7 @@
 #import <MapKit/MapKit.h>
 #import "GGPSearchViewController.h"
 
-@interface GGPFindEventViewController : PFQueryTableViewController<UIAlertViewDelegate>
+@interface GGPFindEventViewController : PFQueryTableViewController<UIAlertViewDelegate, MKMapViewDelegate>
 
 @property (weak, nonatomic) IBOutlet MKMapView *map;
 @property (weak, nonatomic) IBOutlet UITextField *searchBar;

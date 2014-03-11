@@ -10,12 +10,14 @@
 #import <Parse/Parse.h>
 #import "GGPLogEntry.h"
 #import <QuartzCore/QuartzCore.h>
+#import "GGPEventLogViewController.h"
 
 @interface GGPTextEntryViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UITextView *textField;
 @property (strong, nonatomic) PFObject *event;
 @property (strong, nonatomic) GGPLogEntry *entry;
+@property (weak, nonatomic) IBOutlet UIButton *submit;
 
 - (IBAction)submitButton:(id)sender;
 

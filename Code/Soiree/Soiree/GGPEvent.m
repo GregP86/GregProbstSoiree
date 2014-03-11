@@ -22,7 +22,7 @@
     Event[@"Password"] = !self.password ? null: self.password;
     Event[@"Attendees"] = !self.Attendees ? [[NSMutableArray alloc]init]: self.Attendees;
     Event[@"Log"] = !self.eventLog ? [[NSMutableArray alloc]init]: self.eventLog;
-    Event[@"isFiltered"] = self.isFiltered ? @1 : @0;
+    Event[@"isFiltered"] = @1;
     Event[@"isPublicLog"] = self.isPublicLog ? @1 : @0;
     Event[@"usePhoto"] = self.usePhoto ? @1 : @0;
     Event[@"useVideo"] = self.useVideo ? @1 : @0;
@@ -44,17 +44,23 @@
     GGPEvent *newevent = [[GGPEvent alloc] init];
     PFObject *pflocation = dbObject[@"Location"];
     
-    [pflocation fetch];
-    
-    GGPLocation *location = [[GGPLocation alloc]init];
-    PFGeoPoint *coords = [pflocation objectForKey: @"Coords"];
-    location.latitude = coords.latitude;
-    location.longitude = coords.longitude;
-    location.locationName = pflocation[@"Name"];
-    location.streetAddress = pflocation[@"Street"];
-    location.city = pflocation[@"City"];
-    location.state = pflocation[@"State"];
-    location.zip = pflocation[@"Zip"];
+    if (![pflocation isEqual:[NSNull null]]) {
+        [pflocation fetch];
+        
+        GGPLocation *location = [[GGPLocation alloc]init];
+        PFGeoPoint *coords = [pflocation objectForKey: @"Coords"];
+        location.latitude = coords.latitude;
+        location.longitude = coords.longitude;
+        location.locationName = pflocation[@"Name"];
+        location.streetAddress = pflocation[@"Street"];
+        location.city = pflocation[@"City"];
+        location.state = pflocation[@"State"];
+        location.zip = pflocation[@"Zip"];
+        newevent.realLocation = location;
+
+    }else{
+        newevent.realLocation = nil;
+    }
     
     newevent.eventTitle = dbObject[@"Title"];
     newevent.eventDescription = dbObject[@"Description"];
@@ -64,7 +70,7 @@
     newevent.creator = dbObject[@"Creator"];
     newevent.Attendees = dbObject[@"Attendees"];
     newevent.idString= [dbObject objectId];
-    newevent.realLocation = location;
+   
     
     NSNumber *filter = dbObject[@"isFiltered"];
     newevent.isFiltered = ([filter isEqual: @1]);

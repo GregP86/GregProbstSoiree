@@ -137,6 +137,7 @@
         post[@"Text"] = fb[@"message"];
         post[@"isIncluded"] = @1;
         post[@"SubmittedBy"] = [fb[@"from"] objectForKey:@"name"];
+        post[@"eventID"] = [self.event objectId];
         
         [post saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if(!error){

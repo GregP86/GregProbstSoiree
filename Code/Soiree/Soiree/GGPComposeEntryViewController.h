@@ -21,8 +21,8 @@
 @property (strong, nonatomic) GGPLogEntry *entry;
 @property (strong, nonatomic) PFObject *event;
 
-@property (strong, nonatomic) GGPVideoEntryViewController *vidController;
-@property (strong, nonatomic) GGPTextEntryViewController *txtController;
+//@property (strong, nonatomic) GGPVideoEntryViewController *vidController;
+//@property (strong, nonatomic) GGPTextEntryViewController *txtController;
 @property (weak, nonatomic) IBOutlet UIButton *submit;
 
 

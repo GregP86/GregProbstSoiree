@@ -17,8 +17,10 @@
 @property (strong, nonatomic) NSString *fileType;
 @property (strong, nonatomic) NSString *submittedBy;
 @property (strong, nonatomic) NSString *id;
+@property (strong, nonatomic) NSString *eventID;
 @property (nonatomic) BOOL isIncluded;
 
 -(PFObject *)getDBReadyObject;
++(GGPLogEntry *)objectFromDb:(PFObject*)dbObject;
 
 @end

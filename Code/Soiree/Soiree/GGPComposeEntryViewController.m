@@ -59,7 +59,8 @@
 }
 
 - (IBAction)submitButton:(id)sender {
-    NSData *data =  UIImageJPEGRepresentation(self.imageView.image, 0.7);
+    self.imageView.image = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width/10, self.imageView.image.size.height/10)];
+    NSData *data =  UIImageJPEGRepresentation(self.imageView.image, 0.5);
     if([data length] < 10485760){
         
         self.entry = [[GGPLogEntry alloc]init];
@@ -68,6 +69,7 @@
         self.entry.fileType = @"JPEG";
         self.entry.isIncluded = YES;
         self.entry.submittedBy = [PFUser currentUser].username;
+        self.entry.eventID = [self.event objectId];
         
         PFObject *dbEntry = [self.entry getDBReadyObject];
         [dbEntry saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -80,6 +82,14 @@
     }else{
         [self showAlertView];
     }
+}
+
+-(UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 -(void)showAlertView{
@@ -97,13 +107,13 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
-    self.vidController = [tabBarController.viewControllers objectAtIndex:1];
-    self.txtController = [tabBarController.viewControllers objectAtIndex:2];
-    
-    self.vidController.event = self.event;
-    self.txtController.event = self.event;
-}
+//-(void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController{
+//    self.vidController = [tabBarController.viewControllers objectAtIndex:1];
+//    self.txtController = [tabBarController.viewControllers objectAtIndex:2];
+//    
+//    self.vidController.event = self.event;
+//    self.txtController.event = self.event;
+//}
 
 
 -(void)textFieldReturn:(id)sender{
@@ -114,5 +124,12 @@
     [self.view endEditing:YES];
 }
 
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    UIButton *button = sender;
+    if ([segue.identifier isEqualToString:@"backToLog"] && [button isEqual:self.submit]) {
+        GGPEventLogViewController *destination = [segue destinationViewController];
+        destination.load = YES;
+    }
+}
 
 @end

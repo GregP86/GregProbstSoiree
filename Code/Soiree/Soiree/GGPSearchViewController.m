@@ -8,7 +8,9 @@
 
 #import "GGPSearchViewController.h"
 
-@interface GGPSearchViewController ()
+@interface GGPSearchViewController (){
+    PFObject *selectedEvent;
+}
 
 @end
 
@@ -34,7 +36,7 @@
 
 -(PFQuery *)queryForTable{
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-    [query whereKey:@"Title" hasPrefix:self.search];
+    [query whereKey:@"Title" containsString:self.search];
     [query whereKey:@"EndTime" greaterThanOrEqualTo:[NSDate date]];
     [query setLimit:10];
     
@@ -62,7 +64,10 @@
         cell = [[PFTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:cellIdentifier];
     }
-    
+    if(object[@"Password"] != [NSNull null]){
+        UIImageView * view = (UIImageView *)[cell viewWithTag:4321];
+        view.image = [UIImage imageNamed:@"lock.png"];
+    }
     // Configure the cell to show todo item with a priority at the bottom
     cell.textLabel.text = object[@"Title"];
     cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",
@@ -89,12 +94,47 @@
     [self loadObjects];
 }
 
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        if([[alertView textFieldAtIndex:0].text isEqualToString:selectedEvent[@"Password"]]){
+            [self performSegueWithIdentifier:@"eventDetail" sender:self];
+        }else{
+            
+        }
+    }
+}
+
+
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender{
+    BOOL result = YES;
+    if([identifier isEqualToString:@"eventDetail"]){
+        selectedEvent = self.objects[[self.tableView indexPathForSelectedRow].row];
+        if(![selectedEvent[@"Password"] isEqual:[NSNull null]]){
+            [self showAlertView];
+            result = NO;
+        }
+    }
+    
+    return result;
+    
+}
+
+-(void)showAlertView{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Password" message:@"This event is private, enter the password:" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Ok", nil];
+    alertView.delegate = self;
+    alertView.alertViewStyle = UIAlertViewStyleSecureTextInput;
+    [alertView show];
+}
+
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
     if ([segue.identifier isEqualToString:@"eventDetail"]) {
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         GGPEventDetailViewController *destination = segue.destinationViewController;
         destination.event = [self.objects objectAtIndex:indexPath.row];
     }
 }
+
 
 @end

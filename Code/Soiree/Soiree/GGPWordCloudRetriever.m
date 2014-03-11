@@ -17,6 +17,13 @@
     return  url;
 }
 
++ (NSURL *) getWordCloudUrlWithLogs: (NSMutableArray *)logs{
+    NSString *block = [self createWordBlockFromArray: logs];
+    NSDictionary *json = [self JSONRequest:block];
+    NSURL *url = [NSURL URLWithString:json[@"url"]];
+    return  url;
+}
+
 
 + (NSString *)createWordBlock: (PFObject *)event{
     
@@ -34,6 +41,18 @@
         
     }
     
+    return block;
+}
+
++(NSString *)createWordBlockFromArray:(NSMutableArray*)logs{
+     NSString *block = [[NSString alloc]init];
+    
+    for (GGPLogEntry *e in logs) {
+        if (![e.text isEqual:[NSNull null]] && ![e.text isEqual:nil]) {
+            block = [block stringByAppendingString:@" "];
+            block = [block stringByAppendingString:e.text];
+        }
+    }
     return block;
 }
 

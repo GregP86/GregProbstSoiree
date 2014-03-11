@@ -18,6 +18,12 @@
 @property (weak, nonatomic) IBOutlet UISlider *frameSlider;
 @property (strong, nonatomic) GGPSlideshowOptions *options;
 @property (strong, nonatomic) MPMediaPickerController *picker;
+@property (weak, nonatomic) IBOutlet UISwitch *transitionSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *photosSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *textSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *videoSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *statsSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *cloudSwitch;
 
 - (IBAction)slider:(id)sender;
 - (IBAction)fadeTrasitionSwitch:(id)sender;
