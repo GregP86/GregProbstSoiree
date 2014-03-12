@@ -167,6 +167,16 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                     [UIColor whiteColor],
+                                                                     NSForegroundColorAttributeName,
+                                                                     [UIColor whiteColor],
+                                                                     NSForegroundColorAttributeName,
+                                                                     [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+                                                                     NSForegroundColorAttributeName,
+                                                                     [UIFont systemFontOfSize:20],
+                                                                     NSFontAttributeName,
+                                                                     nil]];
     self.tableView.delegate = self;
     self.map.delegate = self;
     [self.todayButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];

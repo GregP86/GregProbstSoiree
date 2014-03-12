@@ -8,7 +8,9 @@
 
 #import "GGPComposeEntryViewController.h"
 
-@interface GGPComposeEntryViewController ()
+@interface GGPComposeEntryViewController (){
+    BOOL submitPress;
+}
 
 @end
 
@@ -27,6 +29,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    submitPress = NO;
     self.imageView.layer.cornerRadius = 5;
     self.captionField.layer.cornerRadius = 5;
     if([self.event[@"usePhoto"] isEqual: @0]){
@@ -59,6 +62,7 @@
 }
 
 - (IBAction)submitButton:(id)sender {
+    submitPress = YES;
     self.imageView.image = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width/10, self.imageView.image.size.height/10)];
     NSData *data =  UIImageJPEGRepresentation(self.imageView.image, 0.5);
     if([data length] < 10485760){
@@ -125,8 +129,7 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    UIButton *button = sender;
-    if ([segue.identifier isEqualToString:@"backToLog"] && [button isEqual:self.submit]) {
+    if ([segue.identifier isEqualToString:@"backToLog"] && submitPress) {
         GGPEventLogViewController *destination = [segue destinationViewController];
         destination.load = YES;
     }

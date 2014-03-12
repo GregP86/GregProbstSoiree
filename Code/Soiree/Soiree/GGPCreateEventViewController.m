@@ -29,6 +29,17 @@
 
 - (void)viewDidLoad
 {
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                     [UIColor whiteColor],
+                                                                     NSForegroundColorAttributeName,
+                                                                     [UIColor whiteColor],
+                                                                     NSForegroundColorAttributeName,
+                                                                     [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+                                                                     NSForegroundColorAttributeName,
+                                                                     [UIFont systemFontOfSize:20],
+                                                                     NSFontAttributeName,
+                                                                     nil]];
+    
     [super viewDidLoad];
 
     // Uncomment the following line to preserve selection between presentations.
@@ -36,6 +47,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
     
     startTimeEdited = NO;
     endTimeEdited = NO;
@@ -172,6 +184,10 @@
             event.password = nil;
         }
         event.location = nil;
+        event.isFiltered = YES;
+        event.usePhoto = YES;
+        event.useVideo = YES;
+        event.isPublicLog = YES;
         [event createOrUpdateOnDB];
         [self.navigationController popViewControllerAnimated:YES];
 

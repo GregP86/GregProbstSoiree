@@ -11,7 +11,7 @@
 @interface GGPEventLogViewController (){
     UICollectionViewCell *largeCell;
     UICollectionViewCell *cell;
-    CGRect frame;
+    CGRect frame, labelRef, temp;
     int shrinkOffset, numberOfItemsPerPage, numberOfPages;
     UILabel *label;
     UIImageView *view;
@@ -25,6 +25,7 @@
     NSString *movieData;
     NSURL *movie;
     CGImageRef refImg;
+    int offset;
     
 
 }
@@ -43,9 +44,10 @@
 }
 -(void)viewDidAppear:(BOOL)animated{
     self.navigationController.toolbarHidden=NO;
+    
     if (self.load) {
-        [self.collectionView bringSubviewToFront:self.indicator];
-        [self.indicator startAnimating];
+        [self.view bringSubviewToFront:self.activityIndicator];
+        [self.activityIndicator startAnimating];
         [self performSelector:@selector(Refresh) withObject:nil afterDelay:0.1];
     }
     self.load = NO;
@@ -55,11 +57,12 @@
     self.navigationController.toolbarHidden=NO;
     [self LoadItems];
     [self.collectionView reloadData];
-    [self.indicator stopAnimating];
+    [self.activityIndicator stopAnimating];
 }
 
 - (void)viewDidLoad
 {
+    offset = 0;
     NSMutableArray *items = [[NSMutableArray alloc] init];
     [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(playVideo)]];
     [items addObject:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil]];
@@ -72,6 +75,12 @@
     self.toolbarItems = items;
     
     [super viewDidLoad];
+    
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    [self.view addSubview:self.activityIndicator];
+    self.activityIndicator.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
+    self.activityIndicator.color = [UIColor colorWithRed:224.0f/225.0f green:70.0f/225.0f blue:3/225.0f alpha:1];
+    
     self.navigationController.toolbarHidden=NO;
     [self LoadItems];
     
@@ -153,7 +162,7 @@
 }
 
 -(void)playVideo{
-    [self.indicator startAnimating];
+    [self.activityIndicator startAnimating];
     [self performSelector:@selector(videoSegue) withObject:nil afterDelay:0.1];
 }
 
@@ -203,7 +212,7 @@
         if([self.event[@"isFiltered"] isEqual:@1]){
             text = [GGPTextFilter filter:text];
         }
-        label.text = text;
+        label.text = [NSString stringWithFormat:@"%@ - %@", text, entry.submittedBy];
         data = entry.file;
         view.image = [UIImage imageWithData:data];
     } else{
@@ -247,7 +256,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
    
-    
+    long num = indexPath.row;
     //[self.collectionView.collectionViewLayout invalidateLayout];
     cell = [collectionView cellForItemAtIndexPath:indexPath];
     
@@ -278,6 +287,11 @@
         
 
     }else if(!largeCell){
+        if (num >= 12) {
+            offset = 320;
+        }else{
+            offset = 0;
+        }
         frame = [collectionView convertRect:cell.frame toView:self.view];
         [self enlargeCell:cell inCollectionView:collectionView];
         largeCell = cell;
@@ -296,15 +310,15 @@
 }
 
 -(void)enlargeCell:(UICollectionViewCell *)cellY inCollectionView:(UICollectionView *)collectionView{
-    [UIView animateWithDuration:.5
+    [UIView animateWithDuration:.25
                           delay:0
                         options:(UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
                          [cellY.layer setCornerRadius:10];
                          frame = [collectionView convertRect:cellY.frame toView:self.view];
                          NSLog(@"animation start");
-                         [cellY setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.7] ];
-                         cellY.frame =  CGRectMake(cellY.frame.origin.x - self.collectionView.contentOffset.x + cellY.frame.origin.x, 75, 300, 350);
+                         [cellY setBackgroundColor:[UIColor colorWithWhite:0.1 alpha:0.7] ];
+                         cellY.frame =  CGRectMake((10 + offset), 75, 300, 350);
                          [self.collectionView bringSubviewToFront:cellY];
                      }
                      completion:^(BOOL finished){
@@ -322,14 +336,14 @@
 }
 
 -(void)enlargeTextCellContents:(UICollectionViewCell *)cellY{
-    [UIView animateWithDuration:.5
+    [UIView animateWithDuration:.25
                           delay:0
                         options:(UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
                          label = (UILabel *)[cellY viewWithTag:111];
                          label.frame = CGRectMake(5, 5, 280, 330);
                          label.font = [UIFont systemFontOfSize:50];
-                         label.textColor = [UIColor blackColor];
+                         label.textColor = [UIColor whiteColor];
                      } completion:^(BOOL finished) {
                          
                      }];
@@ -337,19 +351,21 @@
 }
 
 -(void)enlargeImageCellContents:(UICollectionViewCell *)cellY{
-    [UIView animateWithDuration:.5
+
+    [UIView animateWithDuration:.25
                           delay:0
                         options:(UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
                          view = (UIImageView *)[cellY viewWithTag:112];
                          view.frame = CGRectMake(7, 5, 285, 340);
                          label = (UILabel *)[cellY viewWithTag:113];
-                         label.frame = CGRectMake(5, 280, 285, 100);
+                         temp = label.frame;
+                         label.frame = CGRectMake(5, 235, 285, 100);
                          label.font = [UIFont systemFontOfSize:25];
-                         label.textColor = [UIColor blackColor];
+                         label.textColor = [UIColor whiteColor];
                          view.contentMode = UIViewContentModeScaleAspectFit;
                      } completion:^(BOOL finished) {
-                         
+                         labelRef = temp;
                      }];
 
 }
@@ -367,27 +383,27 @@
 
 
 -(void)shrinkTextCellContents:(UICollectionViewCell *)cellY toSize:(CGRect)tempFrame{
-    [UIView animateWithDuration:.5
+    [UIView animateWithDuration:.25
                           delay:0
                         options:(UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
                          label = (UILabel *)[cellY viewWithTag:111];
                          label.frame = CGRectMake(0, 0, 100, 100);
                          label.font = [UIFont systemFontOfSize:12];
-                         label.textColor = [UIColor whiteColor];
+                         label.textColor = [UIColor blackColor];
                      } completion:^(BOOL finished) {
-                         [UIView animateWithDuration:.5
+                         [UIView animateWithDuration:.25
                                                delay:0
                                              options:(UIViewAnimationOptionAllowUserInteraction)
                                           animations:^{
                                               NSLog(@"animation start");
                                               [cellY setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.7]];
-                                              cellY.frame = CGRectMake(tempFrame.origin.x, (tempFrame.origin.y - shrinkOffset), 100, 100);
+                                              cellY.frame = CGRectMake(tempFrame.origin.x + offset, (tempFrame.origin.y - shrinkOffset), 100, 100);
                                               
                                           }
                                           completion:^(BOOL finished){
                                               NSLog(@"animation end");
-                                              [cellY setBackgroundColor:[UIColor blackColor]];
+                                              [cellY setBackgroundColor:[UIColor whiteColor]];
                                               [cellY.layer setCornerRadius:0];
                                           }
                           ];
@@ -396,26 +412,30 @@
 }
 
 -(void)shrinkImageCellContents:(UICollectionViewCell *)cellY toSize:(CGRect)tempFrame{
-    [UIView animateWithDuration:.5
+    [UIView animateWithDuration:.25
                           delay:0
                         options:(UIViewAnimationOptionAllowUserInteraction)
                      animations:^{
                          view = (UIImageView *)[cellY viewWithTag:112];
                          view.frame = CGRectMake(0, 0 , 100, 100);
+                         label.frame = labelRef;
+                         label.font = [UIFont systemFontOfSize:12];
                          view.contentMode = UIViewContentModeScaleAspectFit;
+                         label.textColor = [UIColor blackColor];
                      } completion:^(BOOL finished) {
-                         [UIView animateWithDuration:1.0
+                         [UIView animateWithDuration:.25
                                                delay:0
                                              options:(UIViewAnimationOptionAllowUserInteraction)
                                           animations:^{
                                               NSLog(@"animation start");
                                               [cellY setBackgroundColor:[UIColor colorWithWhite:0.5 alpha:0.7] ];
-                                              cellY.frame = CGRectMake(tempFrame.origin.x, (tempFrame.origin.y - shrinkOffset), 100, 100);
+                                              cellY.frame = CGRectMake(tempFrame.origin.x + offset, (tempFrame.origin.y - shrinkOffset), 100, 100);
+                                              label = (UILabel *)[cellY viewWithTag:113];
                                               
                                           }
                                           completion:^(BOOL finished){
                                               NSLog(@"animation end");
-                                              [cellY setBackgroundColor:[UIColor blackColor]];
+                                              [cellY setBackgroundColor:[UIColor whiteColor]];
                                               [cellY.layer setCornerRadius:0];
                                           }
                           ];
@@ -426,7 +446,7 @@
 
 
 -(void)viewDidDisappear:(BOOL)animated{
-    [self.indicator stopAnimating];
+    [self.activityIndicator stopAnimating];
 }
 
 

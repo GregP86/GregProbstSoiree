@@ -30,6 +30,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                     [UIColor whiteColor],
+                                                                     NSForegroundColorAttributeName,
+                                                                     [UIColor whiteColor],
+                                                                     NSForegroundColorAttributeName,
+                                                                     [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+                                                                     NSForegroundColorAttributeName,
+                                                                     [UIFont systemFontOfSize:20],
+                                                                     NSFontAttributeName,
+                                                                     nil]];
     self.navigationController.toolbarHidden=YES;
     self.objectEvent = [GGPEvent restoreFromDB:self.event];
     isJoined = NO;
@@ -186,7 +196,7 @@
 }
 
 -(void)segueStuff{
-    if (isJoined) {
+    if (isJoined || [string isEqualToString:self.objectEvent.creator]) {
         if (self.objectEvent.isPublicLog || [string isEqualToString:self.objectEvent.creator]) {
             [self performSegueWithIdentifier:@"toEventLog" sender:self];
         }else{

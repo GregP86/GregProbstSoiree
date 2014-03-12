@@ -33,6 +33,7 @@
     entry.fileType = dbObject[@"FileType"];
     entry.submittedBy = dbObject[@"SubmittedBy"];
     entry.eventID = dbObject[@"eventID"];
+    entry.id = [dbObject objectId];
     
     return entry;
 }

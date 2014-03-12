@@ -26,7 +26,7 @@
 @property(strong, nonatomic) NSMutableArray *LogEntries;
 @property (strong, nonatomic) MPMoviePlayerController *moviePlayer;
 @property (strong, nonatomic) GGPSlideshowOptions *options;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic)BOOL load;
 
 

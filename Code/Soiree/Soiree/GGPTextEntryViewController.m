@@ -8,7 +8,9 @@
 
 #import "GGPTextEntryViewController.h"
 
-@interface GGPTextEntryViewController ()
+@interface GGPTextEntryViewController (){
+    BOOL submitPress;
+}
 
 @end
 
@@ -25,6 +27,7 @@
 
 - (void)viewDidLoad
 {
+    submitPress = NO;
     [super viewDidLoad];
     self.textField.layer.cornerRadius = 5;
 	// Do any additional setup after loading the view.
@@ -37,7 +40,7 @@
 }
 
 - (IBAction)submitButton:(id)sender {
-    
+    submitPress = YES;
     self.entry = [[GGPLogEntry alloc]init];
     self.entry.fileType = @"TXT";
     self.entry.isIncluded = YES;
@@ -64,8 +67,7 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    UIButton *button = sender;
-    if ([segue.identifier isEqualToString:@"backToLog"] && [button isEqual:self.submit]) {
+    if ([segue.identifier isEqualToString:@"backToLog"] && submitPress) {
         GGPEventLogViewController *destination = [segue destinationViewController];
         destination.load = YES;
     }

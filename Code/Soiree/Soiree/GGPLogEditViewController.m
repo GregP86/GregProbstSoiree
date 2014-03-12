@@ -8,7 +8,9 @@
 
 #import "GGPLogEditViewController.h"
 
-@interface GGPLogEditViewController ()
+@interface GGPLogEditViewController (){
+    int count;
+}
 
 @end
 
@@ -26,7 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    count = 0;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
@@ -61,13 +63,14 @@
     UIImageView *imageView = (UIImageView *)[cell viewWithTag:1002];
     
     [button addTarget:self action:@selector(delete:) forControlEvents:UIControlEventTouchUpInside];
-    [button setTag:indexPath.row];
+    [button setTag:count];
     
     GGPLogEntry *entry = self.LogEntries[indexPath.row];
-    
+    count++;
     UIImage *image = [UIImage imageWithData:entry.file];
     
     label.text = [entry.text isEqual:[NSNull null]]? @"No text": entry.text;
+    [imageView setContentMode:UIViewContentModeScaleAspectFit];
     imageView.image = image;
     
     return cell;

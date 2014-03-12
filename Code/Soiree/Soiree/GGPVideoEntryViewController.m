@@ -8,7 +8,9 @@
 
 #import "GGPVideoEntryViewController.h"
 
-@interface GGPVideoEntryViewController ()
+@interface GGPVideoEntryViewController (){
+    BOOL submitPress;
+}
 
 @end
 
@@ -26,6 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    submitPress = NO;
 	// Do any additional setup after loading the view.
     self.videoThumbnailView.layer.cornerRadius = 5;
     if([self.event[@"useVideo"] isEqual: @0]){
@@ -52,7 +55,7 @@
     self.videoSelector.delegate = self;
     self.videoSelector.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     self.videoSelector.mediaTypes = [NSArray arrayWithObjects: (NSString *) kUTTypeMovie, nil];
-    self.videoSelector.videoQuality = UIImagePickerControllerQualityType640x480; 
+    self.videoSelector.videoQuality = UIImagePickerControllerQualityTypeLow;
     self.videoSelector.allowsEditing = NO;
     [self presentViewController:self.videoSelector animated:YES completion:nil];
 }
@@ -101,6 +104,7 @@
 
 
 - (IBAction)submitButton:(id)sender {
+    submitPress = YES;
     NSData *data = [NSData dataWithContentsOfURL:self.moviePlayer.contentURL];
     if([data length] < 10485760){
         self.entry = [[GGPLogEntry alloc]init];
@@ -131,8 +135,7 @@
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    UIButton *button = sender;
-    if ([segue.identifier isEqualToString:@"backToLog"] && [button isEqual:self.submit]) {
+    if ([segue.identifier isEqualToString:@"backToLog"] && submitPress) {
         GGPEventLogViewController *destination = [segue destinationViewController];
         destination.load = YES;
     }

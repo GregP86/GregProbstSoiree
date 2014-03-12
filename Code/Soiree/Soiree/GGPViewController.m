@@ -28,7 +28,6 @@
 - (void)viewDidLoad
 {
     //self.frontView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"fabric_plaid.png"]];
-    
     [self.indicator startAnimating];
     
     [super viewDidLoad];
@@ -39,13 +38,28 @@
     self.myEventsTable.dataSource = self;
     
     self.myEventsTable.layer.cornerRadius = 10;
-    self.myEventsTable.layer.borderWidth = 2;
+    self.myEventsTable.layer.borderWidth = 1;
     //self.myEventsTable.layer.borderColor = [UIColor colorWithRed:23 green:35 blue:47 alpha:1].CGColor;
-    self.myEventsTable.layer.borderColor = [UIColor darkGrayColor].CGColor;
+    self.myEventsTable.layer.borderColor = [UIColor lightGrayColor].CGColor;
     self.myEventsTable.bounces = YES;
     self.myEventsTable.allowsMultipleSelectionDuringEditing = YES;
     //self.midView.backgroundColor = [UIColor colorWithPatternImage: [UIImage imageNamed:@"grey_wash.png"]];
     
+//    UIFont *customFont = [UIFont fontWithName:@"Montez-Regular" size:30];
+//    NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys: customFont ,NSFontAttributeName, [UIColor whiteColor], NSForegroundColorAttributeName, nil];
+//    
+//    [[UINavigationBar appearanceWhenContainedIn:[self.navigationController.navigationBar class], nil] setTitleTextAttributes:attributes];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                     [UIColor whiteColor],
+                                                                     NSForegroundColorAttributeName,
+                                                                     [UIColor whiteColor],
+                                                                     NSForegroundColorAttributeName,
+                                                                     [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+                                                                     NSForegroundColorAttributeName,
+                                                                     [UIFont fontWithName:@"Montez-Regular" size:30],
+                                                                     NSFontAttributeName,
+                                                                     nil]];
     //UIImage *image = [UIImage imageNamed:@"grey_wash.png"];
     //self.navigationController.navigationBar.layer.borderWidth = 2;
     //self.navigationController.navigationBar.layer.borderColor = [UIColor darkGrayColor].CGColor;
@@ -71,6 +85,17 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                                     [UIColor whiteColor],
+                                                                     NSForegroundColorAttributeName,
+                                                                     [UIColor whiteColor],
+                                                                     NSForegroundColorAttributeName,
+                                                                     [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
+                                                                     NSForegroundColorAttributeName,
+                                                                     [UIFont fontWithName:@"Montez-Regular" size:30],
+                                                                     NSFontAttributeName,
+                                                                     nil]];
     if (!firstLoad) {
         [self.indicator startAnimating];
         isFirst = YES;
@@ -92,7 +117,7 @@
     [query setLimit:5];
     
     events = [query findObjects];
- 
+    
     
     [self createObjectsArray];
     [self populateMap];
@@ -104,18 +129,24 @@
 
 -(void)setUpButtons{
     
+
     buttonData = [[NSMutableArray alloc] init];
     PFQuery *images = [PFQuery queryWithClassName:@"LogEntry"];
     [images whereKey:@"FileType" containsString:@"JPEG"];
     NSArray *results=[images findObjects];
+    
+    if (results.count > 0) {
     
     int r = arc4random() % results.count;
     PFFile *tempFile = results[r][@"Data"];
     NSData *image = [tempFile getData];
     [self.bigImage setImage:[UIImage imageWithData:image] forState:UIControlStateNormal];
     [self.bigImage.imageView setContentMode:UIViewContentModeScaleAspectFill];
-    self.bigImage.layer.borderColor =[UIColor darkGrayColor].CGColor;
-    self.bigImage.layer.borderWidth = 2;
+    self.bigImage.layer.masksToBounds = YES;
+    self.bigImage.layer.cornerRadius = 3;
+    self.bigImage.layer.borderColor =[UIColor whiteColor].CGColor;
+    self.bigImage.layer.borderWidth = 1;
+    
     PFObject *obj = [PFQuery getObjectOfClass:@"Event" objectId:results[r][@"eventID"]];
     [buttonData addObject:obj];
     self.bigLabel.text = obj[@"Title"];
@@ -127,8 +158,10 @@
     image = [tempFile getData];
     [self.leftButton setImage:[UIImage imageWithData:image] forState:UIControlStateNormal];
     [self.leftButton.imageView setContentMode:UIViewContentModeScaleAspectFill ];
-    self.leftButton.layer.borderColor =[UIColor darkGrayColor].CGColor;
-    self.leftButton.layer.borderWidth = 2;
+    self.leftButton.layer.masksToBounds = YES;
+    self.leftButton.layer.cornerRadius = 3;
+    self.leftButton.layer.borderColor =[UIColor whiteColor].CGColor;
+    self.leftButton.layer.borderWidth = 1;
     obj = [PFQuery getObjectOfClass:@"Event" objectId:results[r][@"eventID"]];
     [buttonData addObject:obj];
     [self.leftButton setTag:1];
@@ -140,13 +173,17 @@
     image = [tempFile getData];
     [self.rightButton setImage:[UIImage imageWithData:image] forState:UIControlStateNormal];
     [self.rightButton.imageView setContentMode:UIViewContentModeScaleAspectFill];
-    self.rightButton.layer.borderColor =[UIColor darkGrayColor].CGColor;
-    self.rightButton.layer.borderWidth = 2;
+    self.rightButton.layer.masksToBounds = YES;
+    self.rightButton.layer.cornerRadius = 3;
+    self.rightButton.layer.borderColor =[UIColor whiteColor].CGColor;
+    self.rightButton.layer.borderWidth = 1;
+    
     obj = [PFQuery getObjectOfClass:@"Event" objectId:results[r][@"eventID"]];
     [buttonData addObject:obj];
     [self.rightButton setTag:2];
     self.rightLabel.text = obj[@"Title"];
     [self.rightButton addTarget:self action:@selector(bigImageTap:) forControlEvents:UIControlEventTouchUpInside];
+    }
 }
 
 -(void) bigImageTap: (id) sender{
@@ -326,10 +363,10 @@
     
     CGRect destination = self.myEventsTable.frame;
     
-    if (destination.origin.y < 210) {
-        destination.origin.y = 210;
+    if (destination.origin.y < 536) {
+        destination.origin.y = 536;
     } else {
-        destination.origin.y -= 225.5;
+        destination.origin.y -= 230.5;
     }
     
     [UIView animateWithDuration:0.25 animations:^{

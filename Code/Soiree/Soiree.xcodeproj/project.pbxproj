@@ -17,6 +17,7 @@
 		1E548C9818865B0D009F8F5F /* GGPFindEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E548C9718865B0D009F8F5F /* GGPFindEventViewController.m */; };
 		1E5ACB1618C83E86007698B4 /* GGPLogModeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5ACB1518C83E86007698B4 /* GGPLogModeViewController.m */; };
 		1E5ACB1718CB9A80007698B4 /* GGPViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E9E84AC187B5088002C19A6 /* GGPViewController.m */; };
+		1E5ACB1918CFC165007698B4 /* Montez-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1E5ACB1818CFAE31007698B4 /* Montez-Regular.ttf */; };
 		1E5C83CD18C64EB2006CFE6A /* GGPSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C83CC18C64EB2006CFE6A /* GGPSearchViewController.m */; };
 		1E5C83D418C6A36B006CFE6A /* GGPLogEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E5C83D318C6A36B006CFE6A /* GGPLogEditViewController.m */; };
 		1E70D90F18A55708008DFC09 /* GGPCollectionLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E70D90E18A55708008DFC09 /* GGPCollectionLayout.m */; };
@@ -157,6 +158,7 @@
 		1E548C9718865B0D009F8F5F /* GGPFindEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPFindEventViewController.m; sourceTree = "<group>"; };
 		1E5ACB1418C83E86007698B4 /* GGPLogModeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPLogModeViewController.h; sourceTree = "<group>"; };
 		1E5ACB1518C83E86007698B4 /* GGPLogModeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPLogModeViewController.m; sourceTree = "<group>"; };
+		1E5ACB1818CFAE31007698B4 /* Montez-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montez-Regular.ttf"; path = "../../../../../Downloads/montez/Montez-Regular.ttf"; sourceTree = "<group>"; };
 		1E5C83CB18C64EB2006CFE6A /* GGPSearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPSearchViewController.h; sourceTree = "<group>"; };
 		1E5C83CC18C64EB2006CFE6A /* GGPSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPSearchViewController.m; sourceTree = "<group>"; };
 		1E5C83D218C6A36B006CFE6A /* GGPLogEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPLogEditViewController.h; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 		1E9E849A187B5088002C19A6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1E5ACB1818CFAE31007698B4 /* Montez-Regular.ttf */,
 				1E9E849B187B5088002C19A6 /* Soiree-Info.plist */,
 				1E9E849C187B5088002C19A6 /* InfoPlist.strings */,
 				1E9E849F187B5088002C19A6 /* main.m */,
@@ -1014,6 +1017,7 @@
 				1EEAE7F118BD2A9C006580C2 /* Unirest.podspec in Resources */,
 				1E9E84A7187B5088002C19A6 /* Main_iPhone.storyboard in Resources */,
 				1EEAE7E218BD2A9C006580C2 /* README.md in Resources */,
+				1E5ACB1918CFC165007698B4 /* Montez-Regular.ttf in Resources */,
 				1E9E849E187B5088002C19A6 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
