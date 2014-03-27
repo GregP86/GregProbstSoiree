@@ -35,6 +35,9 @@
 @property (nonatomic,strong) NSMutableData *buffer;
 @property (nonatomic,strong) NSMutableArray *results;
 
+@property (strong, nonatomic) UIActivityIndicatorView *activityIndicator;
+
+
 - (IBAction)pressContentSwitch:(id)sender;
 - (IBAction)deleteButton:(id)sender;
 - (IBAction)pressLogSwitch:(id)sender;

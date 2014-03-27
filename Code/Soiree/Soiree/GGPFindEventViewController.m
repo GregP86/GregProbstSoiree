@@ -81,17 +81,20 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
                         object:(PFObject *)object
 {
+   
     
     static NSString *cellIdentifier = @"Cell";
     
     PFTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    UIImageView * view = (UIImageView *)[cell viewWithTag:1234];
+    view.image = nil;
     if (!cell) {
         cell = [[PFTableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle
                                       reuseIdentifier:cellIdentifier];
     }
     
     if(object[@"Password"] != [NSNull null]){
-        UIImageView * view = (UIImageView *)[cell viewWithTag:1234];
+        
         view.image = [UIImage imageNamed:@"lock.png"];
     }
     
@@ -192,7 +195,7 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex != alertView.cancelButtonIndex) {
-        if([[alertView textFieldAtIndex:0].text isEqualToString:selectedEvent[@"Password"]]){
+        if([[GGPHash createSHA512:[alertView textFieldAtIndex:0].text] isEqualToString:selectedEvent[@"Password"]]){
             [self performSegueWithIdentifier:@"eventDetail" sender:self];
         }else{
             
@@ -252,9 +255,9 @@
     [self.indicator startAnimating];
     [self.todayButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.todayButton setUserInteractionEnabled:NO];
-    [self.weekButton setTitleColor:[UIColor colorWithRed:76.0f/255.0f green:202.0f/255.0f blue:205.0f/255.0f alpha:1.0] forState:UIControlStateNormal];
+    [self.weekButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.weekButton setUserInteractionEnabled:YES];
-    [self.monthButton setTitleColor:[UIColor colorWithRed:76.0f/255.0f green:202.0f/255.0f blue:205.0f/255.0f alpha:1.0] forState:UIControlStateNormal];
+    [self.monthButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.monthButton setUserInteractionEnabled:YES];
     start = [NSDate date];
     int addDays = 1;
@@ -268,9 +271,9 @@
     [self.indicator startAnimating];
     [self.weekButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.weekButton setUserInteractionEnabled:NO];
-    [self.todayButton setTitleColor:[UIColor colorWithRed:76.0f/255.0f green:202.0f/255.0f blue:205.0f/255.0f alpha:1.0]forState:UIControlStateNormal];
+    [self.todayButton setTitleColor:[UIColor whiteColor]forState:UIControlStateNormal];
     [self.todayButton setUserInteractionEnabled:YES];
-    [self.monthButton setTitleColor:[UIColor colorWithRed:76.0f/255.0f green:202.0f/255.0f blue:205.0f/255.0f alpha:1.0] forState:UIControlStateNormal];
+    [self.monthButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.monthButton setUserInteractionEnabled:YES];
     start = [NSDate date];
     int addDays = 7;
@@ -283,9 +286,9 @@
     [self.indicator startAnimating];
     [self.monthButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
     [self.monthButton setUserInteractionEnabled:NO];
-    [self.todayButton setTitleColor:[UIColor colorWithRed:76.0f/255.0f green:202.0f/255.0f blue:205.0f/255.0f alpha:1.0] forState:UIControlStateNormal];
+    [self.todayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.todayButton setUserInteractionEnabled:YES];
-    [self.weekButton setTitleColor:[UIColor colorWithRed:76.0f/255.0f green:202.0f/255.0f blue:205.0f/255.0f alpha:1.0] forState:UIControlStateNormal];
+    [self.weekButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.weekButton setUserInteractionEnabled:YES];
     start = [NSDate date];
     int addDays = 30;

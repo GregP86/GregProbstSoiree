@@ -12,6 +12,7 @@
 #import "GGPEventDetailViewController.h"
 #import <MapKit/MapKit.h>
 #import "GGPSearchViewController.h"
+#import "GGPHash.h"
 
 @interface GGPFindEventViewController : PFQueryTableViewController<UIAlertViewDelegate, MKMapViewDelegate>
 

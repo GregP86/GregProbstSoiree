@@ -18,6 +18,8 @@
 @property (strong, nonatomic) PFObject *event;
 @property (strong, nonatomic) GGPLogEntry *entry;
 @property (weak, nonatomic) IBOutlet UIButton *submit;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+@property (strong, nonatomic) NSString *source;
 
 - (IBAction)submitButton:(id)sender;
 

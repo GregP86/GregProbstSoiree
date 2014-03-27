@@ -179,7 +179,7 @@
     }else if (!self.locSwitch.on) {
         GGPEvent *event = [self generateEvent];
         if(passwordEdit){
-            event.password = [self.passwordField.text isEqualToString:self.confirmPasswordField.text]?self.passwordField.text : nil;
+            event.password = [self.passwordField.text isEqualToString:self.confirmPasswordField.text]?[GGPHash createSHA512:self.passwordField.text] : nil;
         }else{
             event.password = nil;
         }
@@ -252,7 +252,7 @@
             
             GGPEvent *event = [self generateEvent];
             if(passwordEdit){
-                event.password = [self.passwordField.text isEqualToString:self.confirmPasswordField.text]?self.passwordField.text : nil;
+                event.password = [self.passwordField.text isEqualToString:self.confirmPasswordField.text]?[GGPHash createSHA512:self.passwordField.text] : nil;
             }else{
                 event.password = nil;
             }

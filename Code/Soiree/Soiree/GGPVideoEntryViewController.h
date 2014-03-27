@@ -25,6 +25,8 @@
 @property (strong, nonatomic) UIImagePickerController *videoSelector;
 @property (strong, nonatomic) GGPLogEntry *entry;
 @property (weak, nonatomic) IBOutlet UIButton *submit;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+@property (strong, nonatomic) NSString *source;
 
 
 - (IBAction)selectVideo:(id)sender;

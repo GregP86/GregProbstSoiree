@@ -9,14 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import "GGPLogEntry.h"
+#import "GGPDeleteCell.h"
 
 @interface GGPLogEditViewController : UITableViewController
 
 @property (strong, nonatomic) PFObject *event;
 @property (strong, nonatomic) NSMutableArray *LogEntries;
-@property (weak, nonatomic) IBOutlet UIImageView *deleteButton;
-- (IBAction)delete:(id)sender;
-@property (weak, nonatomic) IBOutlet UILabel *captionLabel;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+
 
 @end

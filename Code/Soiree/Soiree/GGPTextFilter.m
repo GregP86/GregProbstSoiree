@@ -13,7 +13,7 @@
 +(NSString *)filter:(NSString *)string{
     NSString *filterString = string;
     if(string){
-        NSString *pattern = @"(shit|fuck|tits|cunt|sex|bastard|ass|damn|bitch|pussy)";
+        NSString *pattern = @"(shit|fuck|tits|cunt|sex|bastard|ass|damn|bitch|pussy|duck)";
         
         NSError *error = nil;
         NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:pattern options:NSRegularExpressionCaseInsensitive error:&error];

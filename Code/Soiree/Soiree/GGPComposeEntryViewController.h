@@ -20,10 +20,12 @@
 @property (weak, nonatomic) IBOutlet UITextView *captionField;
 @property (strong, nonatomic) GGPLogEntry *entry;
 @property (strong, nonatomic) PFObject *event;
+@property (strong, nonatomic) NSString *source;
 
 //@property (strong, nonatomic) GGPVideoEntryViewController *vidController;
 //@property (strong, nonatomic) GGPTextEntryViewController *txtController;
 @property (weak, nonatomic) IBOutlet UIButton *submit;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
 
 
 - (IBAction)pickImage:(id)sender;

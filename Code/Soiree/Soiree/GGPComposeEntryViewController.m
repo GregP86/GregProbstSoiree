@@ -10,6 +10,7 @@
 
 @interface GGPComposeEntryViewController (){
     BOOL submitPress;
+    BOOL imagePick;
 }
 
 @end
@@ -28,15 +29,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    imagePick = NO;
 	// Do any additional setup after loading the view.
     submitPress = NO;
+    self.captionField.clipsToBounds = YES;
     self.imageView.layer.cornerRadius = 5;
     self.captionField.layer.cornerRadius = 5;
+    self.captionField.layer.borderWidth = 1;
+    self.captionField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    
     if([self.event[@"usePhoto"] isEqual: @0]){
        [self.submit setTitle:@"Photo Disabled" forState:UIControlStateNormal];
         [self.submit setUserInteractionEnabled:NO];
     }else{
-        [self.submit setTitle:@"Submit Photo" forState:UIControlStateNormal];
+        [self.submit setTitle:@"Submit" forState:UIControlStateNormal];
         [self.submit setUserInteractionEnabled:YES];
     }
 
@@ -62,6 +68,17 @@
 }
 
 - (IBAction)submitButton:(id)sender {
+    if (imagePick) {
+        [self.indicator startAnimating];
+        [self performSelector:@selector(submitImage) withObject:nil afterDelay:.1];
+    }else{
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Error" message:@"No image selected." delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alert show];
+    }
+    
+}
+
+-(void)submitImage{
     submitPress = YES;
     self.imageView.image = [self imageWithImage:self.imageView.image scaledToSize:CGSizeMake(self.imageView.image.size.width/10, self.imageView.image.size.height/10)];
     NSData *data =  UIImageJPEGRepresentation(self.imageView.image, 0.5);
@@ -81,6 +98,7 @@
                 [self.event addObject:[dbEntry objectId] forKey:@"Log"];
                 [self.event saveInBackground];
                 [self performSegueWithIdentifier:@"backToLog" sender:self];
+                [self.indicator stopAnimating];
             }
         }];
     }else{
@@ -103,6 +121,7 @@
 
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
+    imagePick = YES;
     self.imageView.image = [info objectForKey:UIImagePickerControllerOriginalImage];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -129,7 +148,7 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"backToLog"] && submitPress) {
+    if ([segue.identifier isEqualToString:@"backToLog"] && submitPress && [self.source isEqualToString:@"Log"]) {
         GGPEventLogViewController *destination = [segue destinationViewController];
         destination.load = YES;
     }

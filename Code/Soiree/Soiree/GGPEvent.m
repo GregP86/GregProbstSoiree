@@ -23,10 +23,9 @@
     Event[@"Attendees"] = !self.Attendees ? [[NSMutableArray alloc]init]: self.Attendees;
     Event[@"Log"] = !self.eventLog ? [[NSMutableArray alloc]init]: self.eventLog;
     Event[@"isFiltered"] = @1;
-    Event[@"isPublicLog"] = self.isPublicLog ? @1 : @0;
-    Event[@"usePhoto"] = self.usePhoto ? @1 : @0;
-    Event[@"useVideo"] = self.useVideo ? @1 : @0;
-    
+    Event[@"isPublicLog"] = @1;
+    Event[@"usePhoto"] = @1;
+    Event[@"useVideo"] = @1;
     [Event saveInBackground];
 }
 

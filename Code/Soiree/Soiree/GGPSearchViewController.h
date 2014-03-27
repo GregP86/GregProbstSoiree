@@ -8,6 +8,7 @@
 
 #import <Parse/Parse.h>
 #import "GGPEventDetailViewController.h"
+#import "GGPHash.h"
 
 @interface GGPSearchViewController : PFQueryTableViewController
 @property (weak, nonatomic) IBOutlet UITextField *searchBar;

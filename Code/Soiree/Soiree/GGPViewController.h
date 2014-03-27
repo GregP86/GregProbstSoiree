@@ -14,6 +14,7 @@
 #import "GGPEvent.h"
 #import "GGPEventDetailViewController.h"
 #import "GGPEventLogViewController.h"
+#import "GGPHash.h"
 
 @interface GGPViewController : UIViewController<MKMapViewDelegate, UITableViewDelegate, UITableViewDataSource>
 

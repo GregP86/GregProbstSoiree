@@ -37,7 +37,7 @@
                                                                      NSForegroundColorAttributeName,
                                                                      [NSValue valueWithUIOffset:UIOffsetMake(0, -1)],
                                                                      NSForegroundColorAttributeName,
-                                                                     [UIFont systemFontOfSize:20],
+                                                                     [UIFont systemFontOfSize:15],
                                                                      NSFontAttributeName,
                                                                      nil]];
     self.navigationController.toolbarHidden=YES;
@@ -128,9 +128,9 @@
     }else if([self.joinButton.titleLabel.text isEqualToString:@"Options"]){
         [self performSegueWithIdentifier:@"toOptions" sender:self];
     }else{
-        PFGeoPoint *loc = [PFGeoPoint geoPointWithLatitude:self.objectEvent.realLocation.latitude longitude: self.objectEvent.realLocation.longitude];
-        double distanceFromEvent = [loc distanceInMilesTo:currentLocation];
-        if (distanceFromEvent < .5) {
+        //PFGeoPoint *loc = [PFGeoPoint geoPointWithLatitude:self.objectEvent.realLocation.latitude longitude: self.objectEvent.realLocation.longitude];
+        //double distanceFromEvent = [loc distanceInMilesTo:currentLocation];
+        //if (distanceFromEvent < .5) {
             [self.event addUniqueObject:[PFUser currentUser].objectId forKey:@"Attendees"];
             [self.event saveInBackground];
             [[PFUser currentUser] addUniqueObject:[self.event objectId] forKey:@"Events"];
@@ -141,9 +141,9 @@
             self.logLabel.text = @"Event Log";
             [self.tableView cellForRowAtIndexPath:path].userInteractionEnabled = YES;
             isJoined = YES;
-        } else{
-            [self showAlertView];
-        }
+       // } else{
+       //     [self showAlertView];
+       // }
         
     }
     
@@ -198,10 +198,13 @@
 -(void)segueStuff{
     if (isJoined || [string isEqualToString:self.objectEvent.creator]) {
         if (self.objectEvent.isPublicLog || [string isEqualToString:self.objectEvent.creator]) {
+            
             [self performSegueWithIdentifier:@"toEventLog" sender:self];
         }else{
             [self performSegueWithIdentifier:@"toSubmit" sender:self];
         }
+    }else{
+        [self.indicator stopAnimating];
     }
 
 }

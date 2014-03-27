@@ -19,7 +19,7 @@
 
 + (NSURL *) getWordCloudUrlWithLogs: (NSMutableArray *)logs{
     NSString *block = [self createWordBlockFromArray: logs];
-    NSDictionary *json = [self JSONRequest:block];
+    NSDictionary *json = [self JSONRequestSlide:block];
     NSURL *url = [NSURL URLWithString:json[@"url"]];
     return  url;
 }
@@ -59,6 +59,23 @@
 + (NSDictionary *) JSONRequest: (NSString*) block{
     NSDictionary* headers = @{@"X-Mashape-Authorization": @"XwBsFSJltpRz5XkhnPkPibexmnRlWgKm"};
     NSDictionary* parameters = @{@"height": @"130", @"textblock": block, @"width": @"290", @"config": @"Taco"};
+    
+    UNIHTTPJsonResponse *response = [[UNIRest post:^(UNISimpleRequest *simpleRequest) {
+        [simpleRequest setUrl:@"https://gatheringpoint-word-cloud-maker.p.mashape.com/index.php"];
+        
+        [simpleRequest setHeaders:headers];
+        [simpleRequest setParameters:parameters];
+    }]asJson];
+    
+    NSDictionary *json = response.body.JSONObject;
+    NSLog(@"%@", json[@"url"]);
+    
+    return json;
+}
+
++ (NSDictionary *) JSONRequestSlide: (NSString*) block{
+    NSDictionary* headers = @{@"X-Mashape-Authorization": @"XwBsFSJltpRz5XkhnPkPibexmnRlWgKm"};
+    NSDictionary* parameters = @{@"height": @"320", @"textblock": block, @"width": @"320", @"config": @"Taco"};
     
     UNIHTTPJsonResponse *response = [[UNIRest post:^(UNISimpleRequest *simpleRequest) {
         [simpleRequest setUrl:@"https://gatheringpoint-word-cloud-maker.p.mashape.com/index.php"];

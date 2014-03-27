@@ -139,7 +139,12 @@
         [self.view bringSubviewToFront:self.webView];
     }else if([log.fileType isEqualToString:@"TXT"] && self.options.useText){
             self.imageView.image = nil;
-            self.mainLabel.text = log.text;
+        NSNumber * num = self.event[@"isFiltered"];
+        NSString *text = log.text;
+        if ([num  isEqual: @1]) {
+            text = [GGPTextFilter filter:text];
+        }
+        self.mainLabel.text = text;
     }else if ([log.fileType isEqualToString:@"JPEG"] && self.options.usePhotos){
         self.mainLabel.text = @"";
         self.imageView.image = [UIImage imageWithData:log.file];

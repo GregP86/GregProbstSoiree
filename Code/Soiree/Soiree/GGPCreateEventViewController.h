@@ -13,6 +13,7 @@
 #import <Parse/Parse.h>
 #import "GGPLocation.h"
 #import "GGPEvent.h"
+#import "GGPHash.h"
 
 @interface GGPCreateEventViewController : UITableViewController
 

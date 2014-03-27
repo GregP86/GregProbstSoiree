@@ -88,8 +88,14 @@
 
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex == actionSheet.destructiveButtonIndex) {
+
+        NSArray *logs = self.event[@"Log"];
+        for (NSString *s in logs) {
+            PFObject *obj = [PFObject objectWithoutDataWithClassName:@"LogEntry" objectId:s];
+            [obj deleteInBackground];
+        }
         [self.event deleteInBackground];
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 

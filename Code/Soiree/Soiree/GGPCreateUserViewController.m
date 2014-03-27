@@ -85,7 +85,7 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([[segue identifier] isEqualToString:@"ToFirst"]) {
         GGPViewController *destination = [segue destinationViewController];
-        destination.uesrMessageLabel.text = self.userMessage;
+       // destination.uesrMessageLabel.text = self.userMessage;
     }
 }
 

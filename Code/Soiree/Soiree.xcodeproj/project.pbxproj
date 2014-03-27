@@ -25,6 +25,8 @@
 		1E7F98AA18A15D6F00A0D5C2 /* GGPEventOptionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F98A918A15D6F00A0D5C2 /* GGPEventOptionsViewController.m */; };
 		1E7F98AD18A1EB1B00A0D5C2 /* GGPTextFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F98AC18A1EB1B00A0D5C2 /* GGPTextFilter.m */; };
 		1E7F98B018A35F1800A0D5C2 /* GGPTwitterResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E7F98AF18A35F1800A0D5C2 /* GGPTwitterResultsViewController.m */; };
+		1E973AA818D11086006326E2 /* GGPDeleteCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E973AA718D11086006326E2 /* GGPDeleteCell.m */; };
+		1E973AB118D233F2006326E2 /* GGPHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 1E973AB018D233F2006326E2 /* GGPHash.m */; };
 		1E9E8494187B5088002C19A6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8493187B5088002C19A6 /* Foundation.framework */; };
 		1E9E8496187B5088002C19A6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8495187B5088002C19A6 /* CoreGraphics.framework */; };
 		1E9E8498187B5088002C19A6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E9E8497187B5088002C19A6 /* UIKit.framework */; };
@@ -173,6 +175,10 @@
 		1E7F98AC18A1EB1B00A0D5C2 /* GGPTextFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPTextFilter.m; sourceTree = "<group>"; };
 		1E7F98AE18A35F1800A0D5C2 /* GGPTwitterResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPTwitterResultsViewController.h; sourceTree = "<group>"; };
 		1E7F98AF18A35F1800A0D5C2 /* GGPTwitterResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPTwitterResultsViewController.m; sourceTree = "<group>"; };
+		1E973AA618D11086006326E2 /* GGPDeleteCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPDeleteCell.h; sourceTree = "<group>"; };
+		1E973AA718D11086006326E2 /* GGPDeleteCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPDeleteCell.m; sourceTree = "<group>"; };
+		1E973AAF18D233F2006326E2 /* GGPHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GGPHash.h; sourceTree = "<group>"; };
+		1E973AB018D233F2006326E2 /* GGPHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GGPHash.m; sourceTree = "<group>"; };
 		1E9E8490187B5088002C19A6 /* Soiree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Soiree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E9E8493187B5088002C19A6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1E9E8495187B5088002C19A6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -443,6 +449,8 @@
 				1EE3EDFC18AE950A008AF9A7 /* GGPSlideShowOptionsViewController.m */,
 				1E5C83D218C6A36B006CFE6A /* GGPLogEditViewController.h */,
 				1E5C83D318C6A36B006CFE6A /* GGPLogEditViewController.m */,
+				1E973AA618D11086006326E2 /* GGPDeleteCell.h */,
+				1E973AA718D11086006326E2 /* GGPDeleteCell.m */,
 			);
 			name = Log;
 			sourceTree = "<group>";
@@ -509,6 +517,8 @@
 				1EE3EDF618AC8353008AF9A7 /* GGPLabelConverter.m */,
 				1EE3EE0B18BD0AB4008AF9A7 /* GGPWordCloudRetriever.h */,
 				1EE3EE0C18BD0AB4008AF9A7 /* GGPWordCloudRetriever.m */,
+				1E973AAF18D233F2006326E2 /* GGPHash.h */,
+				1E973AB018D233F2006326E2 /* GGPHash.m */,
 			);
 			path = Soiree;
 			sourceTree = "<group>";
@@ -1064,6 +1074,7 @@
 				37BDE16E187CF611000EC13C /* GGPLogInViewController.m in Sources */,
 				1EA45AF0188EEA2E00B13935 /* GGPAttendeesViewController.m in Sources */,
 				1EEAE82518BEF899006580C2 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				1E973AA818D11086006326E2 /* GGPDeleteCell.m in Sources */,
 				1EEAE83318BF0616006580C2 /* GGPInstagramViewController.m in Sources */,
 				1E548C8B187F3C14009F8F5F /* GGPCreateEventViewController.m in Sources */,
 				1EEAE82618BEF899006580C2 /* AFPropertyListRequestOperation.m in Sources */,
@@ -1077,6 +1088,7 @@
 				1E548C9818865B0D009F8F5F /* GGPFindEventViewController.m in Sources */,
 				1EEAE7E318BD2A9C006580C2 /* Base64.m in Sources */,
 				1EEAE82D18BEF899006580C2 /* InstagramMedia.m in Sources */,
+				1E973AB118D233F2006326E2 /* GGPHash.m in Sources */,
 				1EEAE82B18BEF899006580C2 /* IKUserInPhoto.m in Sources */,
 				1E9E84A0187B5088002C19A6 /* main.m in Sources */,
 				1EEAE82218BEF899006580C2 /* AFHTTPRequestOperation.m in Sources */,

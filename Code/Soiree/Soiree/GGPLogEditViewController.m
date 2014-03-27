@@ -29,11 +29,12 @@
 {
     [super viewDidLoad];
     count = 0;
+    self.tableView.bounces = NO;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
@@ -57,24 +58,34 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    UIButton *button = (UIButton *)[cell viewWithTag:1000];
-    UILabel *label = (UILabel *)[cell viewWithTag:1001];
-    UIImageView *imageView = (UIImageView *)[cell viewWithTag:1002];
+    GGPDeleteCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    [button addTarget:self action:@selector(delete:) forControlEvents:UIControlEventTouchUpInside];
-    [button setTag:count];
     
-    GGPLogEntry *entry = self.LogEntries[indexPath.row];
-    count++;
-    UIImage *image = [UIImage imageWithData:entry.file];
+    cell.event = self.event;
+    cell.log = self.LogEntries[indexPath.row];
+    UIImage *image = [UIImage imageWithData:cell.log.file];
     
-    label.text = [entry.text isEqual:[NSNull null]]? @"No text": entry.text;
-    [imageView setContentMode:UIViewContentModeScaleAspectFit];
-    imageView.image = image;
+    cell.label.text = [cell.log.text isEqual:[NSNull null]]? @"No text": cell.log.text;
+    [cell.imageView setContentMode:UIViewContentModeScaleAspectFit];
+    cell.imageView.image = image;
+    
+    if ([cell.log.fileType  isEqualToString: @"MOV"]) {
+        cell.label.text = [NSString stringWithFormat:@"Movie by %@", cell.log.submittedBy];
+    }
     
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // If row is deleted, remove it from the list.
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        GGPDeleteCell *cell = (GGPDeleteCell *)[self.tableView cellForRowAtIndexPath:indexPath];
+        [cell deleteEvent:self];
+        [self.LogEntries removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -127,18 +138,5 @@
 
  */
 
-- (IBAction)delete:(id)sender {
-    UIButton *button = sender;
-    GGPLogEntry *entry = self.LogEntries[button.tag];
-    
-    PFQuery *query = [PFQuery queryWithClassName:@"LogEntry"];
-    [query getObjectInBackgroundWithId:entry.id block:^(PFObject *entryObj, NSError *error) {
-        [entryObj deleteInBackground];
-        [self.event removeObjectsInArray:@[entry.id] forKey:@"Log"];
-        [self.event saveInBackground];
-    }];
-    
-    [self.LogEntries removeObjectAtIndex:button.tag];
-    [self.tableView reloadData];
-}
+
 @end

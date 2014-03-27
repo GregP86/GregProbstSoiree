@@ -29,7 +29,10 @@
 {
     submitPress = NO;
     [super viewDidLoad];
+    self.textField.clipsToBounds = YES;
     self.textField.layer.cornerRadius = 5;
+    self.textField.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    self.textField.layer.borderWidth = 1;
 	// Do any additional setup after loading the view.
 }
 
@@ -40,6 +43,17 @@
 }
 
 - (IBAction)submitButton:(id)sender {
+    if (![self.textField.text isEqualToString:@""]) {
+        [self.indicator startAnimating];
+        [self performSelector:@selector(submitText) withObject:nil afterDelay:.1];
+    }else{
+        UIAlertView *view = [[UIAlertView alloc] initWithTitle: @"Error" message: @"Text field empty." delegate: nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [view show];
+    }
+    
+}
+
+-(void)submitText{
     submitPress = YES;
     self.entry = [[GGPLogEntry alloc]init];
     self.entry.fileType = @"TXT";
@@ -54,8 +68,10 @@
             [self.event addObject:[dbEntry objectId] forKey:@"Log"];
             [self.event saveInBackground];
             [self performSegueWithIdentifier:@"backToLog" sender:self];
+            [self.indicator stopAnimating];
         }
     }];
+ 
 }
 
 -(void)textFieldReturn:(id)sender{
@@ -67,7 +83,7 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if ([segue.identifier isEqualToString:@"backToLog"] && submitPress) {
+    if ([segue.identifier isEqualToString:@"backToLog"] && submitPress && [self.source isEqualToString:@"Log"]) {
         GGPEventLogViewController *destination = [segue destinationViewController];
         destination.load = YES;
     }

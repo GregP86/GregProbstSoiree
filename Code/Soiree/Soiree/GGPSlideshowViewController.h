@@ -14,6 +14,7 @@
 #import <MediaPlayer/MediaPlayer.h>
 #import "GGPStats.h"
 #import "GGPWordCloudRetriever.h"
+#import "GGPTextFilter.h"
 
 @interface GGPSlideshowViewController : UIViewController
 

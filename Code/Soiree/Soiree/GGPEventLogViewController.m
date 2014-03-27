@@ -135,6 +135,9 @@
         vcImage.event = self.event;
         vidControl.event = self.event;
         textControl.event = self.event;
+        vcImage.source = @"Log";
+        vidControl.source = @"Log";
+        textControl.source = @"Log";
     }else if([segue.identifier isEqualToString:@"toSlideshow"]){
         GGPSlideshowViewController *destination = [segue destinationViewController];
         destination.logs = self.LogEntries;
@@ -144,6 +147,7 @@
         GGPSlideShowOptionsViewController *destination = [segue destinationViewController];
         destination.options = self.options;
     }else if([segue.identifier isEqualToString:@"toLogEdit"]){
+        self.load = YES;
         GGPLogEditViewController *destination = [segue destinationViewController];
         destination.LogEntries = self.LogEntries;
         destination.event = self.event;
@@ -342,7 +346,7 @@
                      animations:^{
                          label = (UILabel *)[cellY viewWithTag:111];
                          label.frame = CGRectMake(5, 5, 280, 330);
-                         label.font = [UIFont systemFontOfSize:50];
+                         label.font = [UIFont systemFontOfSize:30];
                          label.textColor = [UIColor whiteColor];
                      } completion:^(BOOL finished) {
                          
@@ -361,7 +365,7 @@
                          label = (UILabel *)[cellY viewWithTag:113];
                          temp = label.frame;
                          label.frame = CGRectMake(5, 235, 285, 100);
-                         label.font = [UIFont systemFontOfSize:25];
+                         label.font = [UIFont systemFontOfSize:20];
                          label.textColor = [UIColor whiteColor];
                          view.contentMode = UIViewContentModeScaleAspectFit;
                      } completion:^(BOOL finished) {

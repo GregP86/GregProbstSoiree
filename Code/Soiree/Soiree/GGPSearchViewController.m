@@ -36,8 +36,7 @@
 
 -(PFQuery *)queryForTable{
     PFQuery *query = [PFQuery queryWithClassName:self.parseClassName];
-    [query whereKey:@"Title" containsString:self.search];
-    [query whereKey:@"EndTime" greaterThanOrEqualTo:[NSDate date]];
+    [query whereKey:@"Title" matchesRegex:self.search modifiers:@"i"];
     [query setLimit:10];
     
     // If no objects are loaded in memory, we look to the cache first to fill the table
@@ -97,7 +96,7 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex != alertView.cancelButtonIndex) {
-        if([[alertView textFieldAtIndex:0].text isEqualToString:selectedEvent[@"Password"]]){
+        if([[GGPHash createSHA512:[alertView textFieldAtIndex:0].text] isEqualToString:selectedEvent[@"Password"]]){
             [self performSegueWithIdentifier:@"eventDetail" sender:self];
         }else{
             

@@ -114,6 +114,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Event"];
     [query whereKey:@"Location" matchesQuery:innerQuery];
     [query whereKey:@"EndTime" greaterThanOrEqualTo:[NSDate date]];
+    [query whereKey:@"StartTime" lessThanOrEqualTo:[NSDate date]];
     [query setLimit:5];
     
     events = [query findObjects];
@@ -138,6 +139,8 @@
     if (results.count > 0) {
     
     int r = arc4random() % results.count;
+    int first = r;
+    PFObject *obj = [PFQuery getObjectOfClass:@"Event" objectId:results[r][@"eventID"]];
     PFFile *tempFile = results[r][@"Data"];
     NSData *image = [tempFile getData];
     [self.bigImage setImage:[UIImage imageWithData:image] forState:UIControlStateNormal];
@@ -147,13 +150,17 @@
     self.bigImage.layer.borderColor =[UIColor whiteColor].CGColor;
     self.bigImage.layer.borderWidth = 1;
     
-    PFObject *obj = [PFQuery getObjectOfClass:@"Event" objectId:results[r][@"eventID"]];
+    
     [buttonData addObject:obj];
     self.bigLabel.text = obj[@"Title"];
     [self.bigImage setTag:0];
     [self.bigImage addTarget:self action:@selector(bigImageTap:) forControlEvents:UIControlEventTouchUpInside];
     
-    r = arc4random() % results.count;
+        
+    while (r == first) {
+        r = arc4random() % results.count;
+    }
+    int second = r;
     tempFile = results[r][@"Data"];
     image = [tempFile getData];
     [self.leftButton setImage:[UIImage imageWithData:image] forState:UIControlStateNormal];
@@ -168,7 +175,10 @@
     self.leftLabel.text = obj[@"Title"];
     [self.leftButton addTarget:self action:@selector(bigImageTap:) forControlEvents:UIControlEventTouchUpInside];
     
-    r = arc4random() % results.count;
+    while (r == first || r == second) {
+        r = arc4random() % results.count;
+    }
+    
     tempFile = results[r][@"Data"];
     image = [tempFile getData];
     [self.rightButton setImage:[UIImage imageWithData:image] forState:UIControlStateNormal];
@@ -226,8 +236,18 @@
     
     for(NSString *s in myEvents){
         PFQuery *query = [PFQuery queryWithClassName:@"Event"];
-        PFObject *temp =[query getObjectWithId:s];
-        [joinedEvents addObject:temp];
+        @try {
+            PFObject *temp =[query getObjectWithId:s];
+            [joinedEvents addObject:temp];
+        }
+        @catch (NSException * e) {
+            [[PFUser currentUser] removeObject:s forKey:@"Events"];
+            [[PFUser currentUser] saveInBackground];
+            NSLog(@"Deleted Event");
+        }
+        
+        
+        
     }
 }
 
@@ -307,7 +327,7 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
     if (buttonIndex != alertView.cancelButtonIndex) {
-        if([[alertView textFieldAtIndex:0].text isEqualToString:selectedEvent[@"Password"]]){
+        if([[GGPHash createSHA512:[alertView textFieldAtIndex:0].text] isEqualToString:selectedEvent[@"Password"]]){
             [self performSegueWithIdentifier:@"toDetail" sender:self];
         }else{
             
@@ -345,8 +365,17 @@
             UIButton *button = sender;
             GGPComposeEntryViewController *vcImage = [[GGPComposeEntryViewController alloc] init];
             UITabBarController* tbc = [segue destinationViewController];
+
+            
+            
+            GGPVideoEntryViewController *vidControl = [[GGPVideoEntryViewController alloc] init];
+            GGPTextEntryViewController *textControl = [[GGPTextEntryViewController alloc] init];
             vcImage = (GGPComposeEntryViewController*)[[tbc customizableViewControllers] objectAtIndex:0];
+            vidControl = (GGPVideoEntryViewController*)[[tbc customizableViewControllers] objectAtIndex:1];
+            textControl = (GGPTextEntryViewController*)[[tbc customizableViewControllers] objectAtIndex:2];
             vcImage.event = events [button.tag];
+            vidControl.event = events [button.tag];
+            textControl.event = events [button.tag];
         }
     
 }
@@ -437,7 +466,7 @@
         UILabel *label = (UILabel *)[cell viewWithTag:5];
         UIButton *button = (UIButton *)[cell viewWithTag:6];
         [button addTarget:self action:@selector(addToLog:) forControlEvents:UIControlEventTouchUpInside];
-        [button setTag:indexPath.row];
+        [button setTag:indexPath.row - 1];
         label.text = temp[@"Title"];
         if (num == joinedEvents.count) {
             isFirst = YES;

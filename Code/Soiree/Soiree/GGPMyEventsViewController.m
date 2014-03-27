@@ -89,7 +89,7 @@
                                                                      NSFontAttributeName,
                                                                      nil]];
 	// Do any additional setup after loading the view.
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    //self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning
